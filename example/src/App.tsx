@@ -1,17 +1,37 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import Menu from 'react-native-menu';
+import { StyleSheet, Text, View } from 'react-native';
+import MenuView from 'react-native-menu';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    Menu.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <MenuView
+        menuTitle="Menu Title Test"
+        style={{ flex: 1, justifyContent: 'center' }}
+        onPressAction={({ nativeEvent }) => {
+          console.warn(JSON.stringify(nativeEvent));
+        }}
+        actions={[
+          {
+            id: 'testId',
+            title: 'testTitle',
+            image: 'image',
+          },
+        ]}
+      >
+        <View
+          style={{
+            height: 100,
+            width: 100,
+            backgroundColor: 'red',
+            borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text style={{ color: 'white' }}>Test</Text>
+        </View>
+      </MenuView>
     </View>
   );
 }

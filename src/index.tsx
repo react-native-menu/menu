@@ -1,9 +1,19 @@
-import { NativeModules } from 'react-native';
+import {
+  HostComponent,
+  requireNativeComponent,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
-type MenuType = {
-  multiply(a: number, b: number): Promise<number>;
+type MenuComponentProps = {
+  style?: StyleProp<ViewStyle>;
+  onPressAction?: ({ nativeEvent }: any) => void;
+  actions: any[];
+  menuTitle?: string;
 };
 
-const { Menu } = NativeModules;
+const MenuComponent = requireNativeComponent('RCTUIMenu') as HostComponent<
+  MenuComponentProps
+>;
 
-export default Menu as MenuType;
+export default MenuComponent;

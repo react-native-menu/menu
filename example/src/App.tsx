@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MenuView from 'react-native-menu';
+import { MenuView } from 'react-native-menu';
 
 export default function App() {
   return (
     <View style={styles.container}>
       <MenuView
         menuTitle="Menu Title Test"
-        style={{ flex: 1, justifyContent: 'center' }}
         onPressAction={({ nativeEvent }) => {
           console.warn(JSON.stringify(nativeEvent));
         }}

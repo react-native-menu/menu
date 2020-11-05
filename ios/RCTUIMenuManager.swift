@@ -12,7 +12,7 @@ class RCTUIMenuManager: RCTViewManager {
         if #available(iOS 14.0, *) {    
             return MenuView();
         } else {
-            return RCTView();
+            return ActionSheetView();
         }
     }
 }

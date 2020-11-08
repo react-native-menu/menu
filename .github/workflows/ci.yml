@@ -87,4 +87,4 @@ jobs:
       - name: Install Podfiles
         run: cd example && npx pod-install
       - name: Build example app
-        run: yarn ios
+        run: cd example && yarn ios

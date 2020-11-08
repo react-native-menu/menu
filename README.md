@@ -189,6 +189,6 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 MIT
 
-[gha-badge]: https://github.com/Naturalclar/react-native-menu/workflows/Build/badge.svg
+[gha-badge]: https://github.com/react-native-menu/menu/workflows/Build/badge.svg
 [npm-badge]: https://img.shields.io/npm/v/@react-native-menu/menu.svg?style=flat-square
 [support-badge]: https://img.shields.io/badge/platforms-ios-lightgrey.svg?style=flat-square

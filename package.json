@@ -34,13 +34,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/Naturalclar/react-native-menu",
+  "repository": "https://github.com/react-native-menu/menu",
   "author": "Jesse Katsumata <jesse.katsumata@gmail.com> (https://github.com/Naturalclar)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Naturalclar/react-native-menu/issues"
+    "url": "https://github.com/react-native-menu/menu/issues"
   },
-  "homepage": "https://github.com/Naturalclar/react-native-menu#readme",
+  "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
     "@react-native-community/bob": "^0.16.2",
     "@react-native-community/eslint-config": "^2.0.0",

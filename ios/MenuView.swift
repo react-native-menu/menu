@@ -10,6 +10,18 @@ import UIKit
 @objc(MenuView)
 class MenuView: UIButton {
 
+    private var _menuConf: UIAction?;
+    @objc var menuConf: NSDictionary? {
+        didSet {
+            guard let menuConf = self.menuConf else {
+                return
+            }
+            
+            self._menuConf = RCTMenuAction(details: menuConf).createUIAction({_ in print("Hello World")})
+            self.setup()
+        }
+    }
+    
     private var _menuTitle: String?;
     @objc var menuTitle: NSString? {
         didSet {
@@ -22,21 +34,32 @@ class MenuView: UIButton {
     }
     @objc var onPressAction: RCTDirectEventBlock?
     @objc var actions: NSArray?
+        
     
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    self.setup()
-  }
+    override init(frame: CGRect) {
+      super.init(frame: frame)
+      self.setup()
+    }
+
     
-    func setup () {
+    func setup () {        
+        
         let addCat = UIAction(title: "Add to List", image: UIImage(systemName: "plus"), identifier: UIAction.Identifier(rawValue: "add")) { (action) in
             self.sendButtonAction(action)
         }
         let shareButton = UIAction(title: "Share List", image: UIImage(systemName: "paperplane"), identifier: UIAction.Identifier(rawValue: "share")) { (action) in
             self.sendButtonAction(action)
         }
+        
+        var actions: [UIAction] = [addCat,shareButton]
+
+        if let testAction = self._menuConf {
+            actions.append(testAction)
+        }
+
+        
         let title = ((self._menuTitle != nil) ? self._menuTitle : "") ?? ""
-        let menu = UIMenu(title:title, identifier: nil, options: .displayInline, children: [addCat, shareButton])
+        let menu = UIMenu(title:title, identifier: nil, options: .displayInline, children: actions)
 
         self.menu = menu
         self.showsMenuAsPrimaryAction = true
@@ -46,6 +69,7 @@ class MenuView: UIButton {
     override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame);
     };
+    
     
     
   required init?(coder aDecoder: NSCoder) {

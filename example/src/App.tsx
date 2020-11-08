@@ -7,6 +7,11 @@ export default function App() {
     <View style={styles.container}>
       <MenuView
         menuTitle="Menu Title Test"
+        menuConf={{
+          id: 'testId',
+          title: 'testTitle',
+          image: 'image',
+        }}
         onPressAction={({ nativeEvent }) => {
           console.warn(JSON.stringify(nativeEvent));
         }}

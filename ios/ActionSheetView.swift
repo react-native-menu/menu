@@ -11,8 +11,31 @@ import UIKit
 @objc(ActionSheetView)
 class ActionSheetView: UIView {
     @objc var onPressAction: RCTDirectEventBlock?
-    @objc var menuTitle: NSString?
-    @objc var actions: NSArray?
+    private var _title: String = "";
+    @objc var title: NSString? {
+        didSet {
+            guard let title = self.title else {
+                return
+            }
+            self._title = title as String
+        }
+    }
+    
+    private var _actions: [UIAlertAction] = [];
+    @objc var actions: [NSDictionary]? {
+        didSet {
+            guard let actions = self.actions else {
+                return
+            }
+            actions.forEach({ alertAction in
+                if let action = RCTAlertAction(details: alertAction).createAction({
+                event in self.sendButtonAction(event)
+            }) {
+                  _actions.append(action)
+                }
+            })
+        }
+    }
 
     
     override init(frame: CGRect) {
@@ -23,15 +46,18 @@ class ActionSheetView: UIView {
     
     func launchActionSheet() {
 
-        let alert = UIAlertController(title: "My Alert",message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: _title, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Add to List", style: .default, handler: { action in self.sendButtonAction("add")}))
-        alert.addAction(UIAlertAction(title: "Share List", style: .default, handler: { action in self.sendButtonAction("share")}))
+        self._actions.forEach({action in
+            alert.addAction(action)
+        })
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        let root = RCTPresentedViewController()
-        root!.present(alert, animated: true, completion: nil)
+        if let root = RCTPresentedViewController() {
+            root.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
     
@@ -43,8 +69,8 @@ class ActionSheetView: UIView {
     }
     
     @objc func sendButtonAction(_ action: String) {
-        if onPressAction != nil {
-            onPressAction!(["event":action])
+        if let onPress = onPressAction {
+            onPress(["event":action])
         }
     }
     

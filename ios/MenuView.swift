@@ -10,30 +10,30 @@ import UIKit
 @objc(MenuView)
 class MenuView: UIButton {
 
-    private var _menuConf: UIAction?;
-    @objc var menuConf: NSDictionary? {
+    private var _actions: [UIAction] = [];
+    @objc var actions: [NSDictionary]? {
         didSet {
-            guard let menuConf = self.menuConf else {
+            guard let actions = self.actions else {
                 return
             }
-            
-            self._menuConf = RCTMenuAction(details: menuConf).createUIAction({_ in print("Hello World")})
+            actions.forEach { menuAction in
+                _actions.append(RCTMenuAction(details: menuAction).createUIAction({action in self.sendButtonAction(action)}))
+            }
             self.setup()
         }
     }
-    
-    private var _menuTitle: String?;
-    @objc var menuTitle: NSString? {
+        
+    private var _title: String = "";
+    @objc var title: NSString? {
         didSet {
-            guard let menuTitle = self.menuTitle else {
+            guard let title = self.title else {
                 return
             }
-            self._menuTitle = menuTitle as String
+            self._title = title as String
             self.setup()
         }
     }
     @objc var onPressAction: RCTDirectEventBlock?
-    @objc var actions: NSArray?
         
     
     override init(frame: CGRect) {
@@ -42,28 +42,11 @@ class MenuView: UIButton {
     }
 
     
-    func setup () {        
-        
-        let addCat = UIAction(title: "Add to List", image: UIImage(systemName: "plus"), identifier: UIAction.Identifier(rawValue: "add")) { (action) in
-            self.sendButtonAction(action)
-        }
-        let shareButton = UIAction(title: "Share List", image: UIImage(systemName: "paperplane"), identifier: UIAction.Identifier(rawValue: "share")) { (action) in
-            self.sendButtonAction(action)
-        }
-        
-        var actions: [UIAction] = [addCat,shareButton]
-
-        if let testAction = self._menuConf {
-            actions.append(testAction)
-        }
-
-        
-        let title = ((self._menuTitle != nil) ? self._menuTitle : "") ?? ""
-        let menu = UIMenu(title:title, identifier: nil, options: .displayInline, children: actions)
+    func setup () {
+        let menu = UIMenu(title:_title, identifier: nil, options: .displayInline, children: self._actions)
 
         self.menu = menu
         self.showsMenuAsPrimaryAction = true
-        
     }
     
     override func reactSetFrame(_ frame: CGRect) {
@@ -71,15 +54,13 @@ class MenuView: UIButton {
     };
     
     
-    
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
         
     @objc func sendButtonAction(_ action: UIAction) {
-        if onPressAction != nil {
-            onPressAction!(["event":action.identifier.rawValue])
-            
+        if let onPress = onPressAction {
+            onPress(["event":action.identifier.rawValue])
         }
     }
 }

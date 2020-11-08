@@ -2,7 +2,8 @@
 
 ![Supports iOS][support-badge]![Github Action Badge][gha-badge] ![npm][npm-badge]
 
-UIMenu component for react-native
+iOS14+ UIMenu component for react-native.
+Falls back to ActionSheet for versions below iOS14.
 
 | iOS 14+                                                                                                                       | iOS 13                                                                                                                        |
 | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -99,6 +100,8 @@ Actions to be displayed in the menu.
 
 #### `MenuAction`
 
+Object representing Menu Action.
+
 ```ts
 export type MenuAction = {
   /**
@@ -132,6 +135,41 @@ export type MenuAction = {
    */
   image?: string;
 };
+```
+
+#### `MenuAttributes`
+
+The attributes indicating the style of the action.
+
+```ts
+type MenuAttributes = {
+  /**
+   * An attribute indicating the destructive style.
+   */
+  destructive?: boolean;
+  /**
+   * An attribute indicating the disabled style.
+   */
+  disabled?: boolean;
+  /**
+   * An attribute indicating the hidden style.
+   */
+  hidden?: boolean;
+};
+```
+
+#### `MenuState`
+
+The state of the action.
+
+```ts
+/**
+ * The state of the action.
+ * - off: A constant indicating the menu element is in the “off” state.
+ * - on: A constant indicating the menu element is in the “on” state.
+ * - mixed: A constant indicating the menu element is in the “mixed” state.
+ */
+type MenuState = 'off' | 'on' | 'mixed';
 ```
 
 ### `onPressAction`

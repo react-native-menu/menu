@@ -1,5 +1,5 @@
 {
-  "name": "react-native-menu",
+  "name": "@react-native-menu/menu",
   "version": "0.1.0",
   "description": "UIMenu component for react-native",
   "main": "lib/commonjs/index",
@@ -124,5 +124,8 @@
       "module",
       "typescript"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

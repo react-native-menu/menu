@@ -1,16 +1,5 @@
-import {
-  HostComponent,
-  requireNativeComponent,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
-
-type MenuComponentProps = {
-  style?: StyleProp<ViewStyle>;
-  onPressAction?: ({ nativeEvent }: any) => void;
-  actions: any[];
-  menuTitle?: string;
-};
+import { HostComponent, requireNativeComponent } from 'react-native';
+import type { MenuComponentProps } from './types';
 
 const MenuComponent = requireNativeComponent('RCTUIMenu') as HostComponent<
   MenuComponentProps

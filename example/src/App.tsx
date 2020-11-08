@@ -7,7 +7,6 @@ export const App = () => {
     <View style={styles.container}>
       <MenuView
         title="Menu Title"
-        image="plus"
         onPressAction={({ nativeEvent }) => {
           console.warn(JSON.stringify(nativeEvent));
         }}

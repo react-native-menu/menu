@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { MenuView } from 'react-native-menu';
+import { MenuView } from '@react-native-menu/menu';
 
 export const App = () => {
   return (
@@ -35,7 +35,7 @@ export const App = () => {
             title: 'Disabled Action',
             subtitle: 'Action is disabled',
             attributes: {
-              disabled: true,
+              disabled: false,
             },
             image: 'tray',
           },
@@ -52,6 +52,7 @@ export const App = () => {
             title: 'Destructive Action',
             attributes: {
               destructive: true,
+              hidden: false,
             },
             image: 'trash',
           },

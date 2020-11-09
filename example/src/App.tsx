@@ -35,7 +35,7 @@ export const App = () => {
             title: 'Disabled Action',
             subtitle: 'Action is disabled',
             attributes: {
-              disabled: false,
+              disabled: true,
             },
             image: 'tray',
           },
@@ -52,7 +52,6 @@ export const App = () => {
             title: 'Destructive Action',
             attributes: {
               destructive: true,
-              hidden: false,
             },
             image: 'trash',
           },

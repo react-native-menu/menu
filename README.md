@@ -1,8 +1,8 @@
 # @react-native-menu/menu
 
-![Supports iOS][support-badge]![Github Action Badge][gha-badge] ![npm][npm-badge]
+![Supports Android, iOS][support-badge]![Github Action Badge][gha-badge] ![npm][npm-badge]
 
-iOS14+ UIMenu component for react-native.
+Android PopupMenu and iOS14+ UIMenu components for react-native.
 Falls back to ActionSheet for versions below iOS14.
 
 | iOS 14+                                                                                                                       | iOS 13                                                                                                                        |
@@ -23,7 +23,7 @@ via yarn:
 yarn add @react-native-menu/menu
 ```
 
-### Installing on React Native 0.63
+### Installing on iOS with React Native 0.63
 
 There is an issue(https://github.com/facebook/react-native/issues/29246) causing projects with this module to fail on build on React Native 0.63.
 This issue may be fixed in future versions of react native.
@@ -88,7 +88,7 @@ const App = () => {
 
 ### Props
 
-### `title`
+### `title` (iOS only)
 
 The title of the menu.
 
@@ -125,6 +125,7 @@ export type MenuAction = {
    */
   subtitle?: string;
   /**
+   * (iOS only)
    * The attributes indicating the style of the action.
    */
   attributes?: MenuAttributes;
@@ -197,4 +198,4 @@ MIT
 
 [gha-badge]: https://github.com/react-native-menu/menu/workflows/Build/badge.svg
 [npm-badge]: https://img.shields.io/npm/v/@react-native-menu/menu.svg?style=flat-square
-[support-badge]: https://img.shields.io/badge/platforms-ios-lightgrey.svg?style=flat-square
+[support-badge]: https://img.shields.io/badge/platforms-android%20|%20ios-lightgrey.svg?style=flat-square

@@ -9,14 +9,17 @@ type NativeActionEvent = {
 type MenuAttributes = {
   /**
    * An attribute indicating the destructive style.
+   * @platform iOS
    */
   destructive?: boolean;
   /**
    * An attribute indicating the disabled style.
+   * @platform iOS
    */
   disabled?: boolean;
   /**
    * An attribute indicating the hidden style.
+   * @platform iOS
    */
   hidden?: boolean;
 };

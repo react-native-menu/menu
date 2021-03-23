@@ -5,9 +5,9 @@
 Android PopupMenu and iOS14+ UIMenu components for react-native.
 Falls back to ActionSheet for versions below iOS14.
 
-| iOS 14+                                                                                                                       | iOS 13                                                                                                                        |
-| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://user-images.githubusercontent.com/6936373/98471164-cf328780-222d-11eb-9cbc-7dcda474fc8a.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/98471162-cb9f0080-222d-11eb-89ef-9342a1f10893.png" width="320" /> |
+| Android                                                                                                                        | iOS 14+                                                                                                                       | iOS 13                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://user-images.githubusercontent.com/6936373/112132781-52b5a980-8c0e-11eb-9604-2de6f9eb4483.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/98471164-cf328780-222d-11eb-9cbc-7dcda474fc8a.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/98471162-cb9f0080-222d-11eb-89ef-9342a1f10893.png" width="320" /> |
 
 ## Installation
 
@@ -152,14 +152,17 @@ The attributes indicating the style of the action.
 type MenuAttributes = {
   /**
    * An attribute indicating the destructive style.
+   * @platform iOS
    */
   destructive?: boolean;
   /**
    * An attribute indicating the disabled style.
+   * @platform iOS
    */
   disabled?: boolean;
   /**
    * An attribute indicating the hidden style.
+   * @platform iOS
    */
   hidden?: boolean;
 };

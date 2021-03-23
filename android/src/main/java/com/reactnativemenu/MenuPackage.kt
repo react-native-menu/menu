@@ -11,10 +11,10 @@ import com.facebook.react.bridge.JavaScriptModule
 
 class MenuPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return Arrays.asList<NativeModule>(MenuModule(reactContext))
+        return emptyList()
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return emptyList<ViewManager<*, *>>()
+        return mutableListOf(MenuViewManager())
     }
 }

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import type { MenuComponentProps } from './types';
+import type { NativeMenuComponentProps } from './types';
 
 /**
- * TODO: implement for Android and Web
+ * TODO: implement for Web
  */
-const MenuView: React.FC<MenuComponentProps> = ({ style, children }) => {
+const MenuView: React.FC<NativeMenuComponentProps> = ({ style, children }) => {
   return <View style={style}>{children}</View>;
 };
 

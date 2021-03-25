@@ -12,9 +12,9 @@ class RCTMenuAction {
     
     var identifier: UIAction.Identifier?;
     var title: String;
-    var subtitle: String?;
+    var subtitle: String?
     var image: UIImage?
-    var attributes: UIAction.Attributes = [];
+    var attributes: UIAction.Attributes = []
     var state: UIAction.State = .off
     
     init(details: NSDictionary){
@@ -25,6 +25,9 @@ class RCTMenuAction {
         
         if let image = details["image"] as? NSString {
             self.image = UIImage(systemName: image as String);
+            if let imageColor = details["imageColor"] {
+                self.image = self.image?.withTintColor(RCTConvert.uiColor(imageColor), renderingMode: .alwaysOriginal)
+            }
         }
         
         if let title = details["title"] as? NSString {

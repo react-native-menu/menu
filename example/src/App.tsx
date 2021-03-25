@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import { MenuView } from '@react-native-menu/menu';
 
 export const App = () => {
@@ -14,20 +14,35 @@ export const App = () => {
           {
             id: 'add',
             title: 'Add to List',
-            image: 'plus',
+            titleColor: '#2367A2',
+            image: Platform.select({
+              ios: 'plus',
+              android: 'ic_menu_add',
+            }),
+            imageColor: '#2367A2',
           },
           {
             id: 'share',
             title: 'Share Action',
+            titleColor: '#46F289',
             subtitle: 'Share action on SNS',
-            image: 'square.and.arrow.up',
+            image: Platform.select({
+              ios: 'square.and.arrow.up',
+              android: 'ic_menu_share',
+            }),
+            imageColor: '#46F289',
             state: 'on',
           },
           {
             id: 'mixed',
             title: 'Mixed State',
+            titleColor: 'rgba(100,200,250,0.3)',
             subtitle: 'State is mixed',
-            image: 'heart.fill',
+            image: Platform.select({
+              ios: 'heart.fill',
+              android: 'ic_menu_today',
+            }),
+            imageColor: 'rgba(100,200,250,0.3)',
             state: 'mixed',
           },
           {
@@ -37,7 +52,10 @@ export const App = () => {
             attributes: {
               disabled: true,
             },
-            image: 'tray',
+            image: Platform.select({
+              ios: 'tray',
+              android: 'ic_menu_agenda',
+            }),
           },
           {
             id: 'hidden',
@@ -53,7 +71,10 @@ export const App = () => {
             attributes: {
               destructive: true,
             },
-            image: 'trash',
+            image: Platform.select({
+              ios: 'trash',
+              android: 'ic_menu_delete',
+            }),
           },
         ]}
       >

@@ -5,9 +5,9 @@
 Android PopupMenu and iOS14+ UIMenu components for react-native.
 Falls back to ActionSheet for versions below iOS14.
 
-| Android                                                                                                                        | iOS 14+                                                                                                                       | iOS 13                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| <img src="https://user-images.githubusercontent.com/6936373/112132781-52b5a980-8c0e-11eb-9604-2de6f9eb4483.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/98471164-cf328780-222d-11eb-9cbc-7dcda474fc8a.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/98471162-cb9f0080-222d-11eb-89ef-9342a1f10893.png" width="320" /> |
+| Android                                                                                                                        | iOS 14+                                                                                                                        | iOS 13                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| <img src="https://user-images.githubusercontent.com/6936373/112418277-827ac380-8d6c-11eb-96e2-324487ff3dde.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/112418272-80b10000-8d6c-11eb-9edb-f91eeff0877e.png" width="320" /> | <img src="https://user-images.githubusercontent.com/6936373/98471162-cb9f0080-222d-11eb-89ef-9342a1f10893.png" width="320" /> |
 
 ## Installation
 
@@ -55,14 +55,23 @@ const App = () => {
         actions={[
           {
             id: 'add',
-            title: 'Add to List',
-            image: 'plus',
+            titleColor: '#2367A2',
+            image: Platform.select({
+              ios: 'plus',
+              android: 'ic_menu_add',
+            }),
+            imageColor: '#2367A2',
           },
           {
             id: 'share',
             title: 'Share Action',
+            titleColor: '#46F289',
             subtitle: 'Share action on SNS',
-            image: 'square.and.arrow.up',
+            image: Platform.select({
+              ios: 'square.and.arrow.up',
+              android: 'ic_menu_share',
+            }),
+            imageColor: '#46F289',
             state: 'on',
           },
           {
@@ -71,7 +80,10 @@ const App = () => {
             attributes: {
               destructive: true,
             },
-            image: 'trash',
+            image: Platform.select({
+              ios: 'trash',
+              android: 'ic_menu_delete',
+            }),
           },
         ]}
       >
@@ -120,27 +132,44 @@ export type MenuAction = {
    */
   title: string;
   /**
+   * (Android only)
+   * The action's title color.
+   * @platform Android
+   */
+  titleColor?: number | ColorValue;
+  /**
    * (iOS14+ only)
    * An elaborated title that explains the purpose of the action.
+   * @platform iOS
    */
   subtitle?: string;
   /**
-   * (iOS only)
    * The attributes indicating the style of the action.
    */
   attributes?: MenuAttributes;
   /**
    * (iOS14+ only)
    * The state of the action.
+   * @platform iOS
    */
   state?: MenuState;
   /**
-   * (iOS13+ only)
+   * (Android and iOS13+ only)
    * - The action's image.
-   * - Allows icon name included in SF Symbol
-   * - TODO: Allow images other than those included in SF Symbol
+   * - Allows icon name included in project or system (Android) resources drawables and
+   * in SF Symbol (iOS)
+   * @example // (iOS)
+   * image="plus"
+   * @example // (Android)
+   * image="ic_menu_add"
+   * - TODO: Allow images other than those included in SF Symbol and resources drawables
    */
   image?: string;
+  /**
+   * (Android and iOS13+ only)
+   * - The action's image color.
+   */
+  imageColor?: number | ColorValue;
 };
 ```
 
@@ -152,17 +181,14 @@ The attributes indicating the style of the action.
 type MenuAttributes = {
   /**
    * An attribute indicating the destructive style.
-   * @platform iOS
    */
   destructive?: boolean;
   /**
    * An attribute indicating the disabled style.
-   * @platform iOS
    */
   disabled?: boolean;
   /**
    * An attribute indicating the hidden style.
-   * @platform iOS
    */
   hidden?: boolean;
 };

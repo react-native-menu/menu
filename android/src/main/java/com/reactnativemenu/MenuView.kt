@@ -45,14 +45,14 @@ class MenuView(context: ReactContext): ReactViewGroup(context) {
       mPopupMenu.menu.clear()
       while (i < getActionsCount) {
         val item = mActions.getMap(i)
-        mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item.getString("title"))
+        mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
         i++
       }
       mPopupMenu.setOnMenuItemClickListener { it ->
         mIsMenuDisplayed = false
         var args: WritableMap = Arguments.createMap()
         val selectedItem = mActions.getMap(it.order)
-        args.putString("event", selectedItem.getString("id"))
+        args.putString("event", selectedItem?.getString("id"))
         args.putString("target", "$id")
         mContext
           .getJSModule(RCTEventEmitter::class.java)

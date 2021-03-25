@@ -1,4 +1,9 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type {
+  ColorValue,
+  processColor,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 
 type NativeActionEvent = {
   nativeEvent: {
@@ -9,17 +14,14 @@ type NativeActionEvent = {
 type MenuAttributes = {
   /**
    * An attribute indicating the destructive style.
-   * @platform iOS
    */
   destructive?: boolean;
   /**
    * An attribute indicating the disabled style.
-   * @platform iOS
    */
   disabled?: boolean;
   /**
    * An attribute indicating the hidden style.
-   * @platform iOS
    */
   hidden?: boolean;
 };
@@ -43,8 +45,15 @@ export type MenuAction = {
    */
   title: string;
   /**
+   * (Android only)
+   * The action's title color.
+   * @platform Android
+   */
+  titleColor?: number | ColorValue;
+  /**
    * (iOS14+ only)
    * An elaborated title that explains the purpose of the action.
+   * @platform iOS
    */
   subtitle?: string;
   /**
@@ -54,15 +63,26 @@ export type MenuAction = {
   /**
    * (iOS14+ only)
    * The state of the action.
+   * @platform iOS
    */
   state?: MenuState;
   /**
-   * (iOS13+ only)
+   * (Android and iOS13+ only)
    * - The action's image.
-   * - Allows icon name included in SF Symbol
-   * - TODO: Allow images other than those included in SF Symbol
+   * - Allows icon name included in project or system (Android) resources drawables and
+   * in SF Symbol (iOS)
+   * @example // (iOS)
+   * image="plus"
+   * @example // (Android)
+   * image="ic_menu_add"
+   * - TODO: Allow images other than those included in SF Symbol and resources drawables
    */
   image?: string;
+  /**
+   * (Android and iOS13+ only)
+   * - The action's image color.
+   */
+  imageColor?: number | ColorValue;
 };
 
 export type MenuComponentProps = {
@@ -79,5 +99,20 @@ export type MenuComponentProps = {
   /**
    * The title of the menu.
    */
+  title?: string;
+};
+
+export type ProcessedMenuAction = Omit<
+  MenuAction,
+  'imageColor' | 'titleColor'
+> & {
+  imageColor: ReturnType<typeof processColor>;
+  titleColor: ReturnType<typeof processColor>;
+};
+
+export type NativeMenuComponentProps = {
+  style?: StyleProp<ViewStyle>;
+  onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
+  actions: ProcessedMenuAction[];
   title?: string;
 };

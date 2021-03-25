@@ -31,6 +31,9 @@ class RCTAlertAction {
         if let image = details["image"] as? NSString {
             if #available(iOS 13.0, *) {
                 self.image = UIImage(systemName: image as String)
+                if let imageColor = details["imageColor"] {
+                    self.image = self.image?.withTintColor(RCTConvert.uiColor(imageColor), renderingMode: .alwaysOriginal)
+                }
             } else {
                 self.image = UIImage(named: image as String)
             };
@@ -54,7 +57,7 @@ class RCTAlertAction {
         if self.isHidden {
             return nil
         }
-        let action =  UIAlertAction(title: title, style: style, handler: {_ in
+        let action = UIAlertAction(title: title, style: style, handler: {_ in
             handleEvent(self.identifier ?? self.title)
         })
         if self.image != nil {

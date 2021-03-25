@@ -1,8 +1,8 @@
 import { HostComponent, requireNativeComponent } from 'react-native';
-import type { MenuComponentProps } from './types';
+import type { NativeMenuComponentProps } from './types';
 
 const MenuComponent = requireNativeComponent(
   'RCTUIMenu'
-) as HostComponent<MenuComponentProps>;
+) as HostComponent<NativeMenuComponentProps>;
 
 export default MenuComponent;

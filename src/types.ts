@@ -100,6 +100,13 @@ export type MenuComponentProps = {
    * The title of the menu.
    */
   title?: string;
+  /**
+   * (Android API 23+)
+   * Boolean value determines whether popup menu should be anchored
+   * to right corner of parent view - default value is `false`
+   * @platform Android
+   */
+  isAnchoredToRight?: boolean;
 };
 
 export type ProcessedMenuAction = Omit<

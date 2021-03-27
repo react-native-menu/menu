@@ -7,6 +7,7 @@ import android.os.Build
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.view.Gravity
 import android.view.Menu
 import android.view.MotionEvent
 import android.widget.PopupMenu
@@ -19,9 +20,9 @@ import com.facebook.react.views.view.ReactViewGroup
 import java.lang.reflect.Field
 
 
-class MenuView(context: ReactContext): ReactViewGroup(context) {
+class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
   private lateinit var mActions: ReadableArray
-  private var mContext: ReactContext = context as ReactContext
+  private var mIsAnchoredToRight = false
   private val mPopupMenu: PopupMenu = PopupMenu(context, this)
   private var mIsMenuDisplayed = false
 
@@ -42,7 +43,14 @@ class MenuView(context: ReactContext): ReactViewGroup(context) {
   }
 
   fun setActions(actions: ReadableArray) {
-    this.mActions = actions
+    mActions = actions
+  }
+
+  fun setIsAnchoredToRight(isAnchoredToRight: Boolean) {
+    if (mIsAnchoredToRight == isAnchoredToRight) {
+      return
+    }
+    mIsAnchoredToRight = isAnchoredToRight
   }
 
   private val getActionsCount: Int
@@ -51,6 +59,12 @@ class MenuView(context: ReactContext): ReactViewGroup(context) {
   private fun prepareMenu() {
     if (getActionsCount > 0) {
       mPopupMenu.menu.clear()
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        mPopupMenu.gravity = when (mIsAnchoredToRight) {
+          true -> Gravity.RIGHT
+          false -> Gravity.LEFT
+        }
+      }
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         mPopupMenu.setForceShowIcon(true)
       }

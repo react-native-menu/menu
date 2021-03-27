@@ -29,6 +29,11 @@ class MenuViewManager: ReactClippingViewManager<MenuView>() {
     view.setActions(actions)
   }
 
+  @ReactProp(name = "isAnchoredToRight", defaultBoolean = false)
+  fun setIsAnchoredToRight(view: MenuView, isAnchoredToRight: Boolean) {
+    view.setIsAnchoredToRight(isAnchoredToRight)
+  }
+
   override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any> {
     return MapBuilder.of(
       "onPressAction",

@@ -57,7 +57,7 @@ class MenuView(context: ReactContext): ReactViewGroup(context) {
       var i = 0
       while (i < getActionsCount) {
         val item = mActions.getMap(i)
-        val menuItem = mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item.getString("title"))
+        val menuItem = mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
 
         val titleColor = when (item.hasKey("titleColor")) {
           true -> item.getInt("titleColor")
@@ -135,7 +135,7 @@ class MenuView(context: ReactContext): ReactViewGroup(context) {
         mIsMenuDisplayed = false
         var args: WritableMap = Arguments.createMap()
         val selectedItem = mActions.getMap(it.order)
-        args.putString("event", selectedItem.getString("id"))
+        args.putString("event", selectedItem?.getString("id"))
         args.putString("target", "$id")
         mContext
           .getJSModule(RCTEventEmitter::class.java)

@@ -59,21 +59,25 @@ class MenuView(context: ReactContext): ReactViewGroup(context) {
         val item = mActions.getMap(i)
         val menuItem = mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
 
-        val titleColor = when (item.hasKey("titleColor")) {
-          true -> item.getInt("titleColor")
+        val titleColor = when (item?.hasKey("titleColor")) {
+          true -> item?.getInt("titleColor")
           false -> null
+          null -> null
         }
-        val imageName = when (item.hasKey("image")) {
-          true -> item.getString("image")
+        val imageName = when (item?.hasKey("image")) {
+          true -> item?.getString("image")
           false -> null
+          null -> null
         }
-        val imageColor = when (item.hasKey("imageColor")) {
-          true -> item.getInt("imageColor")
+        val imageColor = when (item?.hasKey("imageColor")) {
+          true -> item?.getInt("imageColor")
           false -> null
+          null -> null
         }
-        val attributes = when (item.hasKey("attributes")) {
-          true -> item.getMap("attributes")
+        val attributes = when (item?.hasKey("attributes")) {
+          true -> item?.getMap("attributes")
           false -> null
+          null -> null
         }
 
         if (titleColor != null) {

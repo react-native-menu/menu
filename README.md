@@ -108,6 +108,14 @@ The title of the menu.
 | ------ | -------- |
 | string | No       |
 
+### `isAnchoredToRight` (Android only)
+
+Boolean determining if menu should anchored to right or left corner of parent view.
+
+| Type    | Required |
+| ------- | -------- |
+| boolean | No       |
+
 ### `actions`
 
 Actions to be displayed in the menu.

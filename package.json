@@ -1,6 +1,6 @@
 {
   "name": "@react-native-menu/menu",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "UIMenu component for react-native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

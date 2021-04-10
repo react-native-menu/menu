@@ -9,12 +9,10 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.Gravity
 import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.widget.PopupMenu
-import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.ReactContext
-import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.bridge.WritableMap
+import com.facebook.react.bridge.*
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 import java.lang.reflect.Field
@@ -56,6 +54,111 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
   private val getActionsCount: Int
     get() = mActions.size()
 
+  private fun prepareMenuItem(menuItem: MenuItem, config: ReadableMap) {
+    val titleColor = when (config?.hasKey("titleColor") && !config?.isNull("titleColor")) {
+      true -> config?.getInt("titleColor")
+      else -> null
+    }
+    val imageName = when (config?.hasKey("image") && !config?.isNull("image")) {
+      true -> config?.getString("image")
+      else -> null
+    }
+    val imageColor = when (config?.hasKey("imageColor") && !config?.isNull("imageColor")) {
+      true -> config?.getInt("imageColor")
+      else -> null
+    }
+    val attributes = when (config?.hasKey("attributes") && !config?.isNull(("attributes"))) {
+      true -> config?.getMap("attributes")
+      else -> null
+    }
+    val subactions = when (config?.hasKey("subactions") && !config?.isNull(("subactions"))) {
+      true -> config?.getArray("subactions")
+      else -> null
+    }
+
+    if (titleColor != null) {
+      menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), titleColor)
+    }
+
+    if (imageName != null) {
+      val resourceId: Int = getDrawableIdWithName(imageName)
+      if (resourceId != 0) {
+        val icon = resources.getDrawable(resourceId, context.theme)
+        if (imageColor != null) {
+          icon.setTintList(ColorStateList.valueOf(imageColor))
+        }
+        menuItem.icon = icon
+      }
+    }
+
+    if (attributes != null) {
+      // actions.attributes.disabled
+      val disabled = when (attributes.hasKey("disabled") && !attributes.isNull("disabled")) {
+        true -> attributes.getBoolean("disabled")
+        else -> false
+      }
+      menuItem.isEnabled = !disabled
+      if (!menuItem.isEnabled) {
+        val disabledColor = 0x77888888
+        menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), disabledColor)
+        if (imageName != null) {
+          val icon = menuItem.icon
+          icon.setTintList(ColorStateList.valueOf(disabledColor))
+          menuItem.icon = icon
+        }
+      }
+
+      // actions.attributes.hidden
+      val hidden = when (attributes.hasKey("hidden") && !attributes.isNull("hidden")) {
+        true -> attributes.getBoolean("hidden")
+        else -> false
+      }
+      menuItem.isVisible = !hidden
+
+      // actions.attributes.destructive
+      val destructive = when (attributes.hasKey("destructive") && !attributes.isNull("destructive")) {
+        true -> attributes.getBoolean("destructive")
+        else -> false
+      }
+      if (destructive) {
+        menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), Color.RED)
+        if (imageName != null) {
+          val icon = menuItem.icon
+          icon.setTintList(ColorStateList.valueOf(Color.RED))
+          menuItem.icon = icon
+        }
+      }
+    }
+
+    // On Android SubMenu cannot contain another SubMenu, so even if there are subactions provided
+    // we are checking if item has submenu (which will occur only for 1 lvl nesting)
+    if (subactions != null && menuItem.hasSubMenu()) {
+      var i = 0;
+      val subactionsCount = subactions.size();
+      while (i < subactionsCount) {
+        val subMenuConfig = subactions.getMap(i)
+        val subMenuItem = menuItem.subMenu.add(Menu.NONE, Menu.NONE, i, subMenuConfig?.getString("title"))
+        prepareMenuItem(subMenuItem, subMenuConfig)
+        subMenuItem.setOnMenuItemClickListener {
+          if (!it.hasSubMenu()) {
+            mIsMenuDisplayed = false
+            var args: WritableMap = Arguments.createMap()
+            val selectedItem = subactions.getMap(it.order)
+            args.putString("event", selectedItem?.getString("id"))
+            args.putString("target", "$id")
+            mContext
+              .getJSModule(RCTEventEmitter::class.java)
+              .receiveEvent(id, "onPressAction", args)
+            true
+          } else {
+            false
+          }
+        }
+        i++
+      }
+    }
+  }
+
   private fun prepareMenu() {
     if (getActionsCount > 0) {
       mPopupMenu.menu.clear()
@@ -71,94 +174,27 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
       var i = 0
       while (i < getActionsCount) {
         val item = mActions.getMap(i)
-        val menuItem = mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
-
-        val titleColor = when (item?.hasKey("titleColor")) {
-          true -> item?.getInt("titleColor")
-          false -> null
-          null -> null
+        val menuItem = when (item.hasKey("subactions") && !item.isNull("subactions")) {
+          true -> mPopupMenu.menu.addSubMenu(Menu.NONE, Menu.NONE, i, item?.getString("title")).item
+          else -> mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
         }
-        val imageName = when (item?.hasKey("image")) {
-          true -> item?.getString("image")
-          false -> null
-          null -> null
-        }
-        val imageColor = when (item?.hasKey("imageColor")) {
-          true -> item?.getInt("imageColor")
-          false -> null
-          null -> null
-        }
-        val attributes = when (item?.hasKey("attributes")) {
-          true -> item?.getMap("attributes")
-          false -> null
-          null -> null
-        }
-
-        if (titleColor != null) {
-          menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), titleColor)
-        }
-
-        if (imageName != null) {
-          val resourceId: Int = getDrawableIdWithName(imageName)
-          if (resourceId != 0) {
-            val icon = resources.getDrawable(resourceId, context.theme)
-            if (imageColor != null) {
-              icon.setTintList(ColorStateList.valueOf(imageColor))
-            }
-            menuItem.icon = icon
-          }
-        }
-
-        if (attributes != null) {
-          // actions.attributes.disabled
-          val disabled = when (attributes.hasKey("disabled")) {
-            true -> attributes.getBoolean("disabled")
-            false -> false
-          }
-          menuItem.isEnabled = !disabled
-          if (!menuItem.isEnabled) {
-            val disabledColor = 0x77888888
-            menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), disabledColor)
-            if (imageName != null) {
-              val icon = menuItem.icon
-              icon.setTintList(ColorStateList.valueOf(disabledColor))
-              menuItem.icon = icon
-            }
-          }
-
-          // actions.attributes.hidden
-          val hidden = when (attributes.hasKey("hidden")) {
-            true -> attributes.getBoolean("hidden")
-            false -> false
-          }
-          menuItem.isVisible = !hidden
-
-          // actions.attributes.destructive
-          val destructive = when (attributes.hasKey("destructive")) {
-            true -> attributes.getBoolean("destructive")
-            false -> false
-          }
-          if (destructive) {
-            menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), Color.RED)
-            if (imageName != null) {
-              val icon = menuItem.icon
-              icon.setTintList(ColorStateList.valueOf(Color.RED))
-              menuItem.icon = icon
-            }
+        prepareMenuItem(menuItem, item)
+        menuItem.setOnMenuItemClickListener {
+          if (!it.hasSubMenu()) {
+            mIsMenuDisplayed = false
+            var args: WritableMap = Arguments.createMap()
+            val selectedItem = mActions.getMap(it.order)
+            args.putString("event", selectedItem?.getString("id"))
+            args.putString("target", "$id")
+            mContext
+              .getJSModule(RCTEventEmitter::class.java)
+              .receiveEvent(id, "onPressAction", args)
+            true
+          } else {
+            false
           }
         }
         i++
-      }
-      mPopupMenu.setOnMenuItemClickListener { it ->
-        mIsMenuDisplayed = false
-        var args: WritableMap = Arguments.createMap()
-        val selectedItem = mActions.getMap(it.order)
-        args.putString("event", selectedItem?.getString("id"))
-        args.putString("target", "$id")
-        mContext
-          .getJSModule(RCTEventEmitter::class.java)
-          .receiveEvent(id, "onPressAction", args)
-        true
       }
       mPopupMenu.setOnDismissListener {
         mIsMenuDisplayed = false

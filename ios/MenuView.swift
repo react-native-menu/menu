@@ -10,14 +10,14 @@ import UIKit
 @objc(MenuView)
 class MenuView: UIButton {
 
-    private var _actions: [UIAction] = [];
+    private var _actions: [UIMenuElement] = [];
     @objc var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
                 return
             }
             actions.forEach { menuAction in
-                _actions.append(RCTMenuAction(details: menuAction).createUIAction({action in self.sendButtonAction(action)}))
+                _actions.append(RCTMenuAction(details: menuAction).createUIMenuElement({action in self.sendButtonAction(action)}))
             }
             self.setup()
         }

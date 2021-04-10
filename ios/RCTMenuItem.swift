@@ -16,6 +16,7 @@ class RCTMenuAction {
     var image: UIImage?
     var attributes: UIAction.Attributes = []
     var state: UIAction.State = .off
+    var subactions: [RCTMenuAction] = []
     
     init(details: NSDictionary){
         
@@ -64,10 +65,25 @@ class RCTMenuAction {
             }
         }
         
+        if let subactions = details["subactions"] as? NSArray {
+            if subactions.count > 0 {
+                for subaction in subactions {
+                    self.subactions.append(RCTMenuAction(details: subaction as! NSDictionary))
+                }
+            }
+        }
+        
         
     }
     
-    func createUIAction(_ handler: @escaping UIActionHandler) -> UIAction {
+    func createUIMenuElement(_ handler: @escaping UIActionHandler) -> UIMenuElement {
+        if subactions.count > 0 {
+            var subMenuActions: [UIMenuElement] = []
+            subactions.forEach { subaction in
+                subMenuActions.append(subaction.createUIMenuElement(handler))
+            }
+            return UIMenu(title: title, image: image, identifier: nil, children: subMenuActions)
+        }
         return UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: subtitle, attributes: attributes, state: state, handler: handler)
     }
 }

@@ -20,6 +20,31 @@ export const App = () => {
               android: 'ic_menu_add',
             }),
             imageColor: '#2367A2',
+            subactions: [
+              {
+                id: 'nested1',
+                title: 'Nested action',
+                titleColor: 'rgba(250,180,100,0.5)',
+                subtitle: 'State is mixed',
+                image: Platform.select({
+                  ios: 'heart.fill',
+                  android: 'ic_menu_today',
+                }),
+                imageColor: 'rgba(100,200,250,0.3)',
+                state: 'mixed',
+              },
+              {
+                id: 'nestedDestructive',
+                title: 'Destructive Action',
+                attributes: {
+                  destructive: true,
+                },
+                image: Platform.select({
+                  ios: 'trash',
+                  android: 'ic_menu_delete',
+                }),
+              },
+            ],
           },
           {
             id: 'share',
@@ -44,6 +69,63 @@ export const App = () => {
             }),
             imageColor: 'rgba(100,200,250,0.3)',
             state: 'mixed',
+            subactions: [
+              {
+                id: 'nested2',
+                title: 'Nested action',
+                titleColor: 'rgba(250,180,100,0.5)',
+                subtitle: 'State is mixed',
+                image: Platform.select({
+                  ios: 'tray',
+                  android: 'ic_menu_agenda',
+                }),
+                imageColor: 'rgba(100,200,250,0.3)',
+                state: 'mixed',
+              },
+              {
+                id: 'nestedMixed',
+                title: 'Mixed State',
+                subtitle: 'State is mixed',
+                image: Platform.select({
+                  ios: 'heart.fill',
+                  android: 'ic_menu_today',
+                }),
+                imageColor: '#46F289',
+                subactions: [
+                  {
+                    id: 'nestednesteddisabled',
+                    title: 'Disabled Action',
+                    subtitle: 'Action is disabled',
+                    attributes: {
+                      disabled: true,
+                    },
+                    image: Platform.select({
+                      ios: 'tray',
+                      android: 'ic_menu_agenda',
+                    }),
+                  },
+                  {
+                    id: 'nestednestedhidden',
+                    title: 'Hidden Action',
+                    subtitle: 'Action is hidden',
+                    attributes: {
+                      hidden: true,
+                    },
+                  },
+                  {
+                    id: 'nestednesteddestructive',
+                    title: 'Destructive Action',
+                    attributes: {
+                      destructive: true,
+                    },
+                    image: Platform.select({
+                      ios: 'trash',
+                      android: 'ic_menu_delete',
+                    }),
+                  },
+                ],
+              },
+            ],
           },
           {
             id: 'disabled',

@@ -83,6 +83,12 @@ export type MenuAction = {
    * - The action's image color.
    */
   imageColor?: number | ColorValue;
+  /**
+   * (Android and iOS14+ only)
+   * - Actions to be displayed in the sub menu
+   * - On Android it does not support nesting next sub menus in sub menu item
+   */
+  subactions?: MenuAction[];
 };
 
 export type MenuComponentProps = {
@@ -111,10 +117,11 @@ export type MenuComponentProps = {
 
 export type ProcessedMenuAction = Omit<
   MenuAction,
-  'imageColor' | 'titleColor'
+  'imageColor' | 'titleColor' | 'subactions'
 > & {
   imageColor: ReturnType<typeof processColor>;
   titleColor: ReturnType<typeof processColor>;
+  subactions?: ProcessedMenuAction[];
 };
 
 export type NativeMenuComponentProps = {

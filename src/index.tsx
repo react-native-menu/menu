@@ -8,12 +8,19 @@ import type {
   ProcessedMenuAction,
 } from './types';
 
-const MenuView: React.FC<MenuComponentProps> = ({ actions, ...props }) => {
-  const processedActions = actions.map<ProcessedMenuAction>((action) => ({
+function processAction(action: MenuAction): ProcessedMenuAction {
+  return {
     ...action,
     imageColor: processColor(action.imageColor),
     titleColor: processColor(action.titleColor),
-  }));
+    subactions: action.subactions?.map((subAction) => processAction(subAction)),
+  };
+}
+
+const MenuView: React.FC<MenuComponentProps> = ({ actions, ...props }) => {
+  const processedActions = actions.map<ProcessedMenuAction>((action) =>
+    processAction(action)
+  );
   return <UIMenuView {...props} actions={processedActions} />;
 };
 

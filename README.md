@@ -111,6 +111,7 @@ const App = () => {
             }),
           },
         ]}
+        shouldOpenOnLongPress={true}
       >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Test</Text>
@@ -136,6 +137,14 @@ The title of the menu.
 ### `isAnchoredToRight` (Android only)
 
 Boolean determining if menu should anchored to right or left corner of parent view.
+
+| Type    | Required |
+| ------- | -------- |
+| boolean | No       |
+
+### `shouldOpenOnLongPress`
+
+Boolean determining if menu should open after long press or on normal press
 
 | Type    | Required |
 | ------- | -------- |

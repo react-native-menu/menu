@@ -113,6 +113,12 @@ export type MenuComponentProps = {
    * @platform Android
    */
   isAnchoredToRight?: boolean;
+  /**
+   * Determines if menu should open after long press or on normal press
+   *
+   * @default false
+   */
+  shouldOpenOnLongPress?: boolean;
 };
 
 export type ProcessedMenuAction = Omit<

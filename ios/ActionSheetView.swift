@@ -37,11 +37,14 @@ class ActionSheetView: UIView {
         }
     }
 
+    @objc var shouldOpenOnLongPress: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         let tap = UITapGestureRecognizer(target: self, action: #selector (self.handleTap (_:)))
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress(_:)))
         self.addGestureRecognizer(tap)
+        self.addGestureRecognizer(longPress)
     }
     
     func launchActionSheet() {
@@ -61,10 +64,25 @@ class ActionSheetView: UIView {
     }
     
     
-    @objc func handleTap(_ sender:UITapGestureRecognizer){
-       // do other task
-        DispatchQueue.main.async {
-            self.launchActionSheet()
+    @objc func handleTap(_ sender:UITapGestureRecognizer) {
+        if shouldOpenOnLongPress {
+            return
+        }
+        if sender.state == .ended {
+            DispatchQueue.main.async {
+                self.launchActionSheet()
+            }
+        }
+    }
+    
+    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+        if !shouldOpenOnLongPress {
+            return
+        }
+        if sender.state == .ended {
+            DispatchQueue.main.async {
+                self.launchActionSheet()
+            }
         }
     }
     

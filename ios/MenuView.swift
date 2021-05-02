@@ -34,7 +34,12 @@ class MenuView: UIButton {
         }
     }
     @objc var onPressAction: RCTDirectEventBlock?
-        
+    
+    @objc var shouldOpenOnLongPress: Bool = false {
+        didSet {
+            self.setup()
+        }
+    }
     
     override init(frame: CGRect) {
       super.init(frame: frame)
@@ -46,7 +51,7 @@ class MenuView: UIButton {
         let menu = UIMenu(title:_title, identifier: nil, options: .displayInline, children: self._actions)
 
         self.menu = menu
-        self.showsMenuAsPrimaryAction = true
+        self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
     }
     
     override func reactSetFrame(_ frame: CGRect) {

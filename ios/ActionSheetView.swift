@@ -54,6 +54,12 @@ class ActionSheetView: UIView {
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            alert.modalPresentationStyle = .popover
+            alert.popoverPresentationController?.sourceView = self
+            alert.popoverPresentationController?.sourceRect = self.bounds
+        }
+        
         if let root = RCTPresentedViewController() {
             root.present(alert, animated: true, completion: nil)
         }

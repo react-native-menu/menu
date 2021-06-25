@@ -27,6 +27,7 @@ class ActionSheetView: UIView {
             guard let actions = self.actions else {
                 return
             }
+            _actions.removeAll()
             actions.forEach({ alertAction in
                 if let action = RCTAlertAction(details: alertAction).createAction({
                 event in self.sendButtonAction(event)

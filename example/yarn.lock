@@ -1088,6 +1088,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.1.0.tgz#e42b1bef12d2415411519fd528e64b593b1363dc"
   integrity sha512-W/J0fNYVO01tioHjvYWQ9m6RgndVtbElzYozBq1ZPrHO/iCzlqoySHl4gO/fpCl9QEFjvJfjPgtPMTMlsoq5DQ==
 
+"@react-native-menu/menu@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@react-native-menu/menu/-/menu-0.4.1.tgz#4932469b0d8c2280fbfb82a179675ae11bb4f74e"
+  integrity sha512-+9ybh8c0VWWPYwQbcmoQLBpCOS1NyYHP7KB/OLn/feD4dkr1JJQK/chDib6tO4GxmVS3Q6uuxyRp35Owwh2w9g==
+
 "@react-native/assets@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/assets/-/assets-1.0.0.tgz#c6f9bf63d274bafc8e970628de24986b30a55c8e"

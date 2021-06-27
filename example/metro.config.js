@@ -7,10 +7,10 @@
 
 const exclusionList = (() => {
   try {
-    return require("metro-config/src/defaults/exclusionList");
+    return require('metro-config/src/defaults/exclusionList');
   } catch (_) {
     // `blacklist` was renamed to `exclusionList` in 0.60
-    return require("metro-config/src/defaults/blacklist");
+    return require('metro-config/src/defaults/blacklist');
   }
 })();
 

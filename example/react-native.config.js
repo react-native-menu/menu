@@ -1,34 +1,34 @@
-const path = require("path");
+const path = require('path');
 
 if (
-  process.argv.includes("--config=metro.config.windows.js") ||
-  process.argv.includes("autolink-windows") ||
-  process.argv.includes("run-windows")
+  process.argv.includes('--config=metro.config.windows.js') ||
+  process.argv.includes('autolink-windows') ||
+  process.argv.includes('run-windows')
 ) {
-  const sourceDir = "windows";
+  const sourceDir = 'windows';
   module.exports = {
     project: {
       windows: {
         sourceDir,
-        solutionFile: "Example.sln",
+        solutionFile: 'Example.sln',
         project: {
           projectFile: path.relative(
             path.join(__dirname, sourceDir),
             path.join(
-              "node_modules",
-              ".generated",
-              "windows",
-              "ReactTestApp",
-              "ReactTestApp.vcxproj"
+              'node_modules',
+              '.generated',
+              'windows',
+              'ReactTestApp',
+              'ReactTestApp.vcxproj'
             )
           ),
         },
       },
     },
-    reactNativePath: "node_modules/react-native-windows",
+    reactNativePath: 'node_modules/react-native-windows',
   };
 } else {
-  const sourceDir = "android";
+  const sourceDir = 'android';
   module.exports = {
     project: {
       android: {
@@ -36,17 +36,17 @@ if (
         manifestPath: path.relative(
           path.join(__dirname, sourceDir),
           path.join(
-            path.dirname(require.resolve("react-native-test-app/package.json")),
-            "android",
-            "app",
-            "src",
-            "main",
-            "AndroidManifest.xml"
+            path.dirname(require.resolve('react-native-test-app/package.json')),
+            'android',
+            'app',
+            'src',
+            'main',
+            'AndroidManifest.xml'
           )
         ),
       },
       ios: {
-        project: "ios/ReactTestApp-Dummy.xcodeproj",
+        project: 'ios/ReactTestApp-Dummy.xcodeproj',
       },
     },
   };

@@ -57,9 +57,9 @@ PODS:
     - FlipperKit/Core
     - FlipperKit/FlipperKitNetworkPlugin
   - glog (0.3.5)
-  - hermes-engine (0.7.2)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.180)
+  - QRCodeReader.swift (10.1.0)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -69,11 +69,6 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCT-Folly/Futures (2020.01.13.00):
-    - boost-for-react-native
-    - DoubleConversion
-    - glog
-    - libevent
   - RCTRequired (0.64.1)
   - RCTTypeSafety (0.64.1):
     - FBLazyVector (= 0.64.1)
@@ -129,16 +124,6 @@ PODS:
     - React-jsi (= 0.64.1)
     - React-jsiexecutor (= 0.64.1)
     - React-jsinspector (= 0.64.1)
-    - React-perflogger (= 0.64.1)
-    - Yoga
-  - React-Core/Hermes (0.64.1):
-    - glog
-    - hermes-engine
-    - RCT-Folly (= 2020.01.13.00)
-    - RCT-Folly/Futures
-    - React-cxxreact (= 0.64.1)
-    - React-jsi (= 0.64.1)
-    - React-jsiexecutor (= 0.64.1)
     - React-perflogger (= 0.64.1)
     - Yoga
   - React-Core/RCTActionSheetHeaders (0.64.1):
@@ -334,6 +319,9 @@ PODS:
     - React-cxxreact (= 0.64.1)
     - React-jsi (= 0.64.1)
     - React-perflogger (= 0.64.1)
+  - ReactTestApp-DevSupport (0.6.3)
+  - ReactTestApp-Resources (1.0.0-dev)
+  - SwiftLint (0.43.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -347,7 +335,7 @@ DEPENDENCIES:
   - Flipper-Folly (= 2.5.3)
   - Flipper-Glog (= 0.3.6)
   - Flipper-PeerTalk (~> 0.0.4)
-  - Flipper-RSocket (= 1.3.1)
+  - Flipper-RSocket (~> 1.3)
   - FlipperKit (= 0.75.1)
   - FlipperKit/Core (= 0.75.1)
   - FlipperKit/CppBridge (= 0.75.1)
@@ -362,8 +350,7 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.75.1)
   - FlipperKit/SKIOSNetworkPlugin (= 0.75.1)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - hermes-engine (~> 0.7.2)
-  - libevent (~> 2.1.12)
+  - QRCodeReader.swift
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -371,14 +358,13 @@ DEPENDENCIES:
   - React-callinvoker (from `../node_modules/react-native/ReactCommon/callinvoker`)
   - React-Core (from `../node_modules/react-native/`)
   - React-Core/DevSupport (from `../node_modules/react-native/`)
-  - React-Core/Hermes (from `../node_modules/react-native/`)
   - React-Core/RCTWebSocket (from `../node_modules/react-native/`)
   - React-CoreModules (from `../node_modules/react-native/React/CoreModules`)
   - React-cxxreact (from `../node_modules/react-native/ReactCommon/cxxreact`)
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - react-native-menu (from `../..`)
+  - "react-native-menu (from `../node_modules/@react-native-menu/menu`)"
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -391,6 +377,9 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
+  - ReactTestApp-Resources (from `..`)
+  - SwiftLint
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -404,9 +393,10 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
-    - hermes-engine
     - libevent
     - OpenSSL-Universal
+    - QRCodeReader.swift
+    - SwiftLint
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -441,7 +431,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-menu:
-    :path: "../.."
+    :path: "../node_modules/@react-native-menu/menu"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -466,6 +456,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  ReactTestApp-DevSupport:
+    :path: "../node_modules/react-native-test-app"
+  ReactTestApp-Resources:
+    :path: ".."
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -483,9 +477,9 @@ SPEC CHECKSUMS:
   Flipper-RSocket: 127954abe8b162fcaf68d2134d34dc2bd7076154
   FlipperKit: 8a20b5c5fcf9436cac58551dc049867247f64b00
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
-  hermes-engine: 7d97ba46a1e29bacf3e3c61ecb2804a5ddd02d4f
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
+  QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: ec2ebc96b7bfba3ca5c32740f5a0c6a014a274d2
   RCTTypeSafety: 22567f31e67c3e088c7ac23ea46ab6d4779c0ea5
@@ -510,9 +504,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: 4b99a7f5c6c0abbc5256410cc5425fb8531986e1
   React-runtimeexecutor: ff951a0c241bfaefc4940a3f1f1a229e7cb32fa6
   ReactCommon: bedc99ed4dae329c4fcf128d0c31b9115e5365ca
+  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
+  ReactTestApp-Resources: 15cdcdc66d0a6ef3e78dc2523a6bb6d0b88835ab
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: a7de31c64fe738607e7a3803e3f591a4b1df7393
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: bb63916291384074b698f88548d45ae28e2cd5e4
+PODFILE CHECKSUM: 48b97f6ff1825bb0c26ca1f105de9d1f3c259277
 
 COCOAPODS: 1.10.1

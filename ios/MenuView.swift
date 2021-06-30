@@ -16,6 +16,7 @@ class MenuView: UIButton {
             guard let actions = self.actions else {
                 return
             }
+            _actions.removeAll()
             actions.forEach { menuAction in
                 _actions.append(RCTMenuAction(details: menuAction).createUIMenuElement({action in self.sendButtonAction(action)}))
             }

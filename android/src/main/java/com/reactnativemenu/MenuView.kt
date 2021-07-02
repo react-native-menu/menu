@@ -54,25 +54,25 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
   private val getActionsCount: Int
     get() = mActions.size()
 
-  private fun prepareMenuItem(menuItem: MenuItem, config: ReadableMap) {
-    val titleColor = when (config?.hasKey("titleColor") && !config?.isNull("titleColor")) {
-      true -> config?.getInt("titleColor")
+  private fun prepareMenuItem(menuItem: MenuItem, config: ReadableMap?) {
+    val titleColor = when (config != null && config.hasKey("titleColor") && !config.isNull("titleColor")) {
+      true -> config.getInt("titleColor")
       else -> null
     }
-    val imageName = when (config?.hasKey("image") && !config?.isNull("image")) {
-      true -> config?.getString("image")
+    val imageName = when (config != null && config.hasKey("image") && !config.isNull("image")) {
+      true -> config.getString("image")
       else -> null
     }
-    val imageColor = when (config?.hasKey("imageColor") && !config?.isNull("imageColor")) {
-      true -> config?.getInt("imageColor")
+    val imageColor = when (config != null && config.hasKey("imageColor") && !config.isNull("imageColor")) {
+      true -> config.getInt("imageColor")
       else -> null
     }
-    val attributes = when (config?.hasKey("attributes") && !config?.isNull(("attributes"))) {
-      true -> config?.getMap("attributes")
+    val attributes = when (config != null && config.hasKey("attributes") && !config.isNull(("attributes"))) {
+      true -> config.getMap("attributes")
       else -> null
     }
-    val subactions = when (config?.hasKey("subactions") && !config?.isNull(("subactions"))) {
-      true -> config?.getArray("subactions")
+    val subactions = when (config != null && config.hasKey("subactions") && !config.isNull(("subactions"))) {
+      true -> config.getArray("subactions")
       else -> null
     }
 
@@ -133,25 +133,29 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
     // On Android SubMenu cannot contain another SubMenu, so even if there are subactions provided
     // we are checking if item has submenu (which will occur only for 1 lvl nesting)
     if (subactions != null && menuItem.hasSubMenu()) {
-      var i = 0;
-      val subactionsCount = subactions.size();
+      var i = 0
+      val subactionsCount = subactions.size()
       while (i < subactionsCount) {
-        val subMenuConfig = subactions.getMap(i)
-        val subMenuItem = menuItem.subMenu.add(Menu.NONE, Menu.NONE, i, subMenuConfig?.getString("title"))
-        prepareMenuItem(subMenuItem, subMenuConfig)
-        subMenuItem.setOnMenuItemClickListener {
-          if (!it.hasSubMenu()) {
-            mIsMenuDisplayed = false
-            var args: WritableMap = Arguments.createMap()
-            val selectedItem = subactions.getMap(it.order)
-            args.putString("event", selectedItem?.getString("id"))
-            args.putString("target", "$id")
-            mContext
-              .getJSModule(RCTEventEmitter::class.java)
-              .receiveEvent(id, "onPressAction", args)
-            true
-          } else {
-            false
+        if (!subactions.isNull(i)) {
+          val subMenuConfig = subactions.getMap(i)
+          val subMenuItem = menuItem.subMenu.add(Menu.NONE, Menu.NONE, i, subMenuConfig?.getString("title"))
+          prepareMenuItem(subMenuItem, subMenuConfig)
+          subMenuItem.setOnMenuItemClickListener {
+            if (!it.hasSubMenu()) {
+              mIsMenuDisplayed = false
+              val args: WritableMap = Arguments.createMap()
+              if (!subactions.isNull(it.order)) {
+                val selectedItem = subactions.getMap(it.order)
+                args.putString("event", selectedItem?.getString("id"))
+                args.putString("target", "$id")
+                mContext
+                  .getJSModule(RCTEventEmitter::class.java)
+                  .receiveEvent(id, "onPressAction", args)
+              }
+              true
+            } else {
+              false
+            }
           }
         }
         i++
@@ -173,25 +177,29 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
       }
       var i = 0
       while (i < getActionsCount) {
-        val item = mActions.getMap(i)
-        val menuItem = when (item.hasKey("subactions") && !item.isNull("subactions")) {
-          true -> mPopupMenu.menu.addSubMenu(Menu.NONE, Menu.NONE, i, item?.getString("title")).item
-          else -> mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
-        }
-        prepareMenuItem(menuItem, item)
-        menuItem.setOnMenuItemClickListener {
-          if (!it.hasSubMenu()) {
-            mIsMenuDisplayed = false
-            var args: WritableMap = Arguments.createMap()
-            val selectedItem = mActions.getMap(it.order)
-            args.putString("event", selectedItem?.getString("id"))
-            args.putString("target", "$id")
-            mContext
-              .getJSModule(RCTEventEmitter::class.java)
-              .receiveEvent(id, "onPressAction", args)
-            true
-          } else {
-            false
+        if (!mActions.isNull(i)) {
+          val item = mActions.getMap(i)
+          val menuItem = when (item != null && item.hasKey("subactions") && !item.isNull("subactions")) {
+            true -> mPopupMenu.menu.addSubMenu(Menu.NONE, Menu.NONE, i, item.getString("title")).item
+            else -> mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
+          }
+          prepareMenuItem(menuItem, item)
+          menuItem.setOnMenuItemClickListener {
+            if (!it.hasSubMenu()) {
+              mIsMenuDisplayed = false
+              val args: WritableMap = Arguments.createMap()
+              if (!mActions.isNull(it.order)) {
+                val selectedItem = mActions.getMap(it.order)
+                args.putString("event", selectedItem?.getString("id"))
+                args.putString("target", "$id")
+                mContext
+                  .getJSModule(RCTEventEmitter::class.java)
+                  .receiveEvent(id, "onPressAction", args)
+              }
+              true
+            } else {
+              false
+            }
           }
         }
         i++

@@ -15,5 +15,9 @@ RCT_EXPORT_VIEW_PROPERTY(actions, NSArray);
  * onPressAction: callback to be called once user selects an action
  */
 RCT_EXPORT_VIEW_PROPERTY(onPressAction, RCTDirectEventBlock);
+/**
+ * shouldOpenOnLongPress: determines whether menu should be opened after long press or normal press
+ */
+RCT_EXPORT_VIEW_PROPERTY(shouldOpenOnLongPress, BOOL)
 
 @end

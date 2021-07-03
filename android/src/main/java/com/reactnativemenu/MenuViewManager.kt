@@ -34,6 +34,11 @@ class MenuViewManager: ReactClippingViewManager<MenuView>() {
     view.setIsAnchoredToRight(isAnchoredToRight)
   }
 
+  @ReactProp(name = "shouldOpenOnLongPress", defaultBoolean = false)
+  fun setIsOnLongPress(view: MenuView, isOnLongPress: Boolean) {
+    view.setIsOpenOnLongPress(isOnLongPress)
+  }
+
   override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any> {
     return MapBuilder.of(
       "onPressAction",

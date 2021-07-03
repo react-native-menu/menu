@@ -7,10 +7,7 @@ import android.os.Build
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
-import android.view.Gravity
-import android.view.Menu
-import android.view.MenuItem
-import android.view.MotionEvent
+import android.view.*
 import android.widget.PopupMenu
 import com.facebook.react.bridge.*
 import com.facebook.react.uimanager.events.RCTEventEmitter
@@ -23,14 +20,34 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
   private var mIsAnchoredToRight = false
   private val mPopupMenu: PopupMenu = PopupMenu(context, this)
   private var mIsMenuDisplayed = false
+  private var mIsOnLongPress = false
+  private var mGestureDetector: GestureDetector
+
+  init {
+    mGestureDetector = GestureDetector(mContext, object : GestureDetector.SimpleOnGestureListener() {
+      override fun onLongPress(e: MotionEvent?) {
+        if (!mIsOnLongPress) {
+          return
+        }
+        prepareMenu()
+      }
+
+      override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+        if (!mIsOnLongPress) {
+          prepareMenu()
+        }
+        return true
+      }
+    })
+  }
 
   override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
     return true
   }
 
   override fun onTouchEvent(ev: MotionEvent?): Boolean {
-    prepareMenu()
-    return false
+    mGestureDetector.onTouchEvent(ev)
+    return true
   }
 
   override fun onDetachedFromWindow() {
@@ -49,6 +66,10 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
       return
     }
     mIsAnchoredToRight = isAnchoredToRight
+  }
+
+  fun setIsOpenOnLongPress(isLongPress: Boolean) {
+    mIsOnLongPress = isLongPress
   }
 
   private val getActionsCount: Int

@@ -44,7 +44,7 @@
   "devDependencies": {
     "@react-native-community/bob": "^0.17.1",
     "@react-native-community/eslint-config": "^3.0.0",
-    "@release-it/conventional-changelog": "^1.1.4",
+    "@release-it/conventional-changelog": "^3.0.1",
     "@types/jest": "^26.0.0",
     "@types/react": "^17.0.1",
     "@types/react-native": "0.64.12",

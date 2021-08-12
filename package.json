@@ -47,7 +47,7 @@
     "@release-it/conventional-changelog": "^1.1.4",
     "@types/jest": "^26.0.0",
     "@types/react": "^17.0.1",
-    "@types/react-native": "0.64.12",
+    "@types/react-native": "0.64.13",
     "eslint": "7.32.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.1.3",

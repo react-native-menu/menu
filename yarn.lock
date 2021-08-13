@@ -7630,14 +7630,15 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-test-app@^0.6.3:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.6.3.tgz#b5f395d670915e1f0cf865e083a920609ce34365"
-  integrity sha512-irOx+V2mlwX65QZaXQmEk79cMaC0p9gtQ/EM8ZXe8UuMtfO3EsIx8fmuQ8fQuuF+bcJQLVpFoCh3DvrurkC7fw==
+react-native-test-app@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.2.tgz#14dc533935808a0ade320f5fe2b539723e6b1aa0"
+  integrity sha512-cK2vPkGRcxmBa57dmdZ+HJwemtcNBI4lMZ2O6fWTbMPvQKH2nJHEAmMRTZ1qlt4aWqNeawAB7b/9cuZknYTm5w==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
     rimraf "^3.0.0"
+    semver "^7.3.5"
     yargs "^16.0.0"
 
 react-native@0.64.1:

@@ -159,6 +159,7 @@ export const App = () => {
             }),
           },
         ]}
+        shouldOpenOnLongPress={true}
       >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Test</Text>

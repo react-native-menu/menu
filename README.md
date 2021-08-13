@@ -23,9 +23,9 @@ via yarn:
 yarn add @react-native-menu/menu
 ```
 
-### Installing on iOS with React Native 0.63
+### Installing on iOS with React Native 0.63 and above
 
-There is an issue(https://github.com/facebook/react-native/issues/29246) causing projects with this module to fail on build on React Native 0.63.
+There is an issue(https://github.com/facebook/react-native/issues/29246) causing projects with this module to fail on build on React Native 0.63 and above.
 This issue may be fixed in future versions of react native.
 As a work around, look for lines in `[YourPrject].xcodeproj` under `LIBRARY_SEARCH_PATHS` with `"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",` and change `swift-5.0` to `swift-5.3`.
 
@@ -111,6 +111,7 @@ const App = () => {
             }),
           },
         ]}
+        shouldOpenOnLongPress={true}
       >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Test</Text>
@@ -136,6 +137,14 @@ The title of the menu.
 ### `isAnchoredToRight` (Android only)
 
 Boolean determining if menu should anchored to right or left corner of parent view.
+
+| Type    | Required |
+| ------- | -------- |
+| boolean | No       |
+
+### `shouldOpenOnLongPress`
+
+Boolean determining if menu should open after long press or on normal press
 
 | Type    | Required |
 | ------- | -------- |

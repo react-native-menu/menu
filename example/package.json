@@ -25,7 +25,7 @@
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.64.0",
     "mkdirp": "^1.0.0",
-    "react-native-test-app": "^0.7.2",
+    "react-native-test-app": "^0.7.5",
     "react-test-renderer": "17.0.1"
   },
   "jest": {

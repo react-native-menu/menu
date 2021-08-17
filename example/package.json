@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-native-menu/menu": "../",
     "react": "17.0.1",
-    "react-native": "0.64.1"
+    "react-native": "^0.64.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

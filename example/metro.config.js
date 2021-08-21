@@ -5,14 +5,14 @@
  * @format
  */
 
-const path = require("path");
+const path = require('path');
 
 const exclusionList = (() => {
   try {
-    return require("metro-config/src/defaults/exclusionList");
+    return require('metro-config/src/defaults/exclusionList');
   } catch (_) {
     // `blacklist` was renamed to `exclusionList` in 0.60
-    return require("metro-config/src/defaults/blacklist");
+    return require('metro-config/src/defaults/blacklist');
   }
 })();
 
@@ -21,7 +21,7 @@ const blockList = exclusionList([
 
   // This stops "react-native run-windows" from causing the metro server to
   // crash if its already running
-  new RegExp(`${path.join(__dirname, "windows").replace(/[/\\]+/g, "/")}.*`),
+  new RegExp(`${path.join(__dirname, 'windows').replace(/[/\\]+/g, '/')}.*`),
 
   // Workaround for `EBUSY: resource busy or locked, open '~\msbuild.ProjectImports.zip'`
   // when building with `yarn windows --release`

@@ -7771,10 +7771,10 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-test-app@^0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.5.tgz#c0c8eacb9fc068761a8c075e8fda322f3440fed9"
-  integrity sha512-cEUIsZ1KhU8inhZiU2k2Fi6CZnSa1KpYw12kwMPXK9ulsUIHkW//7fn4Jyp0VE49la9WjiyX8/Z8w5tfe5Liww==
+react-native-test-app@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.0.tgz#fd8669fd34703a02bfdab9ba7a98268002cc2fa4"
+  integrity sha512-HMI15lJqWZEOA1O5VvzxYG7mEzuKhkztxarWqVibUhcgOsK3U8fidq2+b18E1BiFpaDI+4zppkib/+/5LTjReQ==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"

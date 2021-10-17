@@ -1942,9 +1942,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^17.0.1":
-  version "17.0.19"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.19.tgz#8f2a85e8180a43b57966b237d26a29481dacc991"
-  integrity sha512-sX1HisdB1/ZESixMTGnMxH9TDe8Sk709734fEQZzCV/4lSu9kJCPbo2PbTRoZM+53Pp0P10hYVyReUueGwUi4A==
+  version "17.0.30"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.30.tgz#2f8e6f5ab6415c091cc5e571942ee9064b17609e"
+  integrity sha512-3Dt/A8gd3TCXi2aRe84y7cK1K8G+N9CZRDG8kDGguOKa0kf/ZkSwTmVIDPsm/KbQOVMaDJXwhBtuOXxqwdpWVg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -7771,15 +7771,16 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-test-app@^0.7.5:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.5.tgz#c0c8eacb9fc068761a8c075e8fda322f3440fed9"
-  integrity sha512-cEUIsZ1KhU8inhZiU2k2Fi6CZnSa1KpYw12kwMPXK9ulsUIHkW//7fn4Jyp0VE49la9WjiyX8/Z8w5tfe5Liww==
+react-native-test-app@^0.9.6:
+  version "0.9.6"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.6.tgz#972a7aec0f49c42762d5199d3ac940cc12b62af1"
+  integrity sha512-ErQ8eaB2UTs9wboHPdHMUTXgmX6xbNyFchyjWq3kZe5901wtzBpK+Qh4uGnu1RMM9eilxdgkobMlTRw7EF0qkw==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
     rimraf "^3.0.0"
     semver "^7.3.5"
+    uuid "^8.3.2"
     yargs "^16.0.0"
 
 react-native@0.64.1:
@@ -9326,7 +9327,7 @@ uuid@8.3.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
   integrity sha512-fX6Z5o4m6XsXBdli9g7DtWgAx+osMsRRZFKma1mIUsLCz6vRvv+pz5VNbyu9UEDzpMWulZfvpgb/cmDXVulYFQ==
 
-uuid@8.3.2:
+uuid@8.3.2, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==

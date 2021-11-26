@@ -11,14 +11,9 @@ import UIKit
 @objc(ActionSheetView)
 class ActionSheetView: UIView {
     @objc var onPressAction: RCTDirectEventBlock?
-    private var _title: String = "";
+    private var _title: String?;
     @objc var title: NSString? {
-        didSet {
-            guard let title = self.title else {
-                return
-            }
-            self._title = title as String
-        }
+        didSet { self._title = title as? String }
     }
     
     private var _actions: [UIAlertAction] = [];

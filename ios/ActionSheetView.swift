@@ -48,7 +48,7 @@ class ActionSheetView: UIView {
         let alert = UIAlertController(title: _title, message: nil, preferredStyle: .actionSheet)
         
         self._actions.forEach({action in
-            alert.addAction(action)
+            alert.addAction(action.copy() as! UIAlertAction)
         })
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))

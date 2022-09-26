@@ -91,7 +91,7 @@ export type MenuAction = {
   subactions?: MenuAction[];
 };
 
-export type MenuComponentProps = {
+export interface MenuComponentProps extends PropsWithChildren {
   style?: StyleProp<ViewStyle>;
   /**
    * Callback function that will be called when selecting a menu item.

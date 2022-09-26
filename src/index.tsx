@@ -6,6 +6,7 @@ import type {
   MenuComponentProps,
   MenuAction,
   ProcessedMenuAction,
+  NativeActionEvent,
 } from './types';
 
 function processAction(action: MenuAction): ProcessedMenuAction {
@@ -25,4 +26,4 @@ const MenuView: React.FC<MenuComponentProps> = ({ actions, ...props }) => {
 };
 
 export { MenuView };
-export type { MenuComponentProps, MenuAction };
+export type { MenuComponentProps, MenuAction, NativeActionEvent };

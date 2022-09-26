@@ -5,7 +5,7 @@ import type {
   ViewStyle,
 } from 'react-native';
 
-type NativeActionEvent = {
+export type NativeActionEvent = {
   nativeEvent: {
     event: string;
   };

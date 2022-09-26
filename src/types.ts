@@ -4,6 +4,7 @@ import type {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import type * as React from 'react';
 
 export type NativeActionEvent = {
   nativeEvent: {
@@ -91,7 +92,7 @@ export type MenuAction = {
   subactions?: MenuAction[];
 };
 
-export interface MenuComponentProps extends PropsWithChildren {
+type MenuComponentPropsBase = {
   style?: StyleProp<ViewStyle>;
   /**
    * Callback function that will be called when selecting a menu item.
@@ -120,6 +121,9 @@ export interface MenuComponentProps extends PropsWithChildren {
    */
   shouldOpenOnLongPress?: boolean;
 };
+
+export type MenuComponentProps =
+  React.PropsWithChildren<MenuComponentPropsBase>;
 
 export type ProcessedMenuAction = Omit<
   MenuAction,

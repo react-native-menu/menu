@@ -90,6 +90,10 @@ export type MenuAction = {
    * - On Android it does not support nesting next sub menus in sub menu item
    */
   subactions?: MenuAction[];
+  /**
+   * Whether subactions should be inline (separated by divider) or nested (sub menu)
+   */
+  displayInline?: boolean;
 };
 
 type MenuComponentPropsBase = {

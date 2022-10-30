@@ -23,7 +23,7 @@ class MenuView: UIButton {
             self.setup()
         }
     }
-        
+
     private var _title: String = "";
     @objc var title: NSString? {
         didSet {
@@ -35,35 +35,35 @@ class MenuView: UIButton {
         }
     }
     @objc var onPressAction: RCTDirectEventBlock?
-    
+
     @objc var shouldOpenOnLongPress: Bool = false {
         didSet {
             self.setup()
         }
     }
-    
+
     override init(frame: CGRect) {
       super.init(frame: frame)
       self.setup()
     }
 
-    
+
     func setup () {
-        let menu = UIMenu(title:_title, identifier: nil, options: .displayInline, children: self._actions)
+        let menu = UIMenu(title:_title, identifier: nil, children: self._actions)
 
         self.menu = menu
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
     }
-    
+
     override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame);
     };
-    
-    
+
+
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-        
+
     @objc func sendButtonAction(_ action: UIAction) {
         if let onPress = onPressAction {
             onPress(["event":action.identifier.rawValue])

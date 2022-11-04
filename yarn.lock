@@ -1967,9 +1967,9 @@
     wcwidth "^1.0.1"
 
 "@react-native-community/eslint-config@^3.0.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/eslint-config/-/eslint-config-3.1.0.tgz#80f9471bae00d0676b98436bbb3a596eca2d69ab"
-  integrity sha512-LCN0QkMNIHoXp2B/uedxQI2GMLbupkIDKSb/6Q7e+pHp4fHrGIkmixSDR5sbjzeqNIf7a1+VcRxRp9u6qv10Ng==
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/eslint-config/-/eslint-config-3.2.0.tgz#42f677d5fff385bccf1be1d3b8faa8c086cf998d"
+  integrity sha512-ZjGvoeiBtCbd506hQqwjKmkWPgynGUoJspG8/MuV/EfKnkjCtBmeJvq2n+sWbWEvL9LWXDp2GJmPzmvU5RSvKQ==
   dependencies:
     "@babel/core" "^7.14.0"
     "@babel/eslint-parser" "^7.18.2"

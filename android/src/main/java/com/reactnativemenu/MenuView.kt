@@ -25,14 +25,14 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
 
   init {
     mGestureDetector = GestureDetector(mContext, object : GestureDetector.SimpleOnGestureListener() {
-      override fun onLongPress(e: MotionEvent?) {
+      override fun onLongPress(e: MotionEvent) {
         if (!mIsOnLongPress) {
           return
         }
         prepareMenu()
       }
 
-      override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
+      override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
         if (!mIsOnLongPress) {
           prepareMenu()
         }
@@ -45,7 +45,7 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
     return true
   }
 
-  override fun onTouchEvent(ev: MotionEvent?): Boolean {
+  override fun onTouchEvent(ev: MotionEvent): Boolean {
     mGestureDetector.onTouchEvent(ev)
     return true
   }
@@ -124,7 +124,7 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
         menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), disabledColor)
         if (imageName != null) {
           val icon = menuItem.icon
-          icon.setTintList(ColorStateList.valueOf(disabledColor))
+          icon?.setTintList(ColorStateList.valueOf(disabledColor))
           menuItem.icon = icon
         }
       }
@@ -145,7 +145,7 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
         menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), Color.RED)
         if (imageName != null) {
           val icon = menuItem.icon
-          icon.setTintList(ColorStateList.valueOf(Color.RED))
+          icon?.setTintList(ColorStateList.valueOf(Color.RED))
           menuItem.icon = icon
         }
       }
@@ -159,23 +159,25 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
       while (i < subactionsCount) {
         if (!subactions.isNull(i)) {
           val subMenuConfig = subactions.getMap(i)
-          val subMenuItem = menuItem.subMenu.add(Menu.NONE, Menu.NONE, i, subMenuConfig?.getString("title"))
-          prepareMenuItem(subMenuItem, subMenuConfig)
-          subMenuItem.setOnMenuItemClickListener {
-            if (!it.hasSubMenu()) {
-              mIsMenuDisplayed = false
-              val args: WritableMap = Arguments.createMap()
-              if (!subactions.isNull(it.order)) {
-                val selectedItem = subactions.getMap(it.order)
-                args.putString("event", selectedItem?.getString("id"))
-                args.putString("target", "$id")
-                mContext
-                  .getJSModule(RCTEventEmitter::class.java)
-                  .receiveEvent(id, "onPressAction", args)
+          val subMenuItem = menuItem.subMenu?.add(Menu.NONE, Menu.NONE, i, subMenuConfig?.getString("title"))
+          if (subMenuItem != null) {
+            prepareMenuItem(subMenuItem, subMenuConfig)
+            subMenuItem.setOnMenuItemClickListener {
+              if (!it.hasSubMenu()) {
+                mIsMenuDisplayed = false
+                val args: WritableMap = Arguments.createMap()
+                if (!subactions.isNull(it.order)) {
+                  val selectedItem = subactions.getMap(it.order)
+                  args.putString("event", selectedItem?.getString("id"))
+                  args.putString("target", "$id")
+                  mContext
+                    .getJSModule(RCTEventEmitter::class.java)
+                    .receiveEvent(id, "onPressAction", args)
+                }
+                true
+              } else {
+                false
               }
-              true
-            } else {
-              false
             }
           }
         }

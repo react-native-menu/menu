@@ -3,7 +3,7 @@ on: push
 
 jobs:
   lint:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16]
@@ -24,7 +24,7 @@ jobs:
       - name: ESLint Checks
         run: yarn lint
   tsc:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16]
@@ -45,7 +45,7 @@ jobs:
       - name: TypeScript type check
         run: yarn typescript
   android:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16]

@@ -8125,9 +8125,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-test-app@^2.0.0:
-  version "2.5.9"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.9.tgz#f28403d8dca7e9f640a5df7cd9c6d1fb2469883a"
-  integrity sha512-4qY+5jsgWsSWxeY5o1iMfZUiRRPp0K/pWibXfcMmZUQIO/hO6Cjmx4QRNEBRh+0OgTadip/jDlUI891VNJ1VOw==
+  version "2.5.10"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.10.tgz#e378a679aaedae413ff09a2955d7939c2f73c120"
+  integrity sha512-k9omt6iSYhELVcAVYGhz0oPKS4LqT2iX16kpkcLlJWiqSzV9BGWNMDw9jBcvWlcIL0/7JdF/IMYTtbWkxlclvg==
   dependencies:
     "@rnx-kit/react-native-host" "^0.2.7"
     ajv "^8.0.0"

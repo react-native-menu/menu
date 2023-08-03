@@ -42,6 +42,12 @@ class MenuView: UIButton {
         }
     }
 
+    @objc var darkMode: Bool = false {
+        didSet {
+            self.setup()
+        }
+    }
+
     override init(frame: CGRect) {
       super.init(frame: frame)
       self.setup()
@@ -50,7 +56,11 @@ class MenuView: UIButton {
 
     func setup () {
         let menu = UIMenu(title:_title, identifier: nil, children: self._actions)
-
+        if self.darkMode {
+          self.overrideUserInterfaceStyle = .dark
+        } else {
+          self.overrideUserInterfaceStyle = .light
+        }
         self.menu = menu
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
     }

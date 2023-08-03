@@ -124,6 +124,13 @@ type MenuComponentPropsBase = {
    * @default false
    */
   shouldOpenOnLongPress?: boolean;
+  /**
+   * Determines if menu should be displayed in dark mode or light mode
+   *
+   * @default false
+   * @platform iOS
+   */
+  darkMode?: boolean;
 };
 
 export type MenuComponentProps =

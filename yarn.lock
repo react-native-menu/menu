@@ -2040,10 +2040,10 @@
     conventional-recommended-bump "^6.1.0"
     prepend-file "^2.0.0"
 
-"@rnx-kit/react-native-host@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.2.7.tgz#78570ecf06733193275eba8ddcb1c2c93f67c8ff"
-  integrity sha512-TMrilUTm4BIJEPVf9JNXdV7Ux88GMKwNYERrf/e7BlZjG8oiGB13sds1W+0H9vpq/CgEbvOhk1m67VE2u/6c7w==
+"@rnx-kit/react-native-host@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.2.8.tgz#e0bbba21c7f7fb47f53dfb0304a0156c3ea836b3"
+  integrity sha512-lPE4uWW1Td6UE/Gu7m0OKkzkOHYlEUolW8l0dCnUhl3ayq/x9e1MmyLQSgAXhh2aDci9dqtoSBQfgD749XRPqg==
 
 "@sideway/address@^4.1.0":
   version "4.1.1"
@@ -8140,11 +8140,11 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-test-app@^2.0.0:
-  version "2.5.12"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.12.tgz#84ec1a9f3c13c0bf76e3993376d3ec808978e482"
-  integrity sha512-6QPaNd0xHD30LAkBkkgFBg7faDv9RX4XkHUPUDd4mwZr5Mfhpo8lespB0tYEdgRUWGFf8p79HTKqM5npIvOalA==
+  version "2.5.15"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.15.tgz#a9b977c2df74688e73b10a39a24c51f6e610afe9"
+  integrity sha512-Nu97sv9smzNhBCJ4Fr7Zkkw+lNuiJGQfpj0szn8v70jQfwMH7vQoTDE/aAB6JYgZu5XKTmf7B0gDVub9gDmh5A==
   dependencies:
-    "@rnx-kit/react-native-host" "^0.2.7"
+    "@rnx-kit/react-native-host" "^0.2.8"
     ajv "^8.0.0"
     chalk "^4.1.0"
     cliui "^8.0.0"
@@ -8706,14 +8706,7 @@ semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.2.0, semver@^6.3.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
-semver@^7.3.4, semver@^7.3.5, semver@^7.3.7:
-  version "7.3.7"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.7.tgz#12c5b649afdbf9049707796e22a4028814ce523f"
-  integrity sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==
-  dependencies:
-    lru-cache "^6.0.0"
-
-semver@^7.5.3:
+semver@^7.3.4, semver@^7.3.5, semver@^7.3.7, semver@^7.5.3:
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.5.4.tgz#483986ec4ed38e1c6c48c34894a9182dbff68a6e"
   integrity sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==

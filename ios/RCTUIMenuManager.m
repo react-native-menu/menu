@@ -19,5 +19,9 @@ RCT_EXPORT_VIEW_PROPERTY(onPressAction, RCTDirectEventBlock);
  * shouldOpenOnLongPress: determines whether menu should be opened after long press or normal press
  */
 RCT_EXPORT_VIEW_PROPERTY(shouldOpenOnLongPress, BOOL)
+/**
+ * darkMode: determines whether menu should be dark mode or light mode
+ */
+RCT_EXPORT_VIEW_PROPERTY(darkMode, BOOL)
 
 @end

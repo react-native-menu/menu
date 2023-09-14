@@ -20,8 +20,8 @@ RCT_EXPORT_VIEW_PROPERTY(onPressAction, RCTDirectEventBlock);
  */
 RCT_EXPORT_VIEW_PROPERTY(shouldOpenOnLongPress, BOOL)
 /**
- * darkMode: determines whether menu should be dark mode or light mode
+ * themeVariant: determines whether menu should use dark theme, light theme or system theme
  */
-RCT_EXPORT_VIEW_PROPERTY(darkMode, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(themeVariant, NSString)
 
 @end

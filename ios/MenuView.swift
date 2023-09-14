@@ -42,8 +42,10 @@ class MenuView: UIButton {
         }
     }
 
-    @objc var darkMode: Bool = false {
+    private var _themeVariant: String?
+    @objc var themeVariant: NSString? {
         didSet {
+            self._themeVariant = themeVariant as? String
             self.setup()
         }
     }
@@ -56,11 +58,17 @@ class MenuView: UIButton {
 
     func setup () {
         let menu = UIMenu(title:_title, identifier: nil, children: self._actions)
-        if self.darkMode {
-          self.overrideUserInterfaceStyle = .dark
-        } else {
-          self.overrideUserInterfaceStyle = .light
+
+        if self._themeVariant != nil {
+            if self._themeVariant == "dark" {
+                self.overrideUserInterfaceStyle = .dark
+            } else if self._themeVariant == "light" {
+                self.overrideUserInterfaceStyle = .light
+            } else {
+                self.overrideUserInterfaceStyle = .unspecified
+            }
         }
+
         self.menu = menu
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
     }

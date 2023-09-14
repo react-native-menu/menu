@@ -36,7 +36,7 @@ class ActionSheetView: UIView {
     @objc var shouldOpenOnLongPress: Bool = false
 
     private var _themeVariant: String?
-    @obc var themeVariant: NSString? {
+    @objc var themeVariant: NSString? {
         didSet { self._themeVariant = themeVariant as? String }
     }
 

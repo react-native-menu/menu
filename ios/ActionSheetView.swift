@@ -11,12 +11,12 @@ import UIKit
 @objc(ActionSheetView)
 class ActionSheetView: UIView {
     @objc var onPressAction: RCTDirectEventBlock?
-    private var _title: String?;
+    private var _title: String?
     @objc var title: NSString? {
         didSet { self._title = title as? String }
     }
-    
-    private var _actions: [UIAlertAction] = [];
+
+    private var _actions: [UIAlertAction] = []
     @objc var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
@@ -47,7 +47,7 @@ class ActionSheetView: UIView {
         self.addGestureRecognizer(tap)
         self.addGestureRecognizer(longPress)
     }
-    
+
     func launchActionSheet() {
 
         let alert = UIAlertController(title: _title, message: nil, preferredStyle: .actionSheet)
@@ -67,22 +67,22 @@ class ActionSheetView: UIView {
         self._actions.forEach({action in
             alert.addAction(action.copy() as! UIAlertAction)
         })
-        
+
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
+
         if UIDevice.current.userInterfaceIdiom == .pad {
             alert.modalPresentationStyle = .popover
             alert.popoverPresentationController?.sourceView = self
             alert.popoverPresentationController?.sourceRect = self.bounds
         }
-        
+
         if let root = RCTPresentedViewController() {
             root.present(alert, animated: true, completion: nil)
         }
-        
+
     }
-    
-    
+
+
     @objc func handleTap(_ sender:UITapGestureRecognizer) {
         if shouldOpenOnLongPress {
             return
@@ -93,7 +93,7 @@ class ActionSheetView: UIView {
             }
         }
     }
-    
+
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         if !shouldOpenOnLongPress {
             return
@@ -104,19 +104,19 @@ class ActionSheetView: UIView {
             }
         }
     }
-    
+
     @objc func sendButtonAction(_ action: String) {
         if let onPress = onPressAction {
             onPress(["event":action])
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func reactSetFrame(_ frame: CGRect) {
-      super.reactSetFrame(frame);
-    };
-    
+      super.reactSetFrame(frame)
+    }
+
 }

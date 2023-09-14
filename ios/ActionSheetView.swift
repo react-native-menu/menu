@@ -34,7 +34,12 @@ class ActionSheetView: UIView {
     }
 
     @objc var shouldOpenOnLongPress: Bool = false
-    
+
+    private var _themeVariant: String?
+    @obc var themeVariant: NSString? {
+        didSet { self._themeVariant = themeVariant as? String }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         let tap = UITapGestureRecognizer(target: self, action: #selector (self.handleTap (_:)))
@@ -47,6 +52,18 @@ class ActionSheetView: UIView {
 
         let alert = UIAlertController(title: _title, message: nil, preferredStyle: .actionSheet)
         
+        if #available(iOS 13.0, *) {
+            if self._themeVariant != nil {
+                if self._themeVariant == "dark" {
+                    alert.overrideUserInterfaceStyle = .dark
+                } else if self._themeVariant == "light" {
+                    alert.overrideUserInterfaceStyle = .light
+                } else {
+                    alert.overrideUserInterfaceStyle = .unspecified
+                }
+            }
+        }
+
         self._actions.forEach({action in
             alert.addAction(action.copy() as! UIAlertAction)
         })

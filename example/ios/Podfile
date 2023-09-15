@@ -1,6 +1,6 @@
-require_relative '../node_modules/react-native-test-app/test_app'
+require_relative '../node_modules/react-native-test-app/test_app.rb'
 
-use_flipper!({ 'Flipper' => '0.75.1', 'Flipper-Folly' => '2.5.3' })
+use_flipper! false if ENV['USE_FLIPPER'] == '0'
 
 workspace 'MenuExample.xcworkspace'
 

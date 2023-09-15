@@ -1,3 +1,5 @@
+const path = require('path');
+
 const project = (() => {
   try {
     const {
@@ -20,4 +22,9 @@ const project = (() => {
 
 module.exports = {
   ...(project ? { project } : undefined),
+  dependencies: {
+    '@react-native-menu/menu': {
+      root: path.join(__dirname, '..'),
+    },
+  },
 };

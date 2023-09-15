@@ -454,6 +454,9 @@ PODS:
     - React-Core
     - React-cxxreact
     - ReactCommon/turbomodule/core
+  - ReactTestApp-DevSupport (2.5.20):
+    - React-Core
+    - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
@@ -504,7 +507,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
-  - "react-native-menu (from `../node_modules/@react-native-menu/menu`)"
+  - react-native-menu (from `../..`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -522,7 +525,8 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - "ReactNativeHost (from `../../node_modules/@rnx-kit/react-native-host`)"
+  - "ReactNativeHost (from `../node_modules/@rnx-kit/react-native-host`)"
+  - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -585,7 +589,7 @@ EXTERNAL SOURCES:
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
   react-native-menu:
-    :path: "../node_modules/@react-native-menu/menu"
+    :path: "../.."
   React-NativeModulesApple:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-perflogger:
@@ -621,7 +625,9 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeHost:
-    :path: "../../node_modules/@rnx-kit/react-native-host"
+    :path: "../node_modules/@rnx-kit/react-native-host"
+  ReactTestApp-DevSupport:
+    :path: "../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
   Yoga:
@@ -679,11 +685,12 @@ SPEC CHECKSUMS:
   React-utils: b79f2411931f9d3ea5781404dcbb2fa8a837e13a
   ReactCommon: 2635a013764a291989765d6ec136513911f478c6
   ReactNativeHost: 5caf8c9381f26c453fabbe8c3b87f6a013a3c459
+  ReactTestApp-DevSupport: 3be52e25664a1b4e722e46a59d57433274e9e7aa
   ReactTestApp-Resources: 1f512f66574607bcfa614e9c0d30e7a990fecf30
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 809623732c9b34bbb3883e79a5ba33a3964987e6
+PODFILE CHECKSUM: 40bfcbe37cb579d88639a74ccb395524460c8bb1
 
 COCOAPODS: 1.12.1

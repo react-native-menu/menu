@@ -3,6 +3,8 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { MenuView } from '@react-native-menu/menu';
 
 export const App = () => {
+  const [themeVariant] = React.useState<string | undefined>('light');
+
   return (
     <View style={styles.container}>
       <MenuView
@@ -160,6 +162,7 @@ export const App = () => {
           },
         ]}
         shouldOpenOnLongPress={true}
+        themeVariant={themeVariant}
       >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Test</Text>

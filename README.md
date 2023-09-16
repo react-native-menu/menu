@@ -158,6 +158,14 @@ Actions to be displayed in the menu.
 | ------------ | -------- |
 | MenuAction[] | Yes      |
 
+### `themeVariant` (iOS only)
+
+String to override theme of menu
+
+| Type         | Required |
+| ------------ | -------- |
+| enum('light', 'dark') | No      |
+
 #### `MenuAction`
 
 Object representing Menu Action.

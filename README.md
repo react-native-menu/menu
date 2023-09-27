@@ -111,7 +111,7 @@ const App = () => {
             }),
           },
         ]}
-        shouldOpenOnLongPress={true}
+        shouldOpenOnLongPress={false}
       >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Test</Text>
@@ -160,7 +160,7 @@ Actions to be displayed in the menu.
 
 ### `themeVariant` (iOS only)
 
-String to override theme of menu
+String to override theme of the menu. If you want to control theme universally across your app, [see this package](https://github.com/vonovak/react-native-theme-control).
 
 | Type         | Required |
 | ------------ | -------- |

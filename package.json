@@ -58,7 +58,7 @@
     "react": "18.2.0",
     "react-native": "0.72.2",
     "react-native-test-app": "^2.5.20",
-    "metro-react-native-babel-preset": "0.76.5",
+    "metro-react-native-babel-preset": "0.77.0",
     "release-it": "^14.10.0",
     "typescript": "4.8.4"
   },

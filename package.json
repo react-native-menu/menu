@@ -43,7 +43,7 @@
   "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
     "@react-native-community/bob": "^0.17.1",
-    "@react-native/eslint-config": "^0.72.2",
+    "@react-native/eslint-config": "^0.74.0",
     "@release-it/conventional-changelog": "^3.0.1",
     "@types/jest": "^29.1.2",
     "@types/react": "^18.2.2",

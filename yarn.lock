@@ -7747,9 +7747,9 @@ react-is@^17.0.1:
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
 react-native-test-app@^2.5.20:
-  version "2.5.34"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.34.tgz#46f6256cb2d3887e989d22111308e4d0207dd3d3"
-  integrity sha512-rfFb8RpA9kJlLF2NLXRoeGJ/atTU9FtJHhes+y/geIiHDK2RyEvYsMrRJQAPLDuW+f96rLrqIkWP0Ix2IVc2/Q==
+  version "2.5.35"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.35.tgz#11bf4cb46faa8df5f3e28a5ef9578c3cfbbf4d53"
+  integrity sha512-B3Y0aE5wM+tGJbJRTk/CnxZvZKtn8XlNHB5i5Z8DjF4E+IHzUStDtK3yaak1wCDHYjJkh11Lm9VdmAGcko7Xgg==
   dependencies:
     "@rnx-kit/react-native-host" "^0.2.9"
     ajv "^8.0.0"

@@ -28,7 +28,7 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn && yarn example && yarn pods"
   },
   "keywords": [
     "react-native",
@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
-    "@react-native-community/bob": "^0.17.1",
+    "react-native-builder-bob": "^0.23.2",
     "@react-native/eslint-config": "^0.74.0",
     "@release-it/conventional-changelog": "^3.0.1",
     "@types/jest": "^29.1.2",
@@ -120,7 +120,7 @@
     "trailingComma": "es5",
     "useTabs": false
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
@@ -131,5 +131,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "volta": {
+    "node": "20.10.0",
+    "yarn": "1.22.21"
   }
 }

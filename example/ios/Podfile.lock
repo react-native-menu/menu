@@ -343,7 +343,7 @@ PODS:
   - React-jsinspector (0.72.4)
   - React-logger (0.72.4):
     - glog
-  - react-native-menu (0.8.0):
+  - react-native-menu (0.9.1):
     - React
   - React-NativeModulesApple (0.72.4):
     - React-callinvoker
@@ -666,7 +666,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: bc8a9ad812a2c88b3a41c08b5f4b3ed32d6d4766
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  react-native-menu: 5b9b82dabcc779cebde15d292ccbcba4469ff311
+  react-native-menu: 9728f90160c36b9a75481fc76e05354b99d54c59
   React-NativeModulesApple: 759309419da76ef4c9f331968b840022ee2aa5b1
   React-perflogger: 496a1a3dc6737f964107cb3ddae7f9e265ddda58
   React-RCTActionSheet: 02904b932b50e680f4e26e7a686b33ebf7ef3c00

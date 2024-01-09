@@ -95,6 +95,11 @@ class RCTMenuAction {
                 return UIMenu(title: title, image: image, children: subMenuActions)
             }
         }
-        return UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: subtitle, attributes: attributes, state: state, handler: handler)
+
+        if #available(iOS 15, *) {
+            return UIAction(title: title, subtitle: subtitle, image: image, identifier: identifier, attributes: attributes, state: state, handler: handler)
+        } else {
+            return UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: subtitle, attributes: attributes, state: state, handler: handler)
+        }
     }
 }

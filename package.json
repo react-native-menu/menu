@@ -59,7 +59,7 @@
     "prettier": "^3.1.1",
     "react": "18.2.0",
     "react-native": "0.72.2",
-    "react-native-test-app": "^2.5.20",
+    "react-native-test-app": "^3.0.1",
     "release-it": "^14.10.0",
     "typescript": "4.8.4"
   },

@@ -1913,10 +1913,10 @@
     conventional-changelog "^3.1.25"
     conventional-recommended-bump "^6.1.0"
 
-"@rnx-kit/react-native-host@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.3.1.tgz#57f8492dd77cc5146f5f9bc2c1ea3e5eb2bed293"
-  integrity sha512-2UDRi7V0q0CTNiYB/48aHeu7L7nYGv5VQqnYTwidyaVnjdF4igvUQT+Y9YhxDKKp9QgaRejbMvFBcGqrNmlQYA==
+"@rnx-kit/react-native-host@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.3.2.tgz#189c56f058e241ea225f251271d6c809382debcb"
+  integrity sha512-L2Ix21xfvqO0wfWywuaXnJcP3cMTXvFtgyNB8QPe0+g+xNX88ntiNHLVgRXy6lTEJaqC5nWfC+uEBN6nDdODbQ==
 
 "@sideway/address@^4.1.3":
   version "4.1.4"
@@ -7287,11 +7287,11 @@ react-native-builder-bob@^0.23.2:
     yargs "^17.5.1"
 
 react-native-test-app@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.0.1.tgz#a231ec6375292c537f33a9023b7c52095f872ef4"
-  integrity sha512-N3aXDQ+MCdlaoHsTcsPJykmA6iL0qbIuKcP3O6G3puaqdYFUARa9IdJjqXwAj0Q+SY9qfFWUwHYc8wz0ii2PkQ==
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.0.2.tgz#69279ee92a7874f11aa8a4b9d589533bfe106d93"
+  integrity sha512-qD+/6nJGEshLHrz7J0ZUl1eUKgqEzPoHPpgnG7D5oAbBAkECyry/0sjWF3JOTctQdpHlHCfESVgCNVuIgbP7Hg==
   dependencies:
-    "@rnx-kit/react-native-host" "^0.3.1"
+    "@rnx-kit/react-native-host" "^0.3.2"
     ajv "^8.0.0"
     chalk "^4.1.0"
     cliui "^8.0.0"

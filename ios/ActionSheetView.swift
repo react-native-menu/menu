@@ -9,15 +9,16 @@ import UIKit
 
 
 @objc(ActionSheetView)
-class ActionSheetView: UIView {
-    @objc var onPressAction: RCTDirectEventBlock?
+public class ActionSheetView: UIView, ViewImplementationProtocol {
+    public var onPressAction: ((String) -> Void)?
+
     private var _title: String?
-    @objc var title: NSString? {
+    public var title: NSString? {
         didSet { self._title = title as? String }
     }
 
     private var _actions: [UIAlertAction] = []
-    @objc var actions: [NSDictionary]? {
+    public var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
                 return
@@ -107,7 +108,7 @@ class ActionSheetView: UIView {
 
     @objc func sendButtonAction(_ action: String) {
         if let onPress = onPressAction {
-            onPress(["event":action])
+            onPress(action)
         }
     }
 
@@ -115,7 +116,7 @@ class ActionSheetView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func reactSetFrame(_ frame: CGRect) {
+    public override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame)
     }
 

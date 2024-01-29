@@ -111,6 +111,7 @@ type MenuComponentPropsBase = {
    * The title of the menu.
    */
   title?: string;
+
   /**
    * (Android API 23+)
    * Boolean value determines whether popup menu should be anchored
@@ -149,5 +150,6 @@ export type NativeMenuComponentProps = {
   style?: StyleProp<ViewStyle>;
   onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
   actions: ProcessedMenuAction[];
+  actionsHash: string;
   title?: string;
 };

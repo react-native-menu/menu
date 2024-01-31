@@ -9,9 +9,13 @@ import UIKit
 @available(iOS 14.0, *)
 @objc(MenuViewImplementation)
 public class MenuViewImplementation: UIButton, ViewImplementationProtocol {
+    #if RCT_NEW_ARCH_ENABLED
     public var onPressAction: ((String) -> Void)?
+    #else
+    @objc var onPressAction: RCTDirectEventBlock?
+    #endif
 
-    public var actions: [NSDictionary]? {
+    @objc public var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
                 return
@@ -27,7 +31,7 @@ public class MenuViewImplementation: UIButton, ViewImplementationProtocol {
     private var _actions: [UIMenuElement] = [];
 
     private var _title: String = "";
-    public var title: NSString? {
+    @objc public var title: NSString? {
         didSet {
             guard let title = self.title else {
                 return
@@ -85,7 +89,12 @@ public class MenuViewImplementation: UIButton, ViewImplementationProtocol {
 
     @objc func sendButtonAction(_ action: UIAction) {
         if let onPress = onPressAction {
+#if RCT_NEW_ARCH_ENABLED
             onPress(action.identifier.rawValue)
+#else
+            onPress(["event":action.identifier.rawValue])
+#endif
+
         }
     }
 }

@@ -10,15 +10,19 @@ import UIKit
 
 @objc(ActionSheetView)
 public class ActionSheetView: UIView, ViewImplementationProtocol {
+#if RCT_NEW_ARCH_ENABLED
     public var onPressAction: ((String) -> Void)?
+#else
+    @objc var onPressAction: RCTDirectEventBlock?
+#endif
 
     private var _title: String?
-    public var title: NSString? {
+    @objc public var title: NSString? {
         didSet { self._title = title as? String }
     }
 
     private var _actions: [UIAlertAction] = []
-    public var actions: [NSDictionary]? {
+    @objc public var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
                 return
@@ -108,7 +112,11 @@ public class ActionSheetView: UIView, ViewImplementationProtocol {
 
     @objc func sendButtonAction(_ action: String) {
         if let onPress = onPressAction {
-            onPress(action)
+#if RCT_NEW_ARCH_ENABLED
+            onPress(action.identifier.rawValue)
+#else
+            onPress(["event":action])
+#endif
         }
     }
 

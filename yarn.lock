@@ -1913,10 +1913,10 @@
     conventional-changelog "^3.1.25"
     conventional-recommended-bump "^6.1.0"
 
-"@rnx-kit/react-native-host@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.3.1.tgz#57f8492dd77cc5146f5f9bc2c1ea3e5eb2bed293"
-  integrity sha512-2UDRi7V0q0CTNiYB/48aHeu7L7nYGv5VQqnYTwidyaVnjdF4igvUQT+Y9YhxDKKp9QgaRejbMvFBcGqrNmlQYA==
+"@rnx-kit/react-native-host@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.4.3.tgz#537a376ab982ae57bb9c319f80221d0851d15545"
+  integrity sha512-CNGdzMBXGxNVXGtgfQyOpW1ew1A4Tqq4b0mDnauqvpKv+6zszX6bgveKHVDjKor6iScwkCTJ7ObP58ODz25itA==
 
 "@sideway/address@^4.1.3":
   version "4.1.4"
@@ -6477,7 +6477,7 @@ minimist-options@4.1.0:
     is-plain-obj "^1.1.0"
     kind-of "^6.0.3"
 
-minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6, minimist@^1.2.8:
+minimist@^1.2.0, minimist@^1.2.5, minimist@^1.2.6:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
@@ -7287,16 +7287,15 @@ react-native-builder-bob@^0.23.2:
     yargs "^17.5.1"
 
 react-native-test-app@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.0.1.tgz#a231ec6375292c537f33a9023b7c52095f872ef4"
-  integrity sha512-N3aXDQ+MCdlaoHsTcsPJykmA6iL0qbIuKcP3O6G3puaqdYFUARa9IdJjqXwAj0Q+SY9qfFWUwHYc8wz0ii2PkQ==
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.2.3.tgz#b6f81b57592f68118282e61b91988ebcdedda5d2"
+  integrity sha512-p+kRpGhDI+u447EF/65b47KbVyh6Lic1N3iHNRF/cpvPQ7/rT/AYOfaLIfLBEKVlVOOdlIwpHJzDvKVZJTh6RQ==
   dependencies:
-    "@rnx-kit/react-native-host" "^0.3.1"
+    "@rnx-kit/react-native-host" "^0.4.3"
     ajv "^8.0.0"
     chalk "^4.1.0"
     cliui "^8.0.0"
     fast-xml-parser "^4.0.0"
-    minimist "^1.2.8"
     prompts "^2.4.0"
     semver "^7.3.5"
     uuid "^8.3.2"

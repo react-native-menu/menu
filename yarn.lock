@@ -3823,9 +3823,9 @@ eslint-plugin-ft-flow@^2.0.1:
     string-natural-compare "^3.0.1"
 
 eslint-plugin-ft-flow@^3.0.0:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ft-flow/-/eslint-plugin-ft-flow-3.0.2.tgz#740f7a08836d112497fe2566a25de6c6ad0233a1"
-  integrity sha512-Dr/RT5FZuxi5sd39vWaUXZj2GrOCHFwfB9zILSZmZ8PFS2C9M2fr7ReJjdB7wlpHEjartL7PYpmoI2c7Q0csMQ==
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ft-flow/-/eslint-plugin-ft-flow-3.0.5.tgz#388dbe89466b862f60940aaef3847531f88c13bf"
+  integrity sha512-owZMmncrI6m4+ypPoGRAFZY3SGcJ+9tFSxeR/aTHTXm14/BWVRqVVeg8fc+k8Ljbfv7dhe+FY4ZVBjgLBV/Ndg==
   dependencies:
     lodash "^4.17.21"
     string-natural-compare "^3.0.1"

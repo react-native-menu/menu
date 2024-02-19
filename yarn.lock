@@ -7287,9 +7287,9 @@ react-native-builder-bob@^0.23.2:
     yargs "^17.5.1"
 
 react-native-test-app@^3.0.1:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.2.3.tgz#b6f81b57592f68118282e61b91988ebcdedda5d2"
-  integrity sha512-p+kRpGhDI+u447EF/65b47KbVyh6Lic1N3iHNRF/cpvPQ7/rT/AYOfaLIfLBEKVlVOOdlIwpHJzDvKVZJTh6RQ==
+  version "3.2.5"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.2.5.tgz#8efaa72d537774621666725fba23e34ac86af2f1"
+  integrity sha512-syMZRVS0mfbN2Ge06Fgg4llqysPn6ThFgvp/M/06fp6vPiFAjpU8M66MyN9pvpo+5ZnOnB2Hg4h7SoSYF7IlLA==
   dependencies:
     "@rnx-kit/react-native-host" "^0.4.3"
     ajv "^8.0.0"

@@ -15,7 +15,7 @@ using namespace facebook::react;
 @end
 
 @implementation MenuView {
-    UIView <ViewImplementationProtocol> * _view;
+    UIView <FabricViewImplementationProtocol> * _view;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -30,9 +30,9 @@ using namespace facebook::react;
         _props = defaultProps;
 
         if (@available(iOS 14.0, *)) {
-            _view = [[MenuViewImplementation alloc] init];
+            _view = [[FabricMenuViewImplementation alloc] init];
         } else {
-            _view = [[ActionSheetView alloc] init];
+            _view = [[FabricActionSheetView alloc] init];
         }
         _view.onPressAction = ^(NSString *eventString) {
             [self onPressAction:eventString];

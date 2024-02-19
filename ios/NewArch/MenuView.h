@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ViewImplementationProtocol;
+@protocol FabricViewImplementationProtocol;
 @interface MenuView : RCTViewComponentView
 @end
 

@@ -8,12 +8,7 @@
 import UIKit
 @available(iOS 14.0, *)
 @objc(MenuViewImplementation)
-public class MenuViewImplementation: UIButton, ViewImplementationProtocol {
-    #if RCT_NEW_ARCH_ENABLED
-    public var onPressAction: ((String) -> Void)?
-    #else
-    @objc var onPressAction: RCTDirectEventBlock?
-    #endif
+public class MenuViewImplementation: UIButton {
 
     @objc public var actions: [NSDictionary]? {
         didSet {
@@ -88,13 +83,6 @@ public class MenuViewImplementation: UIButton, ViewImplementationProtocol {
   }
 
     @objc func sendButtonAction(_ action: UIAction) {
-        if let onPress = onPressAction {
-#if RCT_NEW_ARCH_ENABLED
-            onPress(action.identifier.rawValue)
-#else
-            onPress(["event":action.identifier.rawValue])
-#endif
-
-        }
+        // NO-OP (should be overriden by parent)
     }
 }

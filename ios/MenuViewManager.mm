@@ -2,7 +2,6 @@
 #import <React/RCTUIManager.h>
 #import "RCTBridge.h"
 
-
 #ifdef RCT_NEW_ARCH_ENABLED
 // NEW ARCH
 #import "MenuView.h"
@@ -26,9 +25,9 @@ RCT_EXPORT_MODULE(MenuView)
 #else
     // OLD ARCH
     if (@available(iOS 14.0, *)) {
-        return [[MenuViewImplementation alloc] init];
+        return [[LegacyMenuViewImplementation alloc] init];
     } else {
-        return [[ActionSheetView alloc] init];
+        return [[LegacyActionSheetView alloc] init];
     }
 #endif /* RCT_NEW_ARCH_ENABLED */
 }

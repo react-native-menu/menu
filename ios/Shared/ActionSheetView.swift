@@ -9,12 +9,7 @@ import UIKit
 
 
 @objc(ActionSheetView)
-public class ActionSheetView: UIView, ViewImplementationProtocol {
-#if RCT_NEW_ARCH_ENABLED
-    public var onPressAction: ((String) -> Void)?
-#else
-    @objc var onPressAction: RCTDirectEventBlock?
-#endif
+public class ActionSheetView: UIView {
 
     private var _title: String?
     @objc public var title: NSString? {
@@ -111,13 +106,7 @@ public class ActionSheetView: UIView, ViewImplementationProtocol {
     }
 
     @objc func sendButtonAction(_ action: String) {
-        if let onPress = onPressAction {
-#if RCT_NEW_ARCH_ENABLED
-            onPress(action.identifier.rawValue)
-#else
-            onPress(["event":action])
-#endif
-        }
+        // NO-OP (should be overriden by parent)
     }
 
     required init?(coder: NSCoder) {

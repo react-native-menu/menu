@@ -1769,10 +1769,49 @@
     invariant "^2.2.4"
     nullthrows "^1.1.1"
 
-"@rnx-kit/react-native-host@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.2.9.tgz#ee9fd61254dbca75383b5fcdf9c8bb1f630b0985"
-  integrity sha512-iQWmisL5/UCp+U3vD1GqGThvBcTsgOpa/6p6IHKpywTfOLTNkdZiCDCHwHBekw3amedhGPdxCP7lmEbuVF8Udw==
+"@rnx-kit/console@^1.0.0":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.12.tgz#997e370afdeee49344663c1ae017ba0b4966a5c9"
+  integrity sha512-egjvLiXFJwS5TznWnb5I6vLJ2kYW/lYZPa3E1awam+datbyf/elAH4h1ZCfOd/aiTBQur91HwX07k0WgOHJSow==
+  dependencies:
+    chalk "^4.1.0"
+
+"@rnx-kit/metro-config@^1.3.14":
+  version "1.3.14"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.3.14.tgz#b2d034e23196b6a5ca84718e08b15c0c5018708e"
+  integrity sha512-RjBM2gsDx9Ba7b39ussuRbqJsez8W37puM4oZGSLbneuhQ9kpJcC0omf2QYMKhQisTy0/4jv7L9WdpzvzXR/ow==
+  dependencies:
+    "@rnx-kit/console" "^1.0.0"
+    "@rnx-kit/tools-node" "^2.0.0"
+    "@rnx-kit/tools-react-native" "^1.3.4"
+    "@rnx-kit/tools-workspaces" "^0.1.3"
+
+"@rnx-kit/react-native-host@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/react-native-host/-/react-native-host-0.4.4.tgz#f9ee2f61b578bcfc813a24059b65b1b832da5dbf"
+  integrity sha512-R6JmXwK0blOsbEMhqfDuXiDPuWWUAv48ZE4dGIRIEm2uw4OuRmhclmamyEx184dDoK28gkTFH6kqEQiBh48y8g==
+
+"@rnx-kit/tools-node@^2.0.0", "@rnx-kit/tools-node@^2.0.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-2.1.1.tgz#550016458ec8b67d21949efeafdb4ba2870d5e69"
+  integrity sha512-jZC/pmeM3fv4LwpkVWlLyv5dOh6haUw/dBaDC0e5zkfehkIdLtRhVwz4l7iH9MW/i4I9OySoc+2DtDpX7KZyZA==
+
+"@rnx-kit/tools-react-native@^1.3.4":
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-react-native/-/tools-react-native-1.3.5.tgz#57a0dd7056c55a23d311515def44b292bc6aa4fd"
+  integrity sha512-fc+3hxdlicW3GEhI0Umjj+rnVLSLuxVJoGvUBwWvcaCnlNaaTssBjhd7xSvlfLDrgtuXxhBruA76wdDdZI8tiQ==
+  dependencies:
+    "@rnx-kit/tools-node" "^2.0.1"
+
+"@rnx-kit/tools-workspaces@^0.1.3":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-workspaces/-/tools-workspaces-0.1.5.tgz#bd602e68818d668216265bede5fd358dd854a68f"
+  integrity sha512-f0qJg70NxlLIrdmbbVAcavIQtpYGYE6iqDi81u/Ipyq7CmwCbsHK3uUnFrXBsfigF3Bl2gIiBJlfF96MfqVOkg==
+  dependencies:
+    fast-glob "^3.2.7"
+    find-up "^5.0.0"
+    read-yaml-file "^2.1.0"
+    strip-json-comments "^3.1.1"
 
 "@sideway/address@^4.1.3":
   version "4.1.4"
@@ -3280,7 +3319,7 @@ fast-diff@^1.1.2:
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.3.0.tgz#ece407fa550a64d638536cd727e129c61616e0f0"
   integrity sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==
 
-fast-glob@^3.2.9:
+fast-glob@^3.2.7, fast-glob@^3.2.9:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.2.tgz#a904501e57cfdd2ffcded45e99a54fef55e46129"
   integrity sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==
@@ -4459,7 +4498,7 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@^4.1.0:
+js-yaml@^4.0.0, js-yaml@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
@@ -5252,7 +5291,7 @@ minimatch@^3.0.2, minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatc
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@^1.2.6, minimist@^1.2.8:
+minimist@^1.2.6:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
@@ -5263,6 +5302,11 @@ mkdirp@^0.5.1:
   integrity sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==
   dependencies:
     minimist "^1.2.6"
+
+mkdirp@^1.0.0:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
+  integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
 ms@2.0.0:
   version "2.0.0"
@@ -5741,17 +5785,16 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-test-app@^2.5.20:
-  version "2.5.35"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.5.35.tgz#11bf4cb46faa8df5f3e28a5ef9578c3cfbbf4d53"
-  integrity sha512-B3Y0aE5wM+tGJbJRTk/CnxZvZKtn8XlNHB5i5Z8DjF4E+IHzUStDtK3yaak1wCDHYjJkh11Lm9VdmAGcko7Xgg==
+react-native-test-app@^3.2.9:
+  version "3.2.9"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-3.2.9.tgz#588bb7fc7e15dde24beffcf7ad291e7275a1f901"
+  integrity sha512-FFq2sVKTBIjp+Gu7W8qPTXWedL1blZJop3oKwq+fHsPICaisMU6L/gw5BGsoaEDuFaBinZ8asC7StP8+aWYuAA==
   dependencies:
-    "@rnx-kit/react-native-host" "^0.2.9"
+    "@rnx-kit/react-native-host" "^0.4.4"
     ajv "^8.0.0"
     chalk "^4.1.0"
     cliui "^8.0.0"
     fast-xml-parser "^4.0.0"
-    minimist "^1.2.8"
     prompts "^2.4.0"
     semver "^7.3.5"
     uuid "^8.3.2"
@@ -5827,6 +5870,14 @@ react@18.2.0:
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
+
+read-yaml-file@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/read-yaml-file/-/read-yaml-file-2.1.0.tgz#c5866712db9ef5343b4d02c2413bada53c41c4a9"
+  integrity sha512-UkRNRIwnhG+y7hpqnycCL/xbTk7+ia9VuVTC0S+zVbwd65DI9eUpRMfsWIGrCWxTU/mi+JW8cHQCrv+zfCbEPQ==
+  dependencies:
+    js-yaml "^4.0.0"
+    strip-bom "^4.0.0"
 
 readable-stream@^3.4.0:
   version "3.6.2"

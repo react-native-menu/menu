@@ -9,15 +9,15 @@ import UIKit
 
 
 @objc(ActionSheetView)
-class ActionSheetView: UIView {
-    @objc var onPressAction: RCTDirectEventBlock?
+public class ActionSheetView: UIView {
+
     private var _title: String?
-    @objc var title: NSString? {
+    @objc public var title: NSString? {
         didSet { self._title = title as? String }
     }
 
     private var _actions: [UIAlertAction] = []
-    @objc var actions: [NSDictionary]? {
+    @objc public var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
                 return
@@ -106,16 +106,14 @@ class ActionSheetView: UIView {
     }
 
     @objc func sendButtonAction(_ action: String) {
-        if let onPress = onPressAction {
-            onPress(["event":action])
-        }
+        // NO-OP (should be overriden by parent)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func reactSetFrame(_ frame: CGRect) {
+    public override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame)
     }
 

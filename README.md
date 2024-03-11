@@ -37,6 +37,18 @@ The package is [automatically linked](https://github.com/react-native-community/
 npx pod-install
 ```
 
+## Fabric
+
+If you plan on using fabric with this project, you may want to add the following lines on your projects' Podfile:
+
+```ruby
++    # @react-native-menu/menu (fabric+swift requirements)
++    pod 'React-Fabric', :modular_headers => true, :path => '../node_modules/react-native/ReactCommon'
++    pod 'React-graphics', :modular_headers => true, :path => '../node_modules/react-native/ReactCommon/react/renderer/graphics'
++    pod 'React-utils', :modular_headers => true, :path => '../node_modules/react-native/ReactCommon/react/utils'
++    pod 'React-debug', :modular_headers => true, :path => '../node_modules/react-native/ReactCommon/react/debug'
+```
+
 ## Usage
 
 ```jsx

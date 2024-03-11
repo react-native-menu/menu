@@ -134,5 +134,10 @@
   "volta": {
     "node": "20.10.0",
     "yarn": "1.22.21"
+  },
+  "codegenConfig": {
+    "name": "RNMenuViewSpec",
+    "type": "components",
+    "jsSrcsDir": "src"
   }
 }

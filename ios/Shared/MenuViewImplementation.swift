@@ -1,5 +1,5 @@
 //
-//  MenuView.swift
+//  MenuViewImplementation.swift
 //  react-native-menu
 //
 //  Created by Jesse Katsumata on 11/3/20.
@@ -7,11 +7,10 @@
 
 import UIKit
 @available(iOS 14.0, *)
-@objc(MenuView)
-class MenuView: UIButton {
+@objc(MenuViewImplementation)
+public class MenuViewImplementation: UIButton {
 
-    private var _actions: [UIMenuElement] = [];
-    @objc var actions: [NSDictionary]? {
+    @objc public var actions: [NSDictionary]? {
         didSet {
             guard let actions = self.actions else {
                 return
@@ -24,8 +23,10 @@ class MenuView: UIButton {
         }
     }
 
+    private var _actions: [UIMenuElement] = [];
+
     private var _title: String = "";
-    @objc var title: NSString? {
+    @objc public var title: NSString? {
         didSet {
             guard let title = self.title else {
                 return
@@ -34,7 +35,6 @@ class MenuView: UIButton {
             self.setup()
         }
     }
-    @objc var onPressAction: RCTDirectEventBlock?
 
     @objc var shouldOpenOnLongPress: Bool = false {
         didSet {
@@ -73,7 +73,7 @@ class MenuView: UIButton {
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
     }
 
-    override func reactSetFrame(_ frame: CGRect) {
+    public override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame);
     };
 
@@ -83,8 +83,6 @@ class MenuView: UIButton {
   }
 
     @objc func sendButtonAction(_ action: UIAction) {
-        if let onPress = onPressAction {
-            onPress(["event":action.identifier.rawValue])
-        }
+        // NO-OP (should be overriden by parent)
     }
 }

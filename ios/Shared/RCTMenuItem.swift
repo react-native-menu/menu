@@ -27,6 +27,9 @@ class RCTMenuAction {
 
         if let image = details["image"] as? NSString {
             self.image = UIImage(systemName: image as String);
+            if self.image === nil {
+                self.image = UIImage(named: image as String)
+            }
             if let imageColor = details["imageColor"] {
                 self.image = self.image?.withTintColor(RCTConvert.uiColor(imageColor), renderingMode: .alwaysOriginal)
             }

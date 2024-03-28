@@ -1,4 +1,7 @@
-import type { DirectEventHandler, Int32 } from 'react-native/Libraries/Types/CodegenTypes';
+import type {
+  DirectEventHandler,
+  Int32,
+} from 'react-native/Libraries/Types/CodegenTypes';
 import type { HostComponent, ViewProps } from 'react-native';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 /*
@@ -23,7 +26,7 @@ type SubAction = {
     disabled?: boolean;
     hidden?: boolean;
   };
-}
+};
 type MenuAction = {
   id?: string;
   title: string;
@@ -39,14 +42,14 @@ type MenuAction = {
     hidden?: boolean;
   };
   subactions?: Array<SubAction>;
-}
+};
 export interface NativeProps extends ViewProps {
-  onPressAction?: DirectEventHandler<{ event: string}>
+  onPressAction?: DirectEventHandler<{ event: string }>;
   actions: Array<MenuAction>;
   actionsHash: string; // just a workaround to make sure we don't have to manually compare MenuActions manually in C++ (since it's a struct and that's a pain)
   title?: string;
-};
+}
 
 export default codegenNativeComponent<NativeProps>(
-  'MenuView',
+  'MenuView'
 ) as HostComponent<NativeProps>;

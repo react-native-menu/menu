@@ -143,5 +143,6 @@
     "name": "RNMenuViewSpec",
     "type": "components",
     "jsSrcsDir": "src"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }

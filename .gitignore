@@ -60,4 +60,4 @@ android/keystores/debug.keystore
 lib/
 
 # yarn
-.yarn
+.yarn/install-state.gz

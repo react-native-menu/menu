@@ -20,14 +20,15 @@
     "!**/__mocks__"
   ],
   "scripts": {
-    "bootstrap": "yarn && yarn example && yarn pods",
-    "example": "yarn --cwd example",
+    "android": "react-native run-android",
+    "bootstrap": "yarn && yarn pods",
     "format": "prettier --write \"**/*.{js,ts,tsx}\"",
+    "ios": "react-native run-ios",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "pods": "cd example && pod-install --quiet",
     "prepare": "bob build",
     "release": "release-it",
-    "start": "cd example && react-native start",
+    "start": "react-native start",
     "test": "jest",
     "typescript": "tsc --noEmit"
   },

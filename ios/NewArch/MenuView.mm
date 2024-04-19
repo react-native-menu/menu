@@ -54,7 +54,6 @@ using namespace facebook::react;
 }
 
 - (void)onPressAction:(NSString * _Nonnull)eventString {
-#ifdef RN_FABRIC_ENABLED
     // If screen is already unmounted then there will be no event emitter
     const auto eventEmitter = [self getEventEmitter];
     if (eventEmitter != nullptr) {
@@ -63,15 +62,6 @@ using namespace facebook::react;
             .event = [eventString UTF8String]
         });
     }
-#else
-    if (self.onPressAction) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.onPressAction) {
-                self.onPressAction(@{ @"event": eventString });
-            }
-        });
-    }
-#endif
 }
 
 /**

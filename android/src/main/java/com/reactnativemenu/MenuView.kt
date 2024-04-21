@@ -10,6 +10,8 @@ import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.widget.PopupMenu
 import com.facebook.react.bridge.*
+import com.facebook.react.uimanager.UIManagerHelper
+import com.facebook.react.uimanager.events.Event
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 import java.lang.reflect.Field
@@ -165,14 +167,14 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
             subMenuItem.setOnMenuItemClickListener {
               if (!it.hasSubMenu()) {
                 mIsMenuDisplayed = false
-                val args: WritableMap = Arguments.createMap()
                 if (!subactions.isNull(it.order)) {
                   val selectedItem = subactions.getMap(it.order)
-                  args.putString("event", selectedItem?.getString("id"))
-                  args.putString("target", "$id")
-                  mContext
-                    .getJSModule(RCTEventEmitter::class.java)
-                    .receiveEvent(id, "onPressAction", args)
+                  val dispatcher =
+                    UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
+                  val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
+                  dispatcher?.dispatchEvent(
+                    MenuOnPressActionEvent(surfaceId, id, selectedItem.getString("id"), id)
+                  )
                 }
                 true
               } else {
@@ -210,14 +212,14 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
           menuItem.setOnMenuItemClickListener {
             if (!it.hasSubMenu()) {
               mIsMenuDisplayed = false
-              val args: WritableMap = Arguments.createMap()
               if (!mActions.isNull(it.order)) {
                 val selectedItem = mActions.getMap(it.order)
-                args.putString("event", selectedItem?.getString("id"))
-                args.putString("target", "$id")
-                mContext
-                  .getJSModule(RCTEventEmitter::class.java)
-                  .receiveEvent(id, "onPressAction", args)
+                val dispatcher =
+                  UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
+                val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
+                dispatcher?.dispatchEvent(
+                  MenuOnPressActionEvent(surfaceId, id, selectedItem.getString("id"), id)
+                )
               }
               true
             } else {

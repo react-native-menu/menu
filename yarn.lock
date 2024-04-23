@@ -3258,12 +3258,12 @@ __metadata:
   linkType: hard
 
 "@react-native/eslint-config@npm:^0.74.0":
-  version: 0.74.80
-  resolution: "@react-native/eslint-config@npm:0.74.80"
+  version: 0.74.81
+  resolution: "@react-native/eslint-config@npm:0.74.81"
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@babel/eslint-parser": "npm:^7.20.0"
-    "@react-native/eslint-plugin": "npm:0.74.80"
+    "@react-native/eslint-plugin": "npm:0.74.81"
     "@typescript-eslint/eslint-plugin": "npm:^6.7.4"
     "@typescript-eslint/parser": "npm:^6.7.4"
     eslint-config-prettier: "npm:^8.5.0"
@@ -3277,14 +3277,14 @@ __metadata:
   peerDependencies:
     eslint: ">=8"
     prettier: ">=2"
-  checksum: 10c0/d2aa03e10113bf81cea8509028943444e4a460a254f7fea712d1b9f8f3842fcf7d7c39ee26d04be4c981f59c81da61bbcdb23c3f0b67499e78d83931f2d01268
+  checksum: 10c0/17b10b0849bf627752b63325718137d7fa343e6c7e2ecb941c33916919d75198629abea7d0969a46edc73d031389b8e4434af50a871ea9c703c3823dde914593
   languageName: node
   linkType: hard
 
-"@react-native/eslint-plugin@npm:0.74.80":
-  version: 0.74.80
-  resolution: "@react-native/eslint-plugin@npm:0.74.80"
-  checksum: 10c0/b5aee6857e0216fbff891533dc4e4d73f109c27d8f5435243895b35a95c866287b7105fd52b10e39251616e791bfd5771210c5fbea31c7ba86bdcbcb21a29169
+"@react-native/eslint-plugin@npm:0.74.81":
+  version: 0.74.81
+  resolution: "@react-native/eslint-plugin@npm:0.74.81"
+  checksum: 10c0/5f6e2bc0c20f7fcd276a736eb72c4093dae509bbdc06f6fbe96109b0dff14a72b3b2b621c8221ac1bb7c2268f8f523582e9632b9827c0cb859f062e8f349bf5e
   languageName: node
   linkType: hard
 

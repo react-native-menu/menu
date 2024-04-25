@@ -218,13 +218,12 @@ export type MenuAction = {
   /**
    * (Android and iOS13+ only)
    * - The action's image.
-   * - Allows icon name included in project or system (Android) resources drawables and
+   * - Allows icon name included in project or system (Android) resources drawables and (iOS)
    * in SF Symbol (iOS)
    * @example // (iOS)
    * image="plus"
    * @example // (Android)
    * image="ic_menu_add"
-   * - TODO: Allow images other than those included in SF Symbol and resources drawables
    */
   image?: string;
   /**

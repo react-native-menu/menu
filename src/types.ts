@@ -99,7 +99,13 @@ export type MenuAction = {
   /**
    * Whether subactions should be inline (separated by divider) or nested (sub menu)
    */
-  displayInline?: boolean;
+  displayInline?: boolean;  
+  /**
+  * (iOS 16+ only)
+  * The preferred size of this menu's child elements.
+  * @platform iOS
+  */
+  preferredElementSize?: 'small' | 'medium' | 'large';
 };
 
 type MenuComponentPropsBase = {

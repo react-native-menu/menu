@@ -18,6 +18,8 @@ class RCTMenuAction {
     var attributes: UIAction.Attributes = []
     var state: UIAction.State = .off
     var subactions: [RCTMenuAction] = []
+    // Only available in iOS 16+
+    var preferredElementSizeString: String?
 
     init(details: NSDictionary){
 
@@ -88,6 +90,9 @@ class RCTMenuAction {
             }
         }
 
+        if let preferredElementSizeString = details["preferredElementSize"] as? String {
+            self.preferredElementSizeString = preferredElementSizeString
+        }
 
     }
 
@@ -97,11 +102,24 @@ class RCTMenuAction {
             subactions.forEach { subaction in
                 subMenuActions.append(subaction.createUIMenuElement(handler))
             }
+            var menu: UIMenu;
             if self.displayInline {
-                return UIMenu(title: title, image: image, options: .displayInline, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, options: .displayInline, children: subMenuActions)
             } else {
-                return UIMenu(title: title, image: image, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, children: subMenuActions)
             }
+
+            if #available(iOS 16.0, *) {
+                if(preferredElementSizeString == "small") {
+                    menu.preferredElementSize = .small
+                } else if(preferredElementSizeString == "medium") {
+                    menu.preferredElementSize = .medium
+                } else if(preferredElementSizeString == "large") {
+                    menu.preferredElementSize = .large
+                }
+            }
+
+            return menu
         }
 
         if #available(iOS 15, *) {

@@ -224,7 +224,6 @@ export type MenuAction = {
    * image="plus"
    * @example // (Android)
    * image="ic_menu_add"
-   * - TODO: Allow images other than those included in SF Symbol and resources drawables
    */
   image?: string;
   /**

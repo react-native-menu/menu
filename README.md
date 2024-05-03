@@ -218,7 +218,7 @@ export type MenuAction = {
   /**
    * (Android and iOS13+ only)
    * - The action's image.
-   * - Allows icon name included in project or system (Android) resources drawables and (iOS)
+   * - Allows icon name included in project or system (Android) resources drawables and
    * in SF Symbol (iOS)
    * @example // (iOS)
    * image="plus"

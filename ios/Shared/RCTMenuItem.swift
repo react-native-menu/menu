@@ -61,6 +61,11 @@ class RCTMenuAction {
             if (attributes["hidden"] as? Bool) == true {
                 self.attributes.update(with: .hidden)
             }
+            if(attributes["keepsMenuPresented"] as? Bool) == true {
+                if #available(iOS 16.0, *) {
+                    self.attributes.update(with: .keepsMenuPresented)
+                } 
+            }
         }
 
         if let state = details["state"] as? NSString {

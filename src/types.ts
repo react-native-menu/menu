@@ -25,6 +25,12 @@ type MenuAttributes = {
    * An attribute indicating the hidden style.
    */
   hidden?: boolean;
+  /**
+   * (iOS16+ only)
+   * @platform iOS
+   * An attribute indicating that the menu should remain presented after firing.
+   */
+  keepsMenuPresented?: boolean;
 };
 
 /**

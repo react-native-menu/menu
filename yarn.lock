@@ -1711,8 +1711,8 @@ __metadata:
   linkType: hard
 
 "@callstack/react-native-visionos@npm:^0.73.0":
-  version: 0.73.10
-  resolution: "@callstack/react-native-visionos@npm:0.73.10"
+  version: 0.73.11
+  resolution: "@callstack/react-native-visionos@npm:0.73.11"
   dependencies:
     "@jest/create-cache-key-function": "npm:^29.6.3"
     "@react-native-community/cli": "npm:13.5.1"
@@ -1757,7 +1757,7 @@ __metadata:
     react: 18.2.0
   bin:
     react-native-visionos: cli.js
-  checksum: 10c0/15109a9c4af0f8e417569089c02635d082ee81e2921852e6ae79abbe07b48cda5232ce048c49a5847c8cb463f0147f02dfa6e6550be89fa2ca7cd23f186a4f8a
+  checksum: 10c0/74a1a0e93e95be76d22d40e352466d126bbb1fbbd98416ff66c434090328e5e2f490d6bac682b99f8fee6e2acebc25bde7cf6a40724881b4abce607d7fc4cb6d
   languageName: node
   linkType: hard
 

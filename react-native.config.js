@@ -1,5 +1,4 @@
 const project = (() => {
-  const fs = require('fs');
   const path = require('path');
   try {
     const { configureProjects } = require('react-native-test-app');

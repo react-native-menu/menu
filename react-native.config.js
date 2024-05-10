@@ -1,3 +1,4 @@
+const path = require('path');
 const project = (() => {
   const fs = require('fs');
   const path = require('path');
@@ -10,7 +11,7 @@ const project = (() => {
         manifestPath: path.join(__dirname, 'example', 'android'),
       },
       ios: {
-        sourceDir: 'example/ios',
+        sourceDir: path.join('example', 'ios'),
       },
     });
   } catch (e) {

@@ -2841,7 +2841,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-builder-bob: "npm:^0.23.2"
-    react-native-test-app: "npm:^3.2.9"
+    react-native-test-app: "npm:^3.7.2"
     release-it: "npm:^17.2.0"
     typescript: "npm:5.4.5"
   peerDependencies:
@@ -3364,12 +3364,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.4.8":
-  version: 0.4.8
-  resolution: "@rnx-kit/react-native-host@npm:0.4.8"
+"@rnx-kit/react-native-host@npm:^0.4.9":
+  version: 0.4.9
+  resolution: "@rnx-kit/react-native-host@npm:0.4.9"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: 10c0/43bbd652b9c06b5015c79c8240e11dbb00564261ac1441b8ff08b86f07c74701b541ad4b3d30bbeb5ba964bae5fe2baea8459907ef76332128e38fff9facadf7
+  checksum: 10c0/ae9d749aded8fd0697ab59f440ab994b2591131397132d20f69960971f38183e27cd851f5c6da29e50bd773115de2ebdd5c41bc89673e78ac5b3dc6f4707954c
   languageName: node
   linkType: hard
 
@@ -10889,11 +10889,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^3.2.9":
-  version: 3.6.1
-  resolution: "react-native-test-app@npm:3.6.1"
+"react-native-test-app@npm:^3.7.2":
+  version: 3.7.2
+  resolution: "react-native-test-app@npm:3.7.2"
   dependencies:
-    "@rnx-kit/react-native-host": "npm:^0.4.8"
+    "@rnx-kit/react-native-host": "npm:^0.4.9"
     ajv: "npm:^8.0.0"
     cliui: "npm:^8.0.0"
     fast-xml-parser: "npm:^4.0.0"
@@ -10921,7 +10921,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 10c0/4a1d278b41cde344ff38b3975c57fe085a3a4a06f05f2e0046b75e94261e4f73010ab73225aca2c36e2f07797356c8fdb46d9ad5fc0555009bae5ebfa070e1da
+  checksum: 10c0/c34869aec044805c499482d709b42328c1aa8a1477ccfe97b67cc8bc92e9084be4c6bd28f7c67cdad7669e27181c27dbc68f302145da76e239fd904051deac87
   languageName: node
   linkType: hard
 

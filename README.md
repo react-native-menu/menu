@@ -67,6 +67,7 @@ const App = () => {
         actions={[
           {
             id: 'add',
+            title: 'Add',
             titleColor: '#2367A2',
             image: Platform.select({
               ios: 'plus',
@@ -144,7 +145,7 @@ The title of the menu.
 
 | Type   | Required |
 | ------ | -------- |
-| string | No       |
+| string | Yes      |
 
 ### `isAnchoredToRight` (Android only)
 

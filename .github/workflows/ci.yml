@@ -90,4 +90,4 @@ jobs:
       - name: Install Podfiles
         run: cd example && npx pod-install
       - name: Build example app
-        run: cd example/ios && xcodebuild -workspace MenuExample.xcworkspace -scheme MenuExample -destination "platform=iOS Simulator,id=F882DE2D-825C-4D22-A66D-682FCF5FCCF8" CODE_SIGNING_ALLOWED=NO COMPILER_INDEX_STORE_ENABLE=NO -skip-testing:ReactTestAppTests/ReactNativePerformanceTests
+        run: cd example && yarn ios

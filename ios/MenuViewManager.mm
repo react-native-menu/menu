@@ -7,7 +7,7 @@
 #import "MenuView.h"
 #else
 // OLD ARCH
-#import <react_native_menu/react_native_menu-Swift.h>
+#import <react_native_menu-Swift.h>
 #endif
 
 @interface MenuViewManager : RCTViewManager

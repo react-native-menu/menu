@@ -3,10 +3,10 @@ on: push
 
 jobs:
   lint:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [20]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -24,10 +24,10 @@ jobs:
       - name: ESLint Checks
         run: yarn lint
   tsc:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [20]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -45,15 +45,18 @@ jobs:
       - name: TypeScript type check
         run: yarn typescript
   android:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [20]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '17'
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -69,7 +72,7 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        node-version: [16]
+        node-version: [20]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

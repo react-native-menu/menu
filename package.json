@@ -1,6 +1,6 @@
 {
   "name": "@react-native-menu/menu",
-  "version": "0.7.1",
+  "version": "1.0.3",
   "description": "UIMenu component for react-native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -20,14 +20,17 @@
     "!**/__mocks__"
   ],
   "scripts": {
-    "test": "jest",
-    "typescript": "tsc --noEmit",
+    "android": "react-native run-android",
+    "bootstrap": "yarn && yarn pods",
+    "format": "prettier --write \"**/*.{js,ts,tsx}\"",
+    "ios": "react-native run-ios",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "pods": "cd example && pod-install --quiet",
     "prepare": "bob build",
     "release": "release-it",
-    "example": "yarn --cwd example",
-    "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "start": "react-native start",
+    "test": "jest",
+    "typescript": "tsc --noEmit"
   },
   "keywords": [
     "react-native",
@@ -42,23 +45,28 @@
   },
   "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
-    "@react-native-community/bob": "^0.17.1",
-    "@react-native-community/eslint-config": "^3.0.0",
-    "@release-it/conventional-changelog": "^3.0.1",
+    "@callstack/react-native-visionos": "^0.73.0",
+    "@react-native/babel-preset": "^0.74.79",
+    "@react-native/eslint-config": "^0.74.0",
+    "@react-native/metro-config": "0.74.83",
+    "@release-it/conventional-changelog": "^8.0.1",
+    "@rnx-kit/metro-config": "^1.3.15",
     "@types/jest": "^29.1.2",
-    "@types/react": "^17.0.1",
-    "@types/react-native": "0.67.6",
-    "eslint": "8.26.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "jest": "^29.1.2",
-    "pod-install": "^0.1.0",
-    "prettier": "^2.2.1",
-    "react": "17.0.1",
-    "react-native": "0.64.4",
-    "react-native-test-app": "^2.0.0",
-    "release-it": "^14.10.0",
-    "typescript": "^4.1.3"
+    "@types/react": "^18.2.2",
+    "@types/react-native": "0.73.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-ft-flow": "^3.0.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "jest": "^29.2.1",
+    "pod-install": "^0.2.0",
+    "prettier": "^3.1.1",
+    "react": "18.2.0",
+    "react-native": "^0.73.0",
+    "react-native-builder-bob": "^0.23.2",
+    "react-native-test-app": "^3.7.2",
+    "release-it": "^17.2.0",
+    "typescript": "5.4.5"
   },
   "peerDependencies": {
     "react": "*",
@@ -90,7 +98,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "@react-native-community",
+      "@react-native",
       "prettier"
     ],
     "rules": {
@@ -117,7 +125,7 @@
     "trailingComma": "es5",
     "useTabs": false
   },
-  "@react-native-community/bob": {
+  "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
     "targets": [
@@ -128,5 +136,15 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "volta": {
+    "node": "20.10.0",
+    "yarn": "1.22.21"
+  },
+  "codegenConfig": {
+    "name": "RNMenuViewSpec",
+    "type": "components",
+    "jsSrcsDir": "src"
+  },
+  "packageManager": "yarn@4.1.1"
 }

@@ -5,7 +5,10 @@ import type { NativeMenuComponentProps } from './types';
 /**
  * TODO: implement for Web
  */
-const MenuView: React.FC<NativeMenuComponentProps> = ({ style, children }) => {
+const MenuView: React.FC<React.PropsWithChildren<NativeMenuComponentProps>> = ({
+  style,
+  children,
+}) => {
   return <View style={style}>{children}</View>;
 };
 

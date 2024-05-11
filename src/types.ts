@@ -25,6 +25,12 @@ type MenuAttributes = {
    * An attribute indicating the hidden style.
    */
   hidden?: boolean;
+  /**
+   * (iOS16+ only)
+   * @platform iOS
+   * An attribute indicating that the menu should remain presented after firing.
+   */
+  keepsMenuPresented?: boolean;
 };
 
 /**
@@ -94,6 +100,12 @@ export type MenuAction = {
    * Whether subactions should be inline (separated by divider) or nested (sub menu)
    */
   displayInline?: boolean;
+  /**
+   * (iOS 16+ only)
+   * The preferred size of this menu's child elements.
+   * @platform iOS
+   */
+  preferredElementSize?: 'small' | 'medium' | 'large';
 };
 
 type MenuComponentPropsBase = {
@@ -111,6 +123,7 @@ type MenuComponentPropsBase = {
    * The title of the menu.
    */
   title?: string;
+
   /**
    * (Android API 23+)
    * Boolean value determines whether popup menu should be anchored
@@ -124,6 +137,13 @@ type MenuComponentPropsBase = {
    * @default false
    */
   shouldOpenOnLongPress?: boolean;
+  /**
+   * Overrides theme variant of menu to light mode, dark mode or system theme
+   * (Only support iOS for now)
+   *
+   * @platform iOS
+   */
+  themeVariant?: string;
 };
 
 export type MenuComponentProps =
@@ -142,5 +162,6 @@ export type NativeMenuComponentProps = {
   style?: StyleProp<ViewStyle>;
   onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
   actions: ProcessedMenuAction[];
+  actionsHash: string;
   title?: string;
 };

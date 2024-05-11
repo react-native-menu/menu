@@ -18,6 +18,8 @@ class RCTMenuAction {
     var attributes: UIAction.Attributes = []
     var state: UIAction.State = .off
     var subactions: [RCTMenuAction] = []
+    // Only available in iOS 16+
+    var preferredElementSizeString: String?
 
     init(details: NSDictionary){
 
@@ -27,6 +29,9 @@ class RCTMenuAction {
 
         if let image = details["image"] as? NSString {
             self.image = UIImage(systemName: image as String);
+            if self.image === nil {
+                self.image = UIImage(named: image as String)
+            }
             if let imageColor = details["imageColor"] {
                 self.image = self.image?.withTintColor(RCTConvert.uiColor(imageColor), renderingMode: .alwaysOriginal)
             }
@@ -58,6 +63,11 @@ class RCTMenuAction {
             if (attributes["hidden"] as? Bool) == true {
                 self.attributes.update(with: .hidden)
             }
+            if(attributes["keepsMenuPresented"] as? Bool) == true {
+                if #available(iOS 16.0, *) {
+                    self.attributes.update(with: .keepsMenuPresented)
+                } 
+            }
         }
 
         if let state = details["state"] as? NSString {
@@ -80,6 +90,9 @@ class RCTMenuAction {
             }
         }
 
+        if let preferredElementSizeString = details["preferredElementSize"] as? String {
+            self.preferredElementSizeString = preferredElementSizeString
+        }
 
     }
 
@@ -89,12 +102,30 @@ class RCTMenuAction {
             subactions.forEach { subaction in
                 subMenuActions.append(subaction.createUIMenuElement(handler))
             }
+            var menu: UIMenu;
             if self.displayInline {
-                return UIMenu(title: title, image: image, options: .displayInline, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, options: .displayInline, children: subMenuActions)
             } else {
-                return UIMenu(title: title, image: image, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, children: subMenuActions)
             }
+
+            if #available(iOS 16.0, *) {
+                if(preferredElementSizeString == "small") {
+                    menu.preferredElementSize = .small
+                } else if(preferredElementSizeString == "medium") {
+                    menu.preferredElementSize = .medium
+                } else if(preferredElementSizeString == "large") {
+                    menu.preferredElementSize = .large
+                }
+            }
+
+            return menu
         }
-        return UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: subtitle, attributes: attributes, state: state, handler: handler)
+
+        if #available(iOS 15, *) {
+            return UIAction(title: title, subtitle: subtitle, image: image, identifier: identifier, attributes: attributes, state: state, handler: handler)
+        } else {
+            return UIAction(title: title, image: image, identifier: identifier, discoverabilityTitle: subtitle, attributes: attributes, state: state, handler: handler)
+        }
     }
 }

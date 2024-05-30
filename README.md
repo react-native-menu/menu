@@ -135,6 +135,10 @@ const App = () => {
 };
 ```
 
+### Declarative usage
+
+It's also possible to obtain the `action` is a more React-ish, declarative fashion. Refer to the [`react-to-imperative`](https://github.com/vonovak/react-to-imperative?tab=readme-ov-file#why) package, and see an example [here](https://github.com/vonovak/react-navigation-header-buttons/blob/cca6ce6d04d3b106efe7aa62279101db33c7941b/example/src/screens/UsageNativeMenu.tsx#L62).
+
 ## Reference
 
 ### Props

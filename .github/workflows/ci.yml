@@ -1,5 +1,9 @@
 name: Build
-on: push
+on:
+  push:
+  pull_request:
+    branches:
+      - master
 
 jobs:
   lint:
@@ -73,6 +77,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
+        arch: ['NewArch', 'OldArch']
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -85,9 +90,13 @@ jobs:
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Get arch value
+        run: echo "RCT_NEW_ARCH_ENABLED=${{ matrix.arch == 'NewArch' && '1' || '0' }}" >> $GITHUB_ENV
       - name: Install Dependencies
         run: yarn && yarn bootstrap
       - name: Install Podfiles
         run: cd example && npx pod-install
+      - name: Print React Native Info
+        run: cd example && npx react-native info
       - name: Build example app
-        run: cd example && yarn ios
+        run: cd example && yarn ios --no-packager

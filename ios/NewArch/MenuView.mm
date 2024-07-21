@@ -1,5 +1,9 @@
 #ifdef RCT_NEW_ARCH_ENABLED
+#if __has_include(<react_native_menu/react_native_menu-Swift.h>)
+#import <react_native_menu/react_native_menu-Swift.h>
+#else
 #import <react_native_menu-Swift.h>
+#endif
 #import "MenuView.h"
 
 #import <react/renderer/components/RNMenuViewSpec/ComponentDescriptors.h>

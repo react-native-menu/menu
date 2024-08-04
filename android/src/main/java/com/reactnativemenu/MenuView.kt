@@ -98,6 +98,7 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
       true -> config.getArray("subactions")
       else -> null
     }
+    val menuState = config?.getString("state")
 
     if (titleColor != null) {
       menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), titleColor)
@@ -151,6 +152,15 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
           menuItem.icon = icon
         }
       }
+    }
+
+    // Handle menuState for checkable items
+    when (menuState) {
+      "on", "off" -> {
+        menuItem.isCheckable = true
+        menuItem.isChecked = menuState == "on"
+      }
+      else -> menuItem.isCheckable = false
     }
 
     // On Android SubMenu cannot contain another SubMenu, so even if there are subactions provided

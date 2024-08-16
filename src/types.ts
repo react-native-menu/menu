@@ -144,6 +144,16 @@ type MenuComponentPropsBase = {
    * @platform iOS
    */
   themeVariant?: string;
+  /**
+   * Custom OpenSpace hitSlop prop. Works like touchable hitslop.
+   * @platform iOS
+   */
+  hitSlop?: {
+    top: number;
+    bottom: number;
+    left: number;
+    right: number;
+  };
 };
 
 export type MenuComponentProps =
@@ -164,4 +174,5 @@ export type NativeMenuComponentProps = {
   actions: ProcessedMenuAction[];
   actionsHash: string;
   title?: string;
+  hitSlop?: MenuComponentProps['hitSlop'];
 };

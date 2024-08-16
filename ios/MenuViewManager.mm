@@ -66,4 +66,9 @@ RCT_EXPORT_VIEW_PROPERTY(shouldOpenOnLongPress, BOOL)
  */
 RCT_EXPORT_VIEW_PROPERTY(themeVariant, NSString)
 
+/**
+ * hitSlop: The same as hitSlop in React Native
+*/
+RCT_EXPORT_VIEW_PROPERTY(hitSlop, UIEdgeInsets)
+
 @end

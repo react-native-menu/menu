@@ -50,6 +50,8 @@ public class MenuViewImplementation: UIButton {
         }
     }
 
+    @objc var hitSlop: UIEdgeInsets = .zero
+
     override init(frame: CGRect) {
       super.init(frame: frame)
       self.setup()
@@ -76,6 +78,23 @@ public class MenuViewImplementation: UIButton {
     public override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame);
     };
+
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if hitSlop == .zero || !self.isEnabled || self.isHidden {
+            return super.point(inside: point, with: event)
+        }
+
+        // Create a larger hit frame that extends beyond the view's bounds
+        let largerFrame = CGRect(
+            x: self.bounds.origin.x - hitSlop.left,
+            y: self.bounds.origin.y - hitSlop.top,
+            width: self.bounds.size.width + hitSlop.left + hitSlop.right,
+            height: self.bounds.size.height + hitSlop.top + hitSlop.bottom
+        )
+
+        // Check if the point is within the larger frame
+        return largerFrame.contains(point)
+    }
 
 
   required init?(coder aDecoder: NSCoder) {

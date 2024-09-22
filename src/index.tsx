@@ -21,7 +21,11 @@ function processAction(action: MenuAction): ProcessedMenuAction {
 
 const defaultHitslop = { top: 0, left: 0, bottom: 0, right: 0 };
 
-const MenuView: React.FC<MenuComponentProps> = ({ actions, hitSlop = defaultHitslop, ...props }) => {
+const MenuView: React.FC<MenuComponentProps> = ({
+  actions,
+  hitSlop = defaultHitslop,
+  ...props
+}) => {
   const processedActions = actions.map<ProcessedMenuAction>((action) =>
     processAction(action)
   );
@@ -29,7 +33,12 @@ const MenuView: React.FC<MenuComponentProps> = ({ actions, hitSlop = defaultHits
     return objectHash(processedActions);
   }, [processedActions]);
   return (
-    <UIMenuView {...props} hitSlop={hitSlop} actions={processedActions} actionsHash={hash} />
+    <UIMenuView
+      {...props}
+      hitSlop={hitSlop}
+      actions={processedActions}
+      actionsHash={hash}
+    />
   );
 };
 

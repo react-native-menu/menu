@@ -6753,15 +6753,15 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-ft-flow@npm:^3.0.0":
-  version: 3.0.10
-  resolution: "eslint-plugin-ft-flow@npm:3.0.10"
+  version: 3.0.11
+  resolution: "eslint-plugin-ft-flow@npm:3.0.11"
   dependencies:
     lodash: "npm:^4.17.21"
     string-natural-compare: "npm:^3.0.1"
   peerDependencies:
-    eslint: "*"
+    eslint: ^8.56.0 || ^9.0.0
     hermes-eslint: ">=0.15.0"
-  checksum: 10c0/f9f76eefbca8cf65836d8fd9ead8e50fc184f9dfa30e0eef3bbd69e1807a97662dba32855ff56a50c2acf7dcf464988d8ba78dafac06e7e650229decbe06f73a
+  checksum: 10c0/025b3736d99d2831c6d493421fbfa880b0aeef9752d3b677972c7100e5ba424368525bc15b34604f02d18807bfa7b1bcaa2c3f37552381f2ce45283faa5989d5
   languageName: node
   linkType: hard
 

@@ -154,6 +154,10 @@ type MenuComponentPropsBase = {
     left: number;
     right: number;
   };
+  /**
+   * Test ID for testing purposes
+   */
+  testID?: string;
 };
 
 export type MenuComponentProps =
@@ -175,4 +179,5 @@ export type NativeMenuComponentProps = {
   actionsHash: string;
   title?: string;
   hitSlop?: MenuComponentProps['hitSlop'];
+  testID?: string;
 };

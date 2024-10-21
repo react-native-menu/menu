@@ -277,6 +277,45 @@ It will contain id of the given action.
 |-------------------------|----------|
 | ({nativeEvent}) => void | No       |
 
+## Testing with Jest
+
+In some cases, you might want to mock the package to test your components. You can do this by using the `jest.mock` function.
+
+```ts
+import type { MenuComponentProps } from '@react-native-menu/menu';
+
+jest.mock('@react-native-menu/menu', () => ({
+  MenuView: jest.fn((props: MenuComponentProps) => {
+    const React = require('react');
+
+    class MockMenuView extends React.Component {
+      render() {
+        return React.createElement(
+          'View',
+          { testID: props.testID },
+          // Dynamically mock each action
+          props.actions.map(action =>
+            React.createElement('Button', {
+              key: action.id,
+              title: action.title,
+              onPress: () => {
+                if (action.id && props?.onPressAction) {
+                  props.onPressAction({ nativeEvent: { event: action.id } });
+                }
+              },
+              testID: action.id
+            })
+          ),
+          this.props.children
+        );
+      }
+    }
+
+    return React.createElement(MockMenuView, props);
+  })
+}));
+```
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

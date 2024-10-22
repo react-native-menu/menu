@@ -163,6 +163,7 @@ export const App = () => {
         ]}
         shouldOpenOnLongPress={true}
         themeVariant={themeVariant}
+        testID="menuView"
       >
         <View style={styles.button}>
           <Text style={styles.buttonText}>Test</Text>

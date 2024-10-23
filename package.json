@@ -46,7 +46,7 @@
   "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
     "@callstack/react-native-visionos": "^0.73.0",
-    "@react-native/babel-preset": "^0.74.79",
+    "@react-native/babel-preset": "^0.75.4",
     "@react-native/eslint-config": "^0.74.0",
     "@react-native/metro-config": "0.74.85",
     "@release-it/conventional-changelog": "^9.0.1",

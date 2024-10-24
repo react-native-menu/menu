@@ -110,13 +110,13 @@ class MenuViewManager: ReactClippingViewManager<MenuView>() {
   @ReactProp(name = "hitSlop")
   fun setHitSlop(view: ReactViewGroup, @Nullable hitSlop: ReadableMap?) {
     if (hitSlop == null) {
-      view.setHitSlopRect(null)
+      view.hitSlopRect = null
     } else {
-      view.setHitSlopRect(Rect(
-        if (hitSlop.hasKey("left")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("left")).toInt() else 0,
-        if (hitSlop.hasKey("top")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("top")).toInt() else 0,
-        if (hitSlop.hasKey("right")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("right")).toInt() else 0,
-        if (hitSlop.hasKey("bottom")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("bottom")).toInt() else 0))
+      view.hitSlopRect = Rect(
+          if (hitSlop.hasKey("left")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("left")).toInt() else 0,
+          if (hitSlop.hasKey("top")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("top")).toInt() else 0,
+          if (hitSlop.hasKey("right")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("right")).toInt() else 0,
+          if (hitSlop.hasKey("bottom")) PixelUtil.toPixelFromDIP(hitSlop.getDouble("bottom")).toInt() else 0)
     }
   }
 

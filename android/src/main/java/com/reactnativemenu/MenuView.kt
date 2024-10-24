@@ -3,6 +3,7 @@ package com.reactnativemenu
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Build
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -11,19 +12,18 @@ import android.view.*
 import android.widget.PopupMenu
 import com.facebook.react.bridge.*
 import com.facebook.react.uimanager.UIManagerHelper
-import com.facebook.react.uimanager.events.Event
-import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.facebook.react.views.view.ReactViewGroup
 import java.lang.reflect.Field
 
 
-class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
+class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
   private lateinit var mActions: ReadableArray
   private var mIsAnchoredToRight = false
   private val mPopupMenu: PopupMenu = PopupMenu(context, this)
   private var mIsMenuDisplayed = false
   private var mIsOnLongPress = false
   private var mGestureDetector: GestureDetector
+  private var mHitSlopRect: Rect? = null
 
   init {
     mGestureDetector = GestureDetector(mContext, object : GestureDetector.SimpleOnGestureListener() {
@@ -43,6 +43,12 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
     })
   }
 
+  override fun setHitSlopRect(rect: Rect?) {
+    super.setHitSlopRect(rect)
+    mHitSlopRect = rect
+    updateTouchDelegate()
+  }
+
   override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
     return true
   }
@@ -50,6 +56,16 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
   override fun onTouchEvent(ev: MotionEvent): Boolean {
     mGestureDetector.onTouchEvent(ev)
     return true
+  }
+
+  override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+    super.onSizeChanged(w, h, oldw, oldh)
+    updateTouchDelegate()
+  }
+
+  override fun onAttachedToWindow() {
+    super.onAttachedToWindow()
+    updateTouchDelegate()
   }
 
   override fun onDetachedFromWindow() {
@@ -244,6 +260,24 @@ class MenuView(private val mContext: ReactContext): ReactViewGroup(mContext) {
       }
       mIsMenuDisplayed = true
       mPopupMenu.show()
+    }
+  }
+
+  private fun updateTouchDelegate() {
+    post {
+      val hitRect = Rect()
+      getHitRect(hitRect)
+
+      mHitSlopRect?.let {
+        hitRect.left -= it.left
+        hitRect.top -= it.top
+        hitRect.right += it.right
+        hitRect.bottom += it.bottom
+      }
+
+      (parent as? ViewGroup)?.let {
+        it.touchDelegate = TouchDelegate(hitRect, this)
+      }
     }
   }
 

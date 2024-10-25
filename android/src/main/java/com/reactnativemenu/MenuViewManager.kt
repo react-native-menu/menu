@@ -152,9 +152,7 @@ class MenuViewManager: ReactClippingViewManager<MenuView>() {
 
   @ReactPropGroup(names = [ViewProps.BORDER_COLOR, ViewProps.BORDER_LEFT_COLOR, ViewProps.BORDER_RIGHT_COLOR, ViewProps.BORDER_TOP_COLOR, ViewProps.BORDER_BOTTOM_COLOR, ViewProps.BORDER_START_COLOR, ViewProps.BORDER_END_COLOR], customType = "Color")
   fun setBorderColor(view: ReactViewGroup, index: Int, color: Int?) {
-    val rgbComponent = if (color == null) YogaConstants.UNDEFINED else (color and 0x00FFFFFF).toFloat()
-    val alphaComponent = if (color == null) YogaConstants.UNDEFINED else (color ushr 24).toFloat()
-    view.setBorderColor(SPACING_TYPES[index], rgbComponent, alphaComponent)
+    view.setBorderColor(index, color)
   }
 
   @ReactProp(name = ViewProps.OVERFLOW)

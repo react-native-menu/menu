@@ -17,7 +17,7 @@ import com.facebook.react.views.view.ReactDrawableHelper
 import com.facebook.react.views.view.ReactViewGroup
 import com.facebook.yoga.YogaConstants
 
-class MenuViewManager: ReactClippingViewManager<MenuView>() {
+abstract class MenuViewManagerBase: ReactClippingViewManager<MenuView>() {
   override fun getName() = "MenuView"
 
   override fun createViewInstance(reactContext: ThemedReactContext): MenuView {
@@ -151,9 +151,7 @@ class MenuViewManager: ReactClippingViewManager<MenuView>() {
   }
 
   @ReactPropGroup(names = [ViewProps.BORDER_COLOR, ViewProps.BORDER_LEFT_COLOR, ViewProps.BORDER_RIGHT_COLOR, ViewProps.BORDER_TOP_COLOR, ViewProps.BORDER_BOTTOM_COLOR, ViewProps.BORDER_START_COLOR, ViewProps.BORDER_END_COLOR], customType = "Color")
-  fun setBorderColor(view: ReactViewGroup, index: Int, color: Int?) {
-    view.setBorderColor(index, color)
-  }
+  abstract fun setBorderColor(view: ReactViewGroup, index: Int, color: Int?)
 
   @ReactProp(name = ViewProps.OVERFLOW)
   fun setOverflow(view: ReactViewGroup, overflow: String?) {

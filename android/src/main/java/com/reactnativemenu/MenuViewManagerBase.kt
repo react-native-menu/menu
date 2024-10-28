@@ -20,10 +20,6 @@ import com.facebook.yoga.YogaConstants
 abstract class MenuViewManagerBase: ReactClippingViewManager<MenuView>() {
   override fun getName() = "MenuView"
 
-  override fun createViewInstance(reactContext: ThemedReactContext): MenuView {
-    return MenuView(reactContext)
-  }
-
   @ReactProp(name = "actions")
   fun setActions(view: MenuView, actions: ReadableArray) {
     view.setActions(actions)

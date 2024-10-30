@@ -33,6 +33,10 @@ def getExtOrIntegerDefault(name) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : (project.properties["Menu_" + name]).toInteger()
 }
 
+def getExtOrFallback(name, fallback) {
+  return rootProject.ext.has(name) ? rootProject.ext.get(name) : fallback
+}
+
 def supportsNamespace() {
   def parsed = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')
   def major = parsed[0].toInteger()
@@ -40,6 +44,35 @@ def supportsNamespace() {
 
   // Namespace support was added in 7.3.0
   return (major == 7 && minor >= 3) || major >= 8
+}
+
+def resolveReactNativeDirectory() {
+    def reactNativeLocation = getExtOrFallback("REACT_NATIVE_NODE_MODULES_DIR", null)
+    if (reactNativeLocation != null) {
+        return file(reactNativeLocation)
+    }
+
+    // monorepo workaround.
+    def reactNativePackage = file(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim())
+    if(reactNativePackage.exists()) {
+        return reactNativePackage.parentFile
+    }
+
+    throw new GradleException(
+        "[@react-native-menu/menu] Unable to resolve react-native location in node_modules. You should project extension property (in `app/build.gradle`) `REACT_NATIVE_NODE_MODULES_DIR` with path to react-native."
+    )
+}
+
+def getReactNativeMinorVersion() {
+  def REACT_NATIVE_DIR = resolveReactNativeDirectory()
+
+  def reactProperties = new Properties()
+  file("$REACT_NATIVE_DIR/ReactAndroid/gradle.properties").withInputStream { reactProperties.load(it) }
+
+  def REACT_NATIVE_VERSION = reactProperties.getProperty("VERSION_NAME")
+  def REACT_NATIVE_MINOR_VERSION = REACT_NATIVE_VERSION.startsWith("0.0.0-") ? 1000 : REACT_NATIVE_VERSION.split("\\.")[1].toInteger()
+
+  return REACT_NATIVE_MINOR_VERSION
 }
 
 android {
@@ -92,6 +125,13 @@ android {
         ]
       } else {
         java.srcDirs += ["src/oldarch"]
+      }
+
+      // MenuViewManager
+      if (getReactNativeMinorVersion() <= 75) {
+        java.srcDirs += "src/reactNativeVersionPatch/MenuViewManager/75"
+      } else {
+        java.srcDirs += "src/reactNativeVersionPatch/MenuViewManager/latest"
       }
     }
   }

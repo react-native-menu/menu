@@ -169,7 +169,18 @@ abstract class MenuViewManagerBase: ReactClippingViewManager<MenuView>() {
     view.setBackfaceVisibilityDependantOpacity()
   }
 
+  override fun getCommandsMap(): MutableMap<String, Int>? {
+    return MapBuilder.of("show", COMMAND_SHOW)
+  }
+
+  override fun receiveCommand(root: MenuView, commandId: Int, args: ReadableArray?) {
+    when (commandId) {
+      COMMAND_SHOW -> root.show()
+    }
+  }
+
   companion object {
+    val COMMAND_SHOW = 1
     val SPACING_TYPES = arrayOf(
       Spacing.ALL,
       Spacing.LEFT,

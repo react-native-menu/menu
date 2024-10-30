@@ -1,13 +1,21 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import { MenuView } from '@react-native-menu/menu';
+import { MenuComponentRef } from 'src/types';
+import { useRef } from 'react';
 
 export const App = () => {
   const [themeVariant] = React.useState<string | undefined>('light');
+  const menuRef = useRef<MenuComponentRef>(null);
 
   return (
     <View style={styles.container}>
+      <Button
+        title="Show Menu with ref (Android only)"
+        onPress={() => menuRef.current?.show()}
+      />
       <MenuView
+        ref={menuRef}
         title="Menu Title"
         onPressAction={({ nativeEvent }) => {
           console.warn(JSON.stringify(nativeEvent));
@@ -178,6 +186,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 10,
   },
   button: {
     height: 100,

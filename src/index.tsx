@@ -44,4 +44,9 @@ const MenuView = forwardRef<MenuComponentRef, MenuComponentProps>(
 );
 
 export { MenuView };
-export type { MenuComponentProps, MenuAction, NativeActionEvent };
+export type {
+  MenuComponentProps,
+  MenuComponentRef,
+  MenuAction,
+  NativeActionEvent,
+};

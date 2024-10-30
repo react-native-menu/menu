@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Platform, StyleSheet, Text, View } from 'react-native';
-import { MenuView } from '@react-native-menu/menu';
-import { MenuComponentRef } from 'src/types';
+import { MenuView, MenuComponentRef } from '@react-native-menu/menu';
 import { useRef } from 'react';
 
 export const App = () => {

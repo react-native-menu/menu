@@ -1,7 +1,7 @@
 import React, { forwardRef, useMemo } from 'react';
 import { processColor } from 'react-native';
 
-import UIMenuView from './UIMenuView';
+import UIMenuView from "./UIMenuView";
 import type {
   MenuComponentProps,
   MenuAction,
@@ -12,12 +12,12 @@ import type {
 import { objectHash } from './utils';
 
 function processAction(action: MenuAction): ProcessedMenuAction {
-  return {
-    ...action,
-    imageColor: processColor(action.imageColor),
-    titleColor: processColor(action.titleColor),
-    subactions: action.subactions?.map((subAction) => processAction(subAction)),
-  };
+	return {
+		...action,
+		imageColor: processColor(action.imageColor),
+		titleColor: processColor(action.titleColor),
+		subactions: action.subactions?.map((subAction) => processAction(subAction)),
+	};
 }
 
 const defaultHitslop = { top: 0, left: 0, bottom: 0, right: 0 };

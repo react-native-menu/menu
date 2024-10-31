@@ -58,6 +58,7 @@ To edit the Kotlin files, open `example/android` in Android studio and find the 
 As of the latest update, `com.reactnativemenu.MenuViewManager` has been refactored into an abstract base class, `MenuViewManagerBase`. Any React Native version-dependent changes should be implemented in the specific version folders under `reactNativeVersionPatch`.
 
 For consistency:
+
 - When making version-specific modifications, ensure you update the appropriate implementation of `MenuViewManager`:
   - `src/reactNativeVersionPatch/75/MenuViewManager.kt` for React Native < 0.76
   - `src/reactNativeVersionPatch/latest/MenuViewManager.kt` for React Native >= 0.76
@@ -81,9 +82,9 @@ Our pre-commit hooks verify that your commit message matches this format when co
 
 ### Linting and tests
 
-[ESLint](https://eslint.org/), [Prettier](https://prettier.io/), [TypeScript](https://www.typescriptlang.org/)
+[Biome](https://biomejs.dev/), [TypeScript](https://www.typescriptlang.org/)
 
-We use [TypeScript](https://www.typescriptlang.org/) for type checking, [ESLint](https://eslint.org/) with [Prettier](https://prettier.io/) for linting and formatting the code, and [Jest](https://jestjs.io/) for testing.
+We use [TypeScript](https://www.typescriptlang.org/) for type checking, [Biome](https://biomejs.dev/) for linting and formatting the code, and [Jest](https://jestjs.io/) for testing.
 
 Our pre-commit hooks verify that the linter and tests pass when committing.
 
@@ -93,7 +94,7 @@ The `package.json` file contains various scripts for common tasks:
 
 - `yarn bootstrap`: setup project by installing all dependencies and pods.
 - `yarn typescript`: type-check files with TypeScript.
-- `yarn lint`: lint files with ESLint.
+- `yarn lint`: lint files with Biome.
 - `yarn test`: run unit tests with Jest.
 - `yarn start`: start the Metro server for the example app.
 - `yarn android`: run the example app on Android.

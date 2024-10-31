@@ -10,9 +10,9 @@ function hashCode(str: string): number {
 }
 
 // Function to create a string hash from a TypeScript object
-export function objectHash(obj: Record<string, any>): string {
+export function objectHash(obj: Record<string, unknown>[]): string {
   if (!obj) {
-    return '';
+    return "";
   }
   // Convert the object to a JSON string
   const jsonString = JSON.stringify(obj);

@@ -1,14 +1,15 @@
-import React, { useMemo } from 'react';
-import { processColor } from 'react-native';
+import type React from "react";
+import { useMemo } from "react";
+import { processColor } from "react-native";
 
-import UIMenuView from './UIMenuView';
+import UIMenuView from "./UIMenuView";
 import type {
   MenuComponentProps,
   MenuAction,
   ProcessedMenuAction,
   NativeActionEvent,
-} from './types';
-import { objectHash } from './utils';
+} from "./types";
+import { objectHash } from "./utils";
 
 function processAction(action: MenuAction): ProcessedMenuAction {
   return {
@@ -27,7 +28,7 @@ const MenuView: React.FC<MenuComponentProps> = ({
   ...props
 }) => {
   const processedActions = actions.map<ProcessedMenuAction>((action) =>
-    processAction(action)
+    processAction(action),
   );
   const hash = useMemo(() => {
     return objectHash(processedActions);

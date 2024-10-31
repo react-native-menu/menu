@@ -40,14 +40,20 @@ npx pod-install
 ## Usage
 
 ```jsx
-import { MenuView } from '@react-native-menu/menu';
+import { MenuView, MenuComponentRef } from '@react-native-menu/menu';
 
 // ...
 
 const App = () => {
+  const menuRef = useRef<MenuComponentRef>(null);
   return (
     <View style={styles.container}>
+      <Button
+        title="Show Menu with ref (Android only)"
+        onPress={() => menuRef.current?.show()}
+      />
       <MenuView
+        ref={menuRef}
         title="Menu Title"
         onPressAction={({ nativeEvent }) => {
           console.warn(JSON.stringify(nativeEvent));
@@ -130,6 +136,14 @@ It's also possible to obtain the `action` is a more React-ish, declarative fashi
 ## Reference
 
 ### Props
+
+#### `ref` (Android only)
+
+Ref to the menu component.
+
+| Type | Required |
+|------|----------|
+| ref  | No       |
 
 ### `title` (iOS only)
 

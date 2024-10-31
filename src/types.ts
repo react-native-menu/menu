@@ -163,6 +163,10 @@ type MenuComponentPropsBase = {
 export type MenuComponentProps =
   React.PropsWithChildren<MenuComponentPropsBase>;
 
+export type MenuComponentRef = {
+  show: () => void;
+};
+
 export type ProcessedMenuAction = Omit<
   MenuAction,
   'imageColor' | 'titleColor' | 'subactions'
@@ -180,4 +184,5 @@ export type NativeMenuComponentProps = {
   title?: string;
   hitSlop?: MenuComponentProps['hitSlop'];
   testID?: string;
+  ref?: React.ForwardedRef<MenuComponentRef>;
 };

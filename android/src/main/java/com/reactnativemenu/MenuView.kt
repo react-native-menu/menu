@@ -43,6 +43,10 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
     })
   }
 
+  fun show(){
+    prepareMenu()
+  }
+
   override fun setHitSlopRect(rect: Rect?) {
     super.setHitSlopRect(rect)
     mHitSlopRect = rect

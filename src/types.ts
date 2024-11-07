@@ -164,7 +164,7 @@ export type MenuComponentProps =
 	React.PropsWithChildren<MenuComponentPropsBase>;
 
 export type MenuComponentRef = {
-  show: () => void;
+	show: () => void;
 };
 
 export type ProcessedMenuAction = Omit<
@@ -177,12 +177,12 @@ export type ProcessedMenuAction = Omit<
 };
 
 export type NativeMenuComponentProps = {
-  style?: StyleProp<ViewStyle>;
-  onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
-  actions: ProcessedMenuAction[];
-  actionsHash: string;
-  title?: string;
-  hitSlop?: MenuComponentProps['hitSlop'];
-  testID?: string;
-  ref?: React.ForwardedRef<MenuComponentRef>;
+	style?: StyleProp<ViewStyle>;
+	onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
+	actions: ProcessedMenuAction[];
+	actionsHash: string;
+	title?: string;
+	hitSlop?: MenuComponentProps["hitSlop"];
+	testID?: string;
+	ref?: React.ForwardedRef<MenuComponentRef>;
 };

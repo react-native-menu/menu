@@ -10018,8 +10018,8 @@ __metadata:
   linkType: hard
 
 "react-native-builder-bob@npm:^0.30.2":
-  version: 0.30.2
-  resolution: "react-native-builder-bob@npm:0.30.2"
+  version: 0.30.3
+  resolution: "react-native-builder-bob@npm:0.30.3"
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@babel/plugin-transform-strict-mode": "npm:^7.24.7"
@@ -10045,7 +10045,7 @@ __metadata:
     yargs: "npm:^17.5.1"
   bin:
     bob: bin/bob
-  checksum: 10c0/775306f923aaf6aa9d39e0e78b1ab65bd4e0dd8998978eb634a84bfd4f9cc2e320965055d0d4b5615cc0d6df5885c195f582b3f2ceb7e849abf63566182cbbab
+  checksum: 10c0/981bccd4029718fd072c99c7690bc4314bd5eaabacb503bc46afee06ee46a316893ea05ac5edbe545a573539c67224eb8a5d98d4d8ec32a889d8c2e8507d3a55
   languageName: node
   linkType: hard
 

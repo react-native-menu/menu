@@ -3850,7 +3850,7 @@ __metadata:
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-builder-bob: "npm:^0.32.1"
-    react-native-test-app: "npm:^3.8.1"
+    react-native-test-app: "npm:^4.0.3"
     release-it: "npm:^17.2.0"
     typescript: "npm:5.6.3"
   peerDependencies:
@@ -10566,11 +10566,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^3.8.1":
-  version: 3.10.21
-  resolution: "react-native-test-app@npm:3.10.21"
+"react-native-test-app@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "react-native-test-app@npm:4.0.3"
   dependencies:
     "@rnx-kit/react-native-host": "npm:^0.5.0"
+    "@rnx-kit/tools-react-native": "npm:^2.0.0"
     ajv: "npm:^8.0.0"
     cliui: "npm:^8.0.0"
     fast-xml-parser: "npm:^4.0.0"
@@ -10580,10 +10581,10 @@ __metadata:
   peerDependencies:
     "@callstack/react-native-visionos": 0.73 - 0.76
     "@expo/config-plugins": ">=5.0"
-    react: 17.0.1 - 19.0
-    react-native: 0.66 - 0.76 || >=0.77.0-0 <0.77.0
-    react-native-macos: ^0.0.0-0 || 0.66 || 0.68 || 0.71 - 0.76
-    react-native-windows: ^0.0.0-0 || 0.66 - 0.76
+    react: 18.1 - 19.0
+    react-native: 0.70 - 0.76 || >=0.77.0-0 <0.77.0
+    react-native-macos: ^0.0.0-0 || 0.71 - 0.76
+    react-native-windows: ^0.0.0-0 || 0.70 - 0.76
   peerDependenciesMeta:
     "@callstack/react-native-visionos":
       optional: true
@@ -10598,7 +10599,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 10c0/c8d598bee1cfcd02b3535b82bc0f391461e309ba3925227bc331af44c6546dcfa13dcae06f40d6c69ee7840b7dab17d471487f8cb268961e0b19c27f1bbb8b1b
+  checksum: 10c0/40c32a4d50509ccd205087aa6b6a3db5485f109e3a84ecbb5b62ebb8cdfa960b5925e785a948ba7c9b67b9966ae63ec3dabdb9610cc8f00cdd8844cd228551e8
   languageName: node
   linkType: hard
 

@@ -33,10 +33,10 @@ public class ActionSheetView: UIView {
         }
     }
 
-    @objc var shouldOpenOnLongPress: Bool = false
+    @objc public var shouldOpenOnLongPress: Bool = false
 
     private var _themeVariant: String?
-    @objc var themeVariant: NSString? {
+    @objc public var themeVariant: NSString? {
         didSet { self._themeVariant = themeVariant as? String }
     }
 

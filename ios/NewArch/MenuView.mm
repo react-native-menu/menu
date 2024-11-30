@@ -137,6 +137,26 @@ using namespace facebook::react;
         _view.title = [NSString stringWithUTF8String:newViewProps.title.c_str()];
     }
 
+    if (oldViewProps.themeVariant != newViewProps.themeVariant) {
+        _view.themeVariant = [NSString stringWithUTF8String:newViewProps.themeVariant.c_str()];
+    }
+    
+    if (oldViewProps.shouldOpenOnLongPress != newViewProps.shouldOpenOnLongPress) {
+        _view.shouldOpenOnLongPress = newViewProps.shouldOpenOnLongPress;
+    }
+
+    if (oldViewProps.hitSlop.top != newViewProps.hitSlop.top ||
+        oldViewProps.hitSlop.bottom != newViewProps.hitSlop.bottom ||
+        oldViewProps.hitSlop.left != newViewProps.hitSlop.left ||
+        oldViewProps.hitSlop.right != newViewProps.hitSlop.right) {
+        _view.hitSlop = UIEdgeInsetsMake(
+            newViewProps.hitSlop.top,
+            newViewProps.hitSlop.left,
+            newViewProps.hitSlop.bottom,
+            newViewProps.hitSlop.right
+        );
+    }
+
     [super updateProps:props oldProps:oldProps];
 }
 

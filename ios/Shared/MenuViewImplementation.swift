@@ -36,21 +36,21 @@ public class MenuViewImplementation: UIButton {
         }
     }
 
-    @objc var shouldOpenOnLongPress: Bool = false {
+    @objc public var shouldOpenOnLongPress: Bool = false {
         didSet {
             self.setup()
         }
     }
 
     private var _themeVariant: String?
-    @objc var themeVariant: NSString? {
+    @objc public var themeVariant: NSString? {
         didSet {
             self._themeVariant = themeVariant as? String
             self.setup()
         }
     }
 
-    @objc var hitSlop: UIEdgeInsets = .zero
+    @objc public var hitSlop: UIEdgeInsets = .zero
 
     override init(frame: CGRect) {
       super.init(frame: frame)

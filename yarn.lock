@@ -4363,12 +4363,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/tools-react-native@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "@rnx-kit/tools-react-native@npm:2.0.1"
+"@rnx-kit/tools-react-native@npm:^2.0.2":
+  version: 2.0.3
+  resolution: "@rnx-kit/tools-react-native@npm:2.0.3"
   dependencies:
     "@rnx-kit/tools-node": "npm:^3.0.0"
-  checksum: 10c0/55ec8ea8c279b994da7d4411e216d0d7ed643d817f4f87271606a8f11fb4eebfa596c17dc2effb188a94769b754bc590d3ed1e48724edf9f7d1e5d24c7e06379
+  checksum: 10c0/7a80b7de11200e297dc8a8c0e5e88d68200cf209047f2b86ae4ea98c67302b4bf0c05e78a958edb8a343e22816c1646e296b3a78ad437205c227f2978efcd925
   languageName: node
   linkType: hard
 
@@ -10576,11 +10576,11 @@ __metadata:
   linkType: hard
 
 "react-native-test-app@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "react-native-test-app@npm:4.0.4"
+  version: 4.0.5
+  resolution: "react-native-test-app@npm:4.0.5"
   dependencies:
     "@rnx-kit/react-native-host": "npm:^0.5.0"
-    "@rnx-kit/tools-react-native": "npm:^2.0.1"
+    "@rnx-kit/tools-react-native": "npm:^2.0.2"
     ajv: "npm:^8.0.0"
     cliui: "npm:^8.0.0"
     fast-xml-parser: "npm:^4.0.0"
@@ -10608,7 +10608,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/test-app.mjs
-  checksum: 10c0/259e956c8ddfd09af3cf22349d9355b2e0e1c3a66e47e9bc62e97a64899790253bafab0be69d0f1109be13b4e58fa8093444590829d5b6df88988b3485f2fd8e
+  checksum: 10c0/de9fc28eaf07ad6c65906d860bf4bfd1e56cd0210324207a5f2b7e485b01d3d025653d07a4d8d77cfb522fb2f3dcd04f118087da6742b3c421b098425c1d8477
   languageName: node
   linkType: hard
 

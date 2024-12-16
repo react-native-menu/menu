@@ -8,8 +8,6 @@ class MenuOnCloseEvent(surfaceId: Int, viewId: Int, private val targetId: Int) :
   override fun getEventName() = "onMenuClose"
 
   override fun getEventData(): WritableMap? {
-    val eventData = Arguments.createMap()
-    eventData.putInt("target", targetId)
-    return eventData
+    return Arguments.createMap()
   }
 } 

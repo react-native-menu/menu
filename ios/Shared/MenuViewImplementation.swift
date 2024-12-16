@@ -55,12 +55,17 @@ public class MenuViewImplementation: UIButton {
     override init(frame: CGRect) {
       super.init(frame: frame)
       self.setup()
+      // Add target for menu interaction
+      self.addTarget(self, action: #selector(menuDidTrigger), for: .menuActionTriggered)
     }
 
+    @objc private func menuDidTrigger() {
+        print("DEBUG: Menu action triggered")
+        sendMenuClose()
+    }
 
     func setup () {
         let menu = UIMenu(title:_title, identifier: nil, children: self._actions)
-
         if self._themeVariant != nil {
             if self._themeVariant == "dark" {
                 self.overrideUserInterfaceStyle = .dark
@@ -107,5 +112,6 @@ public class MenuViewImplementation: UIButton {
 
     @objc func sendMenuClose() {
         // NO-OP (should be overriden by parent)
+        print("DEBUG: Send menu close called in base class")
     }
 }

@@ -38,7 +38,9 @@ abstract class MenuViewManagerBase: ReactClippingViewManager<MenuView>() {
   override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any> {
     return MapBuilder.of(
       "onPressAction",
-      MapBuilder.of("registrationName", "onPressAction")
+      MapBuilder.of("registrationName", "onPressAction"),
+      "onMenuClose",
+      MapBuilder.of("registrationName", "onMenuClose")
     )
   }
 

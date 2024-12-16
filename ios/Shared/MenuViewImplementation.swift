@@ -104,4 +104,8 @@ public class MenuViewImplementation: UIButton {
     @objc func sendButtonAction(_ action: UIAction) {
         // NO-OP (should be overriden by parent)
     }
+
+    @objc func sendMenuClose() {
+        // NO-OP (should be overriden by parent)
+    }
 }

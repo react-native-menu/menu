@@ -62,9 +62,9 @@ RCT_EXPORT_VIEW_PROPERTY(onPressAction, RCTDirectEventBlock);
  */
 RCT_EXPORT_VIEW_PROPERTY(onCloseMenu, RCTDirectEventBlock);
 /**
- * onMenuOpen: callback to be called when the menu is opened
+ * onOpenMenu: callback to be called when the menu is opened
  */
-RCT_EXPORT_VIEW_PROPERTY(onMenuOpen, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onOpenMenu, RCTDirectEventBlock);
 /**
  * shouldOpenOnLongPress: determines whether menu should be opened after long press or normal press
  */

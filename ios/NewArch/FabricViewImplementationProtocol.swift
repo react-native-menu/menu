@@ -7,5 +7,5 @@ import Foundation
     @objc optional var hitSlop: UIEdgeInsets { get set }
     var onPressAction: ((String) -> Void)? { get set }
     var onCloseMenu: (() -> Void)? { get set }
-    var onMenuOpen: (() -> Void)? { get set }
+    var onOpenMenu: (() -> Void)? { get set }
 }

@@ -4,7 +4,7 @@ import UIKit
 public class LegacyMenuViewImplementation: MenuViewImplementation {
     @objc var onPressAction: RCTDirectEventBlock?
     @objc var onCloseMenu: RCTDirectEventBlock?
-    @objc var onMenuOpen: RCTDirectEventBlock?
+    @objc var onOpenMenu: RCTDirectEventBlock?
     
     @objc override func sendButtonAction(_ action: UIAction) {
         if let onPress = onPressAction {
@@ -19,8 +19,8 @@ public class LegacyMenuViewImplementation: MenuViewImplementation {
     }
 
     @objc override func sendMenuOpen() {
-        if let onMenuOpen = onMenuOpen {
-            onMenuOpen([:])
+        if let onOpenMenu = onOpenMenu {
+            onOpenMenu([:])
         }
     }
 

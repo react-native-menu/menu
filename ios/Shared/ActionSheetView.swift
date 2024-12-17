@@ -50,6 +50,7 @@ public class ActionSheetView: UIView {
     }
 
     func launchActionSheet() {
+        self.sendMenuOpen()
 
         let alert = UIAlertController(title: _title, message: nil, preferredStyle: .actionSheet)
         

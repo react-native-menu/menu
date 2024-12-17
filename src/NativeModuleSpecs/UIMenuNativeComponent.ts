@@ -45,8 +45,8 @@ type MenuAction = {
 };
 export interface NativeProps extends ViewProps {
 	onPressAction?: DirectEventHandler<{ event: string }>;
-	onCloseMenu?: DirectEventHandler<{}>;
-	onOpenMenu?: DirectEventHandler<{}>;
+	onCloseMenu?: DirectEventHandler<void>;
+	onOpenMenu?: DirectEventHandler<void>;
 	actions: Array<MenuAction>;
 	actionsHash: string; // just a workaround to make sure we don't have to manually compare MenuActions manually in C++ (since it's a struct and that's a pain)
 	title?: string;

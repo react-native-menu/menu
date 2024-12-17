@@ -12,14 +12,6 @@ export type NativeActionEvent = {
 	};
 };
 
-export type NativeMenuCloseEvent = {
-	nativeEvent: {};
-};
-
-export type NativeMenuOpenEvent = {
-	nativeEvent: {};
-};
-
 type MenuAttributes = {
 	/**
 	 * An attribute indicating the destructive style.
@@ -126,11 +118,11 @@ type MenuComponentPropsBase = {
 	/**
 	 * Callback function that will be called when the menu closes.
 	 */
-	onCloseMenu?: ({ nativeEvent }: NativeMenuCloseEvent) => void;
+	onCloseMenu?: () => void;
 	/**
 	 * Callback function that will be called when the menu opens.
 	 */
-	onOpenMenu?: ({ nativeEvent }: NativeMenuOpenEvent) => void;
+	onOpenMenu?: () => void;
 	/**
 	 * Actions to be displayed in the menu.
 	 */
@@ -195,8 +187,8 @@ export type ProcessedMenuAction = Omit<
 export type NativeMenuComponentProps = {
 	style?: StyleProp<ViewStyle>;
 	onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
-	onCloseMenu?: ({ nativeEvent }: NativeMenuCloseEvent) => void;
-	onOpenMenu?: ({ nativeEvent }: NativeMenuOpenEvent) => void;
+	onCloseMenu?: () => void;
+	onOpenMenu?: () => void;
 	actions: ProcessedMenuAction[];
 	actionsHash: string;
 	title?: string;

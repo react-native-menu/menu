@@ -54,19 +54,12 @@ public class MenuViewImplementation: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print("DEBUG: MenuViewImplementation initialized")
-        
-        // Add context menu interaction
         let interaction = UIContextMenuInteraction(delegate: self)
         self.addInteraction(interaction)
-        
         self.setup()
     }
-
-    // MARK: - UIContextMenuInteractionDelegate
-    
+   
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        NSLog("DEBUG: Menu will show")
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
             guard let self = self else { return nil }
             return self.menu
@@ -74,13 +67,10 @@ public class MenuViewImplementation: UIButton {
     }
     
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
-        NSLog("DEBUG: Menu will dismiss")
         sendMenuClose()
-       
     }
 
     func setup () {
-        print("DEBUG: Setting up menu with \(_actions.count) actions")
         let menu = UIMenu(title: _title,
             identifier: nil,
             children: self._actions)
@@ -97,7 +87,6 @@ public class MenuViewImplementation: UIButton {
 
         self.menu = menu
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
-        print("DEBUG: Menu setup complete, showsMenuAsPrimaryAction: \(!shouldOpenOnLongPress)")
     }
 
     public override func reactSetFrame(_ frame: CGRect) {
@@ -125,11 +114,9 @@ public class MenuViewImplementation: UIButton {
 
     @objc func sendButtonAction(_ action: UIAction) {
         // NO-OP (should be overriden by parent)
-        NSLog("DEBUG: Button action received")
     }
 
     @objc func sendMenuClose() {
         // NO-OP (should be overriden by parent)
-        NSLog("DEBUG: Send menu close called in base class")
     }
 }

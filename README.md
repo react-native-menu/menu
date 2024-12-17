@@ -291,6 +291,16 @@ It will contain id of the given action.
 |-------------------------|----------|
 | ({nativeEvent}) => void | No       |
 
+### Events
+
+#### `onMenuClose`
+
+Callback function that will be called when the menu is dismissed. This event fires at the start of the dismissal, before any animations complete.
+
+| Type       | Required |
+|------------|----------|
+| () => void | No       |
+
 ## Testing with Jest
 
 In some cases, you might want to mock the package to test your components. You can do this by using the `jest.mock` function.

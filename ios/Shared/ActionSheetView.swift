@@ -114,7 +114,6 @@ public class ActionSheetView: UIView {
 
     @objc func sendMenuClose() {
         // NO-OP (should be overriden by parent)
-        print("DEBUG: Send menu close called in ActionSheetView base class")
     }
 
     required init?(coder: NSCoder) {

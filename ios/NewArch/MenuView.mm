@@ -44,9 +44,6 @@ using namespace facebook::react;
         _view.onCloseMenu = ^{
             [self onCloseMenu];
         };
-        _view.onOpenMenu = ^{
-            [self onOpenMenu];
-        };
         self.contentView = _view;
     }
 

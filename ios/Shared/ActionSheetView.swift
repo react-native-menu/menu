@@ -116,6 +116,10 @@ public class ActionSheetView: UIView {
     @objc func sendMenuClose() {
         // NO-OP (should be overriden by parent)
     }
+    
+    @objc func sendMenuOpen() {
+         // NO-OP (should be overriden by parent)
+     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

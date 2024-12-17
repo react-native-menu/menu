@@ -1,7 +1,7 @@
 @objc(LegacyActionSheetView)
 public class LegacyActionSheetView: ActionSheetView {
     @objc var onPressAction: RCTDirectEventBlock?
-    @objc var onMenuClose: RCTDirectEventBlock?
+    @objc var onCloseMenu: RCTDirectEventBlock?
     
     @objc override func sendButtonAction(_ action: String) {
         if let onPress = onPressAction {
@@ -10,8 +10,8 @@ public class LegacyActionSheetView: ActionSheetView {
     }
 
     @objc override func sendMenuClose() {
-        if let onMenuClose = onMenuClose {
-            onMenuClose([:])
+        if let onCloseMenu = onCloseMenu {
+            onCloseMenu([:])
         }
     }
 }

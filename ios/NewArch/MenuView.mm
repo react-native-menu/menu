@@ -41,8 +41,8 @@ using namespace facebook::react;
         _view.onPressAction = ^(NSString *eventString) {
             [self onPressAction:eventString];
         };
-        _view.onMenuClose = ^{
-            [self onMenuClose];
+        _view.onCloseMenu = ^{
+            [self onCloseMenu];
         };
         self.contentView = _view;
     }
@@ -71,11 +71,11 @@ using namespace facebook::react;
     }
 }
 
-- (void)onMenuClose {
+- (void)onCloseMenu {
     // If screen is already unmounted then there will be no event emitter
     const auto eventEmitter = [self getEventEmitter];
     if (eventEmitter != nullptr) {
-        eventEmitter->onMenuClose(MenuViewEventEmitter::OnMenuClose{});
+        eventEmitter->onCloseMenu(MenuViewEventEmitter::onCloseMenu{});
     }
 }
 

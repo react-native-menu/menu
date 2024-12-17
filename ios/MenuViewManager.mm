@@ -58,9 +58,13 @@ RCT_EXPORT_VIEW_PROPERTY(actionsHash, NSString);
  */
 RCT_EXPORT_VIEW_PROPERTY(onPressAction, RCTDirectEventBlock);
 /**
- * onMenuClose: callback to be called when the menu is closed
+ * onCloseMenu: callback to be called when the menu is closed
  */
-RCT_EXPORT_VIEW_PROPERTY(onMenuClose, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onCloseMenu, RCTDirectEventBlock);
+/**
+ * onMenuOpen: callback to be called when the menu is opened
+ */
+RCT_EXPORT_VIEW_PROPERTY(onMenuOpen, RCTDirectEventBlock);
 /**
  * shouldOpenOnLongPress: determines whether menu should be opened after long press or normal press
  */

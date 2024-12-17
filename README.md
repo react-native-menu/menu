@@ -293,7 +293,7 @@ It will contain id of the given action.
 
 ### Events
 
-#### `onMenuClose`
+#### `onCloseMenu`
 
 Callback function that will be called when the menu is dismissed. This event fires at the start of the dismissal, before any animations complete.
 
@@ -301,6 +301,30 @@ Callback function that will be called when the menu is dismissed. This event fir
 |------------|----------|
 | () => void | No       |
 
+#### `onOpenMenu`
+
+Callback function that will be called when the menu is opened. This event fires right before the menu is displayed.
+
+| Type       | Required |
+|------------|----------|
+| () => void | No       |
+
+Example usage:
+```jsx
+<MenuView
+  onOpenMenu={() => {
+    console.log('Menu was opened');
+  }}
+  onCloseMenu={() => {
+    console.log('Menu was closed');
+  }}
+  // ... other props
+>
+  <View>
+    <Text>Open Menu</Text>
+  </View>
+</MenuView>
+```
 ## Testing with Jest
 
 In some cases, you might want to mock the package to test your components. You can do this by using the `jest.mock` function.

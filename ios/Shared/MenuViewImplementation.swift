@@ -60,6 +60,7 @@ public class MenuViewImplementation: UIButton {
     }
    
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        sendMenuOpen()
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
             guard let self = self else { return nil }
             return self.menu
@@ -117,6 +118,10 @@ public class MenuViewImplementation: UIButton {
     }
 
     @objc func sendMenuClose() {
+        // NO-OP (should be overriden by parent)
+    }
+
+    @objc func sendMenuOpen() {
         // NO-OP (should be overriden by parent)
     }
 }

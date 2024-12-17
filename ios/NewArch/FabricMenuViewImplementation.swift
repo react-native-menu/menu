@@ -10,7 +10,8 @@ import UIKit
 @objc(FabricMenuViewImplementation)
 public class FabricMenuViewImplementation: MenuViewImplementation, FabricViewImplementationProtocol {
     public var onPressAction: ((String) -> Void)?
-    public var onMenuClose: (() -> Void)?
+    public var onCloseMenu: (() -> Void)?
+    public var onMenuOpen: (() -> Void)?
 
     @objc override func sendButtonAction(_ action: UIAction) {
         if let onPress = onPressAction {
@@ -19,8 +20,14 @@ public class FabricMenuViewImplementation: MenuViewImplementation, FabricViewImp
     }
 
     @objc override func sendMenuClose() {
-        if let onMenuClose = onMenuClose {
-            onMenuClose()
+        if let onCloseMenu = onCloseMenu {
+            onCloseMenu()
+        }
+    }
+
+    @objc override func sendMenuOpen() {
+        if let onMenuOpen = onMenuOpen {
+            onMenuOpen()
         }
     }
 

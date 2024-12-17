@@ -42,8 +42,12 @@ abstract class MenuViewManagerBase: ReactClippingViewManager<MenuView>() {
       MapBuilder.of("registrationName", "onPressAction")
     )
     eventMap.put(
-      "onMenuClose",
-      MapBuilder.of("registrationName", "onMenuClose")
+      "onCloseMenu",
+      MapBuilder.of("registrationName", "onCloseMenu")
+    )
+    eventMap.put(
+      "onOpenMenu",
+      MapBuilder.of("registrationName", "onOpenMenu")
     )
     return eventMap.build()
   }

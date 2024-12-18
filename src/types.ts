@@ -116,6 +116,14 @@ type MenuComponentPropsBase = {
 	 */
 	onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
 	/**
+	 * Callback function that will be called when the menu closes.
+	 */
+	onCloseMenu?: () => void;
+	/**
+	 * Callback function that will be called when the menu opens.
+	 */
+	onOpenMenu?: () => void;
+	/**
 	 * Actions to be displayed in the menu.
 	 */
 	actions: MenuAction[];
@@ -179,6 +187,8 @@ export type ProcessedMenuAction = Omit<
 export type NativeMenuComponentProps = {
 	style?: StyleProp<ViewStyle>;
 	onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
+	onCloseMenu?: () => void;
+	onOpenMenu?: () => void;
 	actions: ProcessedMenuAction[];
 	actionsHash: string;
 	title?: string;

@@ -26,6 +26,7 @@ public class ActionSheetView: UIView {
             actions.forEach({ alertAction in
                 if let action = RCTAlertAction(details: alertAction).createAction({
                 event in self.sendButtonAction(event)
+                self.sendMenuClose()
             }) {
                   _actions.append(action)
                 }
@@ -49,6 +50,7 @@ public class ActionSheetView: UIView {
     }
 
     func launchActionSheet() {
+        self.sendMenuOpen()
 
         let alert = UIAlertController(title: _title, message: nil, preferredStyle: .actionSheet)
         
@@ -68,7 +70,9 @@ public class ActionSheetView: UIView {
             alert.addAction(action.copy() as! UIAlertAction)
         })
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+            self.sendMenuClose()
+        }))
 
         if UIDevice.current.userInterfaceIdiom == .pad {
             alert.modalPresentationStyle = .popover
@@ -108,6 +112,14 @@ public class ActionSheetView: UIView {
     @objc func sendButtonAction(_ action: String) {
         // NO-OP (should be overriden by parent)
     }
+
+    @objc func sendMenuClose() {
+        // NO-OP (should be overriden by parent)
+    }
+    
+    @objc func sendMenuOpen() {
+         // NO-OP (should be overriden by parent)
+     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

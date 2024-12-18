@@ -53,13 +53,28 @@ public class MenuViewImplementation: UIButton {
     @objc public var hitSlop: UIEdgeInsets = .zero
 
     override init(frame: CGRect) {
-      super.init(frame: frame)
-      self.setup()
+        super.init(frame: frame)
+        let interaction = UIContextMenuInteraction(delegate: self)
+        self.addInteraction(interaction)
+        self.setup()
+    }
+   
+    public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        sendMenuOpen()
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+            guard let self = self else { return nil }
+            return self.menu
+        }
+    }
+    
+    public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+        sendMenuClose()
     }
 
-
     func setup () {
-        let menu = UIMenu(title:_title, identifier: nil, children: self._actions)
+        let menu = UIMenu(title: _title,
+            identifier: nil,
+            children: self._actions)
 
         if self._themeVariant != nil {
             if self._themeVariant == "dark" {
@@ -76,15 +91,14 @@ public class MenuViewImplementation: UIButton {
     }
 
     public override func reactSetFrame(_ frame: CGRect) {
-      super.reactSetFrame(frame);
-    };
+        super.reactSetFrame(frame);
+    }
 
     public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         if hitSlop == .zero || !self.isEnabled || self.isHidden {
             return super.point(inside: point, with: event)
         }
 
-        // Create a larger hit frame that extends beyond the view's bounds
         let largerFrame = CGRect(
             x: self.bounds.origin.x - hitSlop.left,
             y: self.bounds.origin.y - hitSlop.top,
@@ -92,16 +106,22 @@ public class MenuViewImplementation: UIButton {
             height: self.bounds.size.height + hitSlop.top + hitSlop.bottom
         )
 
-        // Check if the point is within the larger frame
         return largerFrame.contains(point)
     }
 
-
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     @objc func sendButtonAction(_ action: UIAction) {
+        // NO-OP (should be overriden by parent)
+    }
+
+    @objc func sendMenuClose() {
+        // NO-OP (should be overriden by parent)
+    }
+
+    @objc func sendMenuOpen() {
         // NO-OP (should be overriden by parent)
     }
 }

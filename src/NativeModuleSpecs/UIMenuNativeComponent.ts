@@ -12,6 +12,7 @@ import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNati
   OR with extending types in an interface, so for now we'll just keep some duplicate
   types here, to avoid issues while `pod install` takes place.
 */
+
 type SubAction = {
 	id?: string;
 	title: string;
@@ -45,6 +46,8 @@ type MenuAction = {
 };
 export interface NativeProps extends ViewProps {
 	onPressAction?: DirectEventHandler<{ event: string }>;
+	onCloseMenu?: DirectEventHandler<{ event: string }>;
+	onOpenMenu?: DirectEventHandler<{ event: string }>;
 	actions: Array<MenuAction>;
 	actionsHash: string; // just a workaround to make sure we don't have to manually compare MenuActions manually in C++ (since it's a struct and that's a pain)
 	title?: string;
@@ -55,7 +58,7 @@ export interface NativeProps extends ViewProps {
 		bottom: Int32;
 		left: Int32;
 		right: Int32;
-	}	
+	};
 }
 
 export default codegenNativeComponent<NativeProps>(

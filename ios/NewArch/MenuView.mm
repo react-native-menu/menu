@@ -75,7 +75,7 @@ using namespace facebook::react;
     // If screen is already unmounted then there will be no event emitter
     const auto eventEmitter = [self getEventEmitter];
     if (eventEmitter != nullptr) {
-        eventEmitter->onCloseMenu(MenuViewEventEmitter::onCloseMenu{});
+        eventEmitter->onCloseMenu({});
     }
 }
 
@@ -83,7 +83,7 @@ using namespace facebook::react;
     // If screen is already unmounted then there will be no event emitter
     const auto eventEmitter = [self getEventEmitter];
     if (eventEmitter != nullptr) {
-        eventEmitter->onOpenMenu(MenuViewEventEmitter::onOpenMenu{});
+        eventEmitter->onOpenMenu({});
     }
 }
 

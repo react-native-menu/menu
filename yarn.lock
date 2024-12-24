@@ -4292,8 +4292,8 @@ __metadata:
   linkType: hard
 
 "@release-it/conventional-changelog@npm:^9.0.1":
-  version: 9.0.3
-  resolution: "@release-it/conventional-changelog@npm:9.0.3"
+  version: 9.0.4
+  resolution: "@release-it/conventional-changelog@npm:9.0.4"
   dependencies:
     concat-stream: "npm:^2.0.0"
     conventional-changelog: "npm:^6.0.0"
@@ -4302,7 +4302,7 @@ __metadata:
     semver: "npm:^7.6.3"
   peerDependencies:
     release-it: ^17.0.0
-  checksum: 10c0/3707a3377c0f7f5f3f087a4081def3b5f1ae34ea09bb3ed50e395f44e7305c2738babfca59772b51d079661311d2ae7ab50a69a3462a427000412be18c4a8077
+  checksum: 10c0/61680310fe049125ffb6d0e86e54bb1c4c083ac5d4cd314417e1a4d7c48a42177c98893f05ec6b0923a1400354f0c0d01ca66cd61b0c6535f7a8377d3fe65bd2
   languageName: node
   linkType: hard
 

@@ -261,8 +261,14 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
       }
       mPopupMenu.setOnDismissListener {
         mIsMenuDisplayed = false
+        val dispatcher = UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
+        val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
+        dispatcher?.dispatchEvent(MenuOnCloseEvent(surfaceId, id, id))
       }
       mIsMenuDisplayed = true
+      val dispatcher = UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
+      val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
+      dispatcher?.dispatchEvent(MenuOnOpenEvent(surfaceId, id, id))
       mPopupMenu.show()
     }
   }

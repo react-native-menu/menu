@@ -3840,7 +3840,7 @@ __metadata:
     "@callstack/react-native-visionos": "npm:^0.73.0"
     "@react-native/babel-preset": "npm:^0.76.1"
     "@react-native/metro-config": "npm:0.76.3"
-    "@release-it/conventional-changelog": "npm:^9.0.1"
+    "@release-it/conventional-changelog": "npm:^10.0.0"
     "@rnx-kit/metro-config": "npm:^2.0.0"
     "@types/jest": "npm:^29.1.2"
     "@types/react": "npm:^18.2.2"
@@ -4291,9 +4291,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@release-it/conventional-changelog@npm:^9.0.1":
-  version: 9.0.4
-  resolution: "@release-it/conventional-changelog@npm:9.0.4"
+"@release-it/conventional-changelog@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "@release-it/conventional-changelog@npm:10.0.0"
   dependencies:
     concat-stream: "npm:^2.0.0"
     conventional-changelog: "npm:^6.0.0"
@@ -4301,8 +4301,8 @@ __metadata:
     git-semver-tags: "npm:^8.0.0"
     semver: "npm:^7.6.3"
   peerDependencies:
-    release-it: ^17.0.0
-  checksum: 10c0/61680310fe049125ffb6d0e86e54bb1c4c083ac5d4cd314417e1a4d7c48a42177c98893f05ec6b0923a1400354f0c0d01ca66cd61b0c6535f7a8377d3fe65bd2
+    release-it: ^18.0.0
+  checksum: 10c0/94acca963bccbb1c89a8be3e7972000dad0a23ac9a86193d9df8f13abd951277859d4f22f74cb2909138de2c5853efb3e700ec40682e4a610a4811af0b340775
   languageName: node
   linkType: hard
 

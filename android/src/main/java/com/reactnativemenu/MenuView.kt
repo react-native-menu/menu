@@ -203,7 +203,7 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
                     UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
                   val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
                   dispatcher?.dispatchEvent(
-                    MenuOnPressActionEvent(surfaceId, id, selectedItem.getString("id"), id)
+                    MenuOnPressActionEvent(surfaceId, id, selectedItem?.getString("id"), id)
                   )
                 }
                 true
@@ -248,7 +248,7 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
                   UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
                 val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
                 dispatcher?.dispatchEvent(
-                  MenuOnPressActionEvent(surfaceId, id, selectedItem.getString("id"), id)
+                  MenuOnPressActionEvent(surfaceId, id, selectedItem?.getString("id"), id)
                 )
               }
               true

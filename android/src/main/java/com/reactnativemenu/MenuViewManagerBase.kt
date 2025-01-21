@@ -210,7 +210,7 @@ abstract class MenuViewManagerBase : ReactClippingViewManager<MenuView>() {
   }
 
   @ReactProp(name = "backfaceVisibility")
-  fun setBackfaceVisibility(view: ReactViewGroup, backfaceVisibility: String?) {
+  fun setBackfaceVisibility(view: ReactViewGroup, backfaceVisibility: String) {
     view.setBackfaceVisibility(backfaceVisibility)
   }
 

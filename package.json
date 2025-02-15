@@ -46,7 +46,7 @@
   "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@callstack/react-native-visionos": "^0.73.0",
+    "@callstack/react-native-visionos": "^0.77.0",
     "@react-native/babel-preset": "^0.77.0",
     "@react-native/metro-config": "0.77.1",
     "@release-it/conventional-changelog": "^10.0.0",

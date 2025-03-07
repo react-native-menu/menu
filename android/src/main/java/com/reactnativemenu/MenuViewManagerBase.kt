@@ -206,7 +206,7 @@ abstract class MenuViewManagerBase : ReactClippingViewManager<MenuView>() {
 
   @ReactProp(name = ViewProps.OVERFLOW)
   fun setOverflow(view: ReactViewGroup, overflow: String?) {
-    view.overflow = overflow
+    view.setOverflow(overflow)
   }
 
   @ReactProp(name = "backfaceVisibility")

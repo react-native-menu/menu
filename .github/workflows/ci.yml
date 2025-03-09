@@ -19,7 +19,7 @@ jobs:
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -60,7 +60,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - uses: actions/setup-java@v1
         with:
-          java-version: '17'
+          java-version: "17"
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -77,7 +77,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20]
-        arch: ['NewArch', 'OldArch']
+        arch: ["NewArch", "OldArch"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -86,7 +86,7 @@ jobs:
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}

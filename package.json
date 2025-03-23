@@ -47,7 +47,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@callstack/react-native-visionos": "^0.73.0",
-    "@react-native/babel-preset": "^0.77.0",
+    "@react-native/babel-preset": "^0.78.1",
     "@react-native/metro-config": "0.78.1",
     "@release-it/conventional-changelog": "^10.0.0",
     "@rnx-kit/metro-config": "^2.0.0",

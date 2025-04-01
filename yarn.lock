@@ -10840,11 +10840,11 @@ __metadata:
   linkType: hard
 
 "pod-install@npm:^0.3.2":
-  version: 0.3.4
-  resolution: "pod-install@npm:0.3.4"
+  version: 0.3.5
+  resolution: "pod-install@npm:0.3.5"
   bin:
     pod-install: build/index.js
-  checksum: 10c0/9b065454b88ea2cd17308d639586f7854a66a109a285c81d677db496ac207951ef60120e6c77d227cea99841c9b00649d2207c94fca33400f308774fb0c84217
+  checksum: 10c0/78b0eaf25931f10c6959d2d07dc2de34e11f94086ae405f4ef4d35d570a48bff03d23d77b2a6fa5a03e3edaf191575bbc923093051f25ec4953dc26fdc640eeb
   languageName: node
   linkType: hard
 

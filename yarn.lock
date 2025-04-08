@@ -15,6 +15,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ark/schema@npm:0.45.9":
+  version: 0.45.9
+  resolution: "@ark/schema@npm:0.45.9"
+  dependencies:
+    "@ark/util": "npm:0.45.9"
+  checksum: 10c0/78075edb3769a64ca6d0775747071a96f781bc9cfe5a7218858f2c11fe7397cc8f10980383ad68d9e6d3479881b0d03fbce6d509a023702648eadbdbc22b0308
+  languageName: node
+  linkType: hard
+
+"@ark/util@npm:0.45.9":
+  version: 0.45.9
+  resolution: "@ark/util@npm:0.45.9"
+  checksum: 10c0/793b144623838a554976d9a95ac44c677c7ddfd0edff8c5cce494e923d97ac5bb15ae2294550d4e9e5086e7ac874a9f285811dad349d63a62000e3f32390455b
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.22.13, @babel/code-frame@npm:^7.23.5":
   version: 7.23.5
   resolution: "@babel/code-frame@npm:7.23.5"
@@ -4144,7 +4160,7 @@ __metadata:
     pod-install: "npm:^0.3.2"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
-    react-native-builder-bob: "npm:^0.38.0"
+    react-native-builder-bob: "npm:^0.40.3"
     react-native-test-app: "npm:^4.0.4"
     release-it: "npm:^18.1.1"
     typescript: "npm:5.8.2"
@@ -5145,6 +5161,16 @@ __metadata:
   version: 2.0.1
   resolution: "argparse@npm:2.0.1"
   checksum: 10c0/c5640c2d89045371c7cedd6a70212a04e360fd34d6edeae32f6952c63949e3525ea77dbec0289d8213a99bbaeab5abfa860b5c12cf88a2e6cf8106e90dd27a7e
+  languageName: node
+  linkType: hard
+
+"arktype@npm:^2.1.15":
+  version: 2.1.19
+  resolution: "arktype@npm:2.1.19"
+  dependencies:
+    "@ark/schema": "npm:0.45.9"
+    "@ark/util": "npm:0.45.9"
+  checksum: 10c0/cceae540bb64cd5d1711773273001524e357f1d92d000a2c5f09b16bcaf836a7421f2c44632869697526f277e73d6b7ad2f7e5af63bc05b0a7e8cbd557b477a4
   languageName: node
   linkType: hard
 
@@ -6246,7 +6272,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cosmiconfig@npm:9.0.0, cosmiconfig@npm:^9.0.0":
+"cosmiconfig@npm:9.0.0":
   version: 9.0.0
   resolution: "cosmiconfig@npm:9.0.0"
   dependencies:
@@ -11079,9 +11105,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-builder-bob@npm:^0.38.0":
-  version: 0.38.4
-  resolution: "react-native-builder-bob@npm:0.38.4"
+"react-native-builder-bob@npm:^0.40.3":
+  version: 0.40.3
+  resolution: "react-native-builder-bob@npm:0.40.3"
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@babel/plugin-transform-strict-mode": "npm:^7.24.7"
@@ -11089,9 +11115,9 @@ __metadata:
     "@babel/preset-flow": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.7"
     "@babel/preset-typescript": "npm:^7.24.7"
+    arktype: "npm:^2.1.15"
     babel-plugin-module-resolver: "npm:^5.0.2"
     browserslist: "npm:^4.20.4"
-    cosmiconfig: "npm:^9.0.0"
     cross-spawn: "npm:^7.0.3"
     dedent: "npm:^0.7.0"
     del: "npm:^6.1.1"
@@ -11107,7 +11133,7 @@ __metadata:
     yargs: "npm:^17.5.1"
   bin:
     bob: bin/bob
-  checksum: 10c0/84ff2866b8abc42fe7b0928ad9640c6db7303af912cb8452131252bf2126d09b8900f00a19a704c6bf5d48d35f6bae8cc56e4d205af3df2ad81c56834f83b35f
+  checksum: 10c0/1146431d34005da2b7cbb9fb02fa92de709416e585f3aa4142eb72245829bca6b4c918a1d59c0f78457315d416a2b7293f6b4e9c4df76dfb67e5d40e1b7c9445
   languageName: node
   linkType: hard
 

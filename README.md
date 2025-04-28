@@ -325,6 +325,40 @@ Example usage:
   </View>
 </MenuView>
 ```
+
+### Custom icons (Android)
+
+You might want to use custom icons in the MenuAction `image` attribute. To do so, follow these steps.
+
+1. Search for your icon on e.g. [Material Icons](https://fonts.google.com/icons), customize the fill, weight, grade etc.
+   to your liking and then press the `Android` tab and click `Download`. This wil download an xml file, e.g.
+   `search_24px.xml`. You can create your own icon or get it somewhere else, as long as it is in a format that Android
+   understands.
+2. If using bare react-native, copy the downloaded xml file to your `android/app/src/main/res/drawable` folder.
+   If you are using Expo, add a dependency
+   on [@expo/config-plugins,](https://www.npmjs.com/package/@expo/config-plugins) and then you can use
+   an [expo config plugin](./plugin/withAndroidDrawables.js) to copy the file from your `assets` folder to the drawable
+   folder. Copy the config plugin to your app and reference it in your `app.json` or `app.config.js` in the `plugins`
+   section like this:
+
+   ```json
+   {
+     "expo": {
+       "plugins": [
+         [
+           "./plugin/withAndroidDrawables",
+           {
+             "drawableFiles": [ "./assets/my_icon.xml" ]
+           }
+         ]
+       ]
+     }
+   }
+   ```
+3. In your `MenuAction` you can now reference the icon using its file name, without the `.xml` extension. For example,
+   `image: 'my_icon'` will use the `my_icon.xml` file you copied to the drawable folder.
+4. Remember to run a new build to see changes to these icons.
+
 ## Testing with Jest
 
 In some cases, you might want to mock the package to test your components. You can do this by using the `jest.mock` function.

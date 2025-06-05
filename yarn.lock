@@ -4133,7 +4133,7 @@ __metadata:
   dependencies:
     "@biomejs/biome": "npm:1.9.4"
     "@callstack/react-native-visionos": "npm:^0.73.0"
-    "@react-native/babel-preset": "npm:^0.78.1"
+    "@react-native/babel-preset": "npm:^0.79.3"
     "@react-native/metro-config": "npm:0.78.1"
     "@release-it/conventional-changelog": "npm:^10.0.0"
     "@rnx-kit/metro-config": "npm:^2.0.0"
@@ -4186,6 +4186,16 @@ __metadata:
     "@babel/traverse": "npm:^7.25.3"
     "@react-native/codegen": "npm:0.78.1"
   checksum: 10c0/4db1a1fe88e10fed084bd514188a392f2d0008255ec8e2986cdaed49da5eb3e2ef5fb4d4a97497e971d23ad79475cedbe0f56d7fbd5f7bfc06bab3552688f791
+  languageName: node
+  linkType: hard
+
+"@react-native/babel-plugin-codegen@npm:0.79.3":
+  version: 0.79.3
+  resolution: "@react-native/babel-plugin-codegen@npm:0.79.3"
+  dependencies:
+    "@babel/traverse": "npm:^7.25.3"
+    "@react-native/codegen": "npm:0.79.3"
+  checksum: 10c0/a7c1656f8aada8d062759be1714165b3707d6a18860b0e90542b07becc23c86c72a4dd7efd6b2330496b0c0c86f1662649ac339d6704cc94451a9328d155f7fa
   languageName: node
   linkType: hard
 
@@ -4294,7 +4304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/babel-preset@npm:0.78.1, @react-native/babel-preset@npm:^0.78.1":
+"@react-native/babel-preset@npm:0.78.1":
   version: 0.78.1
   resolution: "@react-native/babel-preset@npm:0.78.1"
   dependencies:
@@ -4349,6 +4359,61 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native/babel-preset@npm:^0.79.3":
+  version: 0.79.3
+  resolution: "@react-native/babel-preset@npm:0.79.3"
+  dependencies:
+    "@babel/core": "npm:^7.25.2"
+    "@babel/plugin-proposal-export-default-from": "npm:^7.24.7"
+    "@babel/plugin-syntax-dynamic-import": "npm:^7.8.3"
+    "@babel/plugin-syntax-export-default-from": "npm:^7.24.7"
+    "@babel/plugin-syntax-nullish-coalescing-operator": "npm:^7.8.3"
+    "@babel/plugin-syntax-optional-chaining": "npm:^7.8.3"
+    "@babel/plugin-transform-arrow-functions": "npm:^7.24.7"
+    "@babel/plugin-transform-async-generator-functions": "npm:^7.25.4"
+    "@babel/plugin-transform-async-to-generator": "npm:^7.24.7"
+    "@babel/plugin-transform-block-scoping": "npm:^7.25.0"
+    "@babel/plugin-transform-class-properties": "npm:^7.25.4"
+    "@babel/plugin-transform-classes": "npm:^7.25.4"
+    "@babel/plugin-transform-computed-properties": "npm:^7.24.7"
+    "@babel/plugin-transform-destructuring": "npm:^7.24.8"
+    "@babel/plugin-transform-flow-strip-types": "npm:^7.25.2"
+    "@babel/plugin-transform-for-of": "npm:^7.24.7"
+    "@babel/plugin-transform-function-name": "npm:^7.25.1"
+    "@babel/plugin-transform-literals": "npm:^7.25.2"
+    "@babel/plugin-transform-logical-assignment-operators": "npm:^7.24.7"
+    "@babel/plugin-transform-modules-commonjs": "npm:^7.24.8"
+    "@babel/plugin-transform-named-capturing-groups-regex": "npm:^7.24.7"
+    "@babel/plugin-transform-nullish-coalescing-operator": "npm:^7.24.7"
+    "@babel/plugin-transform-numeric-separator": "npm:^7.24.7"
+    "@babel/plugin-transform-object-rest-spread": "npm:^7.24.7"
+    "@babel/plugin-transform-optional-catch-binding": "npm:^7.24.7"
+    "@babel/plugin-transform-optional-chaining": "npm:^7.24.8"
+    "@babel/plugin-transform-parameters": "npm:^7.24.7"
+    "@babel/plugin-transform-private-methods": "npm:^7.24.7"
+    "@babel/plugin-transform-private-property-in-object": "npm:^7.24.7"
+    "@babel/plugin-transform-react-display-name": "npm:^7.24.7"
+    "@babel/plugin-transform-react-jsx": "npm:^7.25.2"
+    "@babel/plugin-transform-react-jsx-self": "npm:^7.24.7"
+    "@babel/plugin-transform-react-jsx-source": "npm:^7.24.7"
+    "@babel/plugin-transform-regenerator": "npm:^7.24.7"
+    "@babel/plugin-transform-runtime": "npm:^7.24.7"
+    "@babel/plugin-transform-shorthand-properties": "npm:^7.24.7"
+    "@babel/plugin-transform-spread": "npm:^7.24.7"
+    "@babel/plugin-transform-sticky-regex": "npm:^7.24.7"
+    "@babel/plugin-transform-typescript": "npm:^7.25.2"
+    "@babel/plugin-transform-unicode-regex": "npm:^7.24.7"
+    "@babel/template": "npm:^7.25.0"
+    "@react-native/babel-plugin-codegen": "npm:0.79.3"
+    babel-plugin-syntax-hermes-parser: "npm:0.25.1"
+    babel-plugin-transform-flow-enums: "npm:^0.0.2"
+    react-refresh: "npm:^0.14.0"
+  peerDependencies:
+    "@babel/core": "*"
+  checksum: 10c0/2d6386c0f4efbee0d1c4cb4acbb3753fc465b91303248712d6a54a071c24f127cdbb93236793aea3b8af07622a645a4fd6e67f9c661ffbe9a571c0d6e67df50a
+  languageName: node
+  linkType: hard
+
 "@react-native/codegen@npm:0.73.3":
   version: 0.73.3
   resolution: "@react-native/codegen@npm:0.73.3"
@@ -4397,6 +4462,21 @@ __metadata:
   peerDependencies:
     "@babel/preset-env": ^7.1.6
   checksum: 10c0/98fffe2e8827f9c2bcf6de866f5d85833cdd267baa1d70b026bac821bbad407cef6c9c7336798d8ca5114ff57305f9c267bd095f43c97639d6e9cbdff48a5d3e
+  languageName: node
+  linkType: hard
+
+"@react-native/codegen@npm:0.79.3":
+  version: 0.79.3
+  resolution: "@react-native/codegen@npm:0.79.3"
+  dependencies:
+    glob: "npm:^7.1.1"
+    hermes-parser: "npm:0.25.1"
+    invariant: "npm:^2.2.4"
+    nullthrows: "npm:^1.1.1"
+    yargs: "npm:^17.6.2"
+  peerDependencies:
+    "@babel/core": "*"
+  checksum: 10c0/a7554ddfac06ed4761bd05621efa9fba667ba4cce260fcaad0189aa8d3a76e771affaf1e467b5393da3869ff3eb8fcf575c085c76bc39860434da625f26f1102
   languageName: node
   linkType: hard
 

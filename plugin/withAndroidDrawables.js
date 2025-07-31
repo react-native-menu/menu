@@ -1,6 +1,6 @@
 const { withDangerousMod } = require('@expo/config-plugins');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 /**
  * This config plugin copies files from the specified paths, like the assets
@@ -27,19 +27,19 @@ function withAndroidDrawables(config, { drawableFiles }) {
       }
 
       // Copy each drawable file to the drawable directory
-      drawableFiles.forEach((filePath) => {
+      for (const filePath of drawableFiles) {
         const sourcePath = path.resolve(config.modRequest.projectRoot, filePath);
         const fileName = path.basename(filePath);
         const destPath = path.join(drawableDir, fileName);
 
         if (!fs.existsSync(sourcePath)) {
           console.warn(`Warning: Drawable file not found: ${sourcePath}`);
-          return;
+          continue;
         }
 
         // Copy the file
         fs.copyFileSync(sourcePath, destPath);
-      });
+      }
 
       return config;
     },

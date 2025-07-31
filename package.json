@@ -110,7 +110,12 @@
   "codegenConfig": {
     "name": "RNMenuViewSpec",
     "type": "components",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src",
+    "ios": {
+      "componentProvider": {
+        "MenuView": "MenuView"
+      }
+    }
   },
   "packageManager": "yarn@4.1.1"
 }

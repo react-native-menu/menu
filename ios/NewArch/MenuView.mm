@@ -41,6 +41,11 @@ using namespace facebook::react;
         _view.onPressAction = ^(NSString *eventString) {
             [self onPressAction:eventString];
         };
+
+        _view.onOpenMenu = ^{
+            [self onOpenMenu];
+        };
+
         _view.onCloseMenu = ^{
             [self onCloseMenu];
         };

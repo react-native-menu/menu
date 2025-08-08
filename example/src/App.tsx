@@ -1,10 +1,14 @@
 import * as React from "react";
 import { Button, Platform, StyleSheet, Text, View } from "react-native";
-import { MenuView, type MenuComponentRef } from "@react-native-menu/menu";
+import {
+	MenuView,
+	type MenuComponentRef,
+	type MenuThemeVariant,
+} from "@react-native-menu/menu";
 import { useRef } from "react";
 
 export const App = () => {
-	const [themeVariant] = React.useState<string | undefined>("light");
+	const [themeVariant] = React.useState<MenuThemeVariant | undefined>("light");
 	const menuRef = useRef<MenuComponentRef>(null);
 
 	return (

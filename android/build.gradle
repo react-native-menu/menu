@@ -47,20 +47,20 @@ def supportsNamespace() {
 }
 
 def resolveReactNativeDirectory() {
-  def reactNativeLocation = getExtOrFallback("REACT_NATIVE_NODE_MODULES_DIR", null)
-  if (reactNativeLocation != null) {
-    return file(reactNativeLocation)
-  }
+    def reactNativeLocation = getExtOrFallback("REACT_NATIVE_NODE_MODULES_DIR", null)
+    if (reactNativeLocation != null) {
+        return file(reactNativeLocation)
+    }
 
-  // monorepo workaround.
-  def reactNativePackage = file(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim())
-  if (reactNativePackage.exists()) {
-    return reactNativePackage.parentFile
-  }
+    // monorepo workaround.
+    def reactNativePackage = file(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim())
+    if(reactNativePackage.exists()) {
+        return reactNativePackage.parentFile
+    }
 
-  throw new GradleException(
-    "[@react-native-menu/menu] Unable to resolve react-native location in node_modules. You should project extension property (in `app/build.gradle`) `REACT_NATIVE_NODE_MODULES_DIR` with path to react-native."
-  )
+    throw new GradleException(
+        "[@react-native-menu/menu] Unable to resolve react-native location in node_modules. You should project extension property (in `app/build.gradle`) `REACT_NATIVE_NODE_MODULES_DIR` with path to react-native."
+    )
 }
 
 def getReactNativeMinorVersion() {

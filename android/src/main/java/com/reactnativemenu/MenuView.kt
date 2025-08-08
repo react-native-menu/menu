@@ -13,13 +13,18 @@ import android.widget.PopupMenu
 import com.facebook.react.bridge.*
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.views.view.ReactViewGroup
+import com.reactnativemenu.ThemeHelper.appcompat
+import com.reactnativemenu.ThemeHelper.isNight
+import com.reactnativemenu.ThemeHelper.material3
 import java.lang.reflect.Field
 
 
 class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
   private lateinit var mActions: ReadableArray
+  private var uiKit = "auto"
+  private var themeVariant = "system"
   private var mIsAnchoredToRight = false
-  private val mPopupMenu: PopupMenu = PopupMenu(context, this)
+  private var mPopupMenu: PopupMenu = PopupMenu(context, this)
   private var mIsMenuDisplayed = false
   private var mIsOnLongPress = false
   private var mGestureDetector: GestureDetector
@@ -43,7 +48,7 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
     })
   }
 
-  fun show(){
+  fun show() {
     prepareMenu()
   }
 
@@ -92,6 +97,18 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
 
   fun setIsOpenOnLongPress(isLongPress: Boolean) {
     mIsOnLongPress = isLongPress
+  }
+
+  fun setUiKit(uiKit: String?) {
+    this.uiKit = uiKit ?: "auto"
+
+    setStyle()
+  }
+
+  fun setThemeVariant(themeVariant: String?) {
+    this.themeVariant = themeVariant ?: "system"
+
+    setStyle()
   }
 
   private val getActionsCount: Int
@@ -317,5 +334,23 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
     textWithColor.setSpan(ForegroundColorSpan(color),
       0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     return textWithColor
+  }
+
+  private fun setStyle() {
+    val dark = when (this.themeVariant) {
+      "dark" -> true
+      "light" -> false
+      else -> isNight(context)
+    }
+
+    val theme = when (this.uiKit) {
+      "material3" -> material3(dark).takeIf { it != 0 } ?: appcompat(dark)
+      "appcompat" -> appcompat(dark)
+      else -> material3(dark).takeIf { it != 0 } ?: appcompat(dark)
+    }
+
+    val themedCtx = ContextThemeWrapper(context, theme)
+
+    mPopupMenu = PopupMenu(themedCtx, this)
   }
 }

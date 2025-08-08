@@ -177,13 +177,21 @@ Actions to be displayed in the menu.
 |--------------|----------|
 | MenuAction[] | Yes      |
 
-### `themeVariant` (iOS only)
+### `themeVariant`
 
 String to override theme of the menu. If you want to control theme universally across your app, [see this package](https://github.com/vonovak/react-native-theme-control).
 
-| Type                  | Required |
-|-----------------------|----------|
-| enum('light', 'dark') | No       |
+| Type                            | Required |
+| ------------------------------- | -------- |
+| enum('light', 'dark', 'system') | No       |
+
+### `uiKit` (Android only)
+
+String to override UI kit of the menu. Allows you to choose between different Android UI implementations.
+
+| Type                                   | Required |
+| -------------------------------------- | -------- |
+| enum('auto', 'material3', 'appcompat') | No       |
 
 #### `MenuAction`
 

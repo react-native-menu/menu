@@ -4141,7 +4141,7 @@ __metadata:
     "@types/react": "npm:^18.2.2"
     "@types/react-native": "npm:0.73.0"
     jest: "npm:^29.2.1"
-    pod-install: "npm:^0.3.2"
+    pod-install: "npm:^1.0.1"
     react: "npm:18.2.0"
     react-native: "npm:^0.73.0"
     react-native-builder-bob: "npm:^0.38.0"
@@ -10839,12 +10839,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pod-install@npm:^0.3.2":
-  version: 0.3.4
-  resolution: "pod-install@npm:0.3.4"
+"pod-install@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "pod-install@npm:1.0.2"
   bin:
     pod-install: build/index.js
-  checksum: 10c0/9b065454b88ea2cd17308d639586f7854a66a109a285c81d677db496ac207951ef60120e6c77d227cea99841c9b00649d2207c94fca33400f308774fb0c84217
+  checksum: 10c0/72d6ea4e1c633f3b21497204087adc6ded237666e04f77a2730c1a27a874562698d1241a26f33e66936355ee32a66b8f3d7170434aac37e9a40f7da139958e41
   languageName: node
   linkType: hard
 

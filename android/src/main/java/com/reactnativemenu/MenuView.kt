@@ -24,6 +24,11 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
   private var mIsOnLongPress = false
   private var mGestureDetector: GestureDetector
   private var mHitSlopRect: Rect? = null
+    set(value) {
+      super.hitSlopRect = value
+      mHitSlopRect = value
+      updateTouchDelegate()
+    }
 
   init {
     mGestureDetector = GestureDetector(mContext, object : GestureDetector.SimpleOnGestureListener() {
@@ -45,12 +50,6 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
 
   fun show(){
     prepareMenu()
-  }
-
-  override fun setHitSlopRect(rect: Rect?) {
-    super.setHitSlopRect(rect)
-    mHitSlopRect = rect
-    updateTouchDelegate()
   }
 
   override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {

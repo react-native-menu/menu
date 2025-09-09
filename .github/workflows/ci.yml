@@ -1,9 +1,10 @@
 name: Build
 on:
   push:
-  pull_request:
     branches:
-      - master
+      - main
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -95,8 +96,9 @@ jobs:
       - name: Install Dependencies
         run: yarn && yarn bootstrap
       - name: Install Podfiles
-        run: cd example && npx pod-install
+        run: cd example && RCT_USE_PREBUILT_RNCORE=1 RCT_USE_RN_DEP=1 npx pod-install
       - name: Print React Native Info
         run: cd example && npx react-native info
       - name: Build example app
-        run: cd example && yarn ios --no-packager
+        run: xcodebuild -scheme ReactTestApp -workspace MenuExample.xcworkspace ONLY_ACTIVE_ARCH=NO -sdk iphonesimulator -configuration Debug
+        working-directory: example/ios

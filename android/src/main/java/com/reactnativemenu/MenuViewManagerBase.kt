@@ -123,9 +123,9 @@ abstract class MenuViewManagerBase : ReactClippingViewManager<MenuView>() {
   fun setHitSlop(view: ReactViewGroup, @Nullable hitSlop: ReadableMap?) {
     if (hitSlop == null) {
       // We should keep using setters as `Val cannot be reassigned`
-      view.setHitSlopRect(null)
+      view.hitSlopRect = null
     } else {
-      view.setHitSlopRect(
+      view.hitSlopRect = (
               Rect(
                       if (hitSlop.hasKey("left"))
                               PixelUtil.toPixelFromDIP(hitSlop.getDouble("left")).toInt()
@@ -206,7 +206,7 @@ abstract class MenuViewManagerBase : ReactClippingViewManager<MenuView>() {
 
   @ReactProp(name = ViewProps.OVERFLOW)
   fun setOverflow(view: ReactViewGroup, overflow: String?) {
-    view.setOverflow(overflow)
+    view.overflow = overflow
   }
 
   @ReactProp(name = "backfaceVisibility")

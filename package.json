@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "android": "react-native run-android",
-    "bootstrap": "yarn && yarn pods",
+    "bootstrap": "yarn && yarn generateRntaManifest",
     "format": "biome format --write .",
     "ios": "react-native run-ios",
     "lint": "biome lint --write .",
@@ -30,7 +30,8 @@
     "release": "release-it",
     "start": "react-native start",
     "test": "jest",
-    "typescript": "tsc --noEmit"
+    "typescript": "tsc --noEmit",
+    "generateRntaManifest": "node node_modules/react-native-test-app/android/android-manifest.js example/app.json example/android/app/build/generated/rnta/src/main/AndroidManifest.xml"
   },
   "keywords": [
     "react-native",
@@ -46,20 +47,21 @@
   "homepage": "https://github.com/react-native-menu/menu#readme",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@callstack/react-native-visionos": "^0.73.0",
-    "@react-native/babel-preset": "^0.78.1",
-    "@react-native/metro-config": "0.78.1",
+    "@callstack/react-native-visionos": "^0.79.6",
+    "@react-native-community/cli": "^20.0.2",
+    "@react-native/babel-preset": "^0.81.1",
+    "@react-native/metro-config": "0.81.1",
     "@release-it/conventional-changelog": "^10.0.0",
-    "@rnx-kit/metro-config": "^2.0.0",
+    "@rnx-kit/metro-config": "^2.1.1",
     "@types/jest": "^29.1.2",
-    "@types/react": "^18.2.2",
+    "@types/react": "^19.1.12",
     "@types/react-native": "0.73.0",
     "jest": "^29.2.1",
-    "pod-install": "^0.3.2",
-    "react": "18.2.0",
-    "react-native": "^0.73.0",
+    "pod-install": "1.0.1",
+    "react": "19.1.0",
+    "react-native": "^0.81.1",
     "react-native-builder-bob": "^0.38.0",
-    "react-native-test-app": "^4.0.4",
+    "react-native-test-app": "^4.4.9",
     "release-it": "^18.1.1",
     "typescript": "5.8.3"
   },
@@ -104,8 +106,7 @@
     "access": "public"
   },
   "volta": {
-    "node": "22.11.0",
-    "yarn": "1.22.21"
+    "node": "22.11.0"
   },
   "codegenConfig": {
     "name": "RNMenuViewSpec",

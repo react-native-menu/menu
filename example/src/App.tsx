@@ -168,7 +168,6 @@ export const App = () => {
 						}),
 					},
 				]}
-				shouldOpenOnLongPress={true}
 				themeVariant={themeVariant}
 				testID="menuView"
 			>

@@ -52,12 +52,32 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
     prepareMenu()
   }
 
+  override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
+    super.addView(child, index, params)
+    // Make child views trigger menu when clicked via TalkBack
+    child?.let {
+      it.isClickable = true
+      it.isFocusable = true
+      it.setOnClickListener {
+        performClick()
+      }
+    }
+  }
+
   override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
     return true
   }
 
   override fun onTouchEvent(ev: MotionEvent): Boolean {
     mGestureDetector.onTouchEvent(ev)
+    return true
+  }
+
+  override fun performClick(): Boolean {
+    super.performClick()
+    if (!mIsOnLongPress) {
+      prepareMenu()
+    }
     return true
   }
 

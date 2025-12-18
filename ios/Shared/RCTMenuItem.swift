@@ -33,7 +33,18 @@ class RCTMenuAction {
                 self.image = UIImage(named: image as String)
             }
             if let imageColor = details["imageColor"] {
-                self.image = self.image?.withTintColor(RCTConvert.uiColor(imageColor), renderingMode: .alwaysOriginal)
+                let uiColor = RCTConvert.uiColor(imageColor)
+                // Only apply tint if color is valid and not transparent (alpha > 0)
+                // processColor(undefined) returns transparent color (0,0,0,0) which makes icons invisible
+                if let color = uiColor {
+                    var red: CGFloat = 0
+                    var green: CGFloat = 0
+                    var blue: CGFloat = 0
+                    var alpha: CGFloat = 0
+                    if color.getRed(&red, green: &green, blue: &blue, alpha: &alpha) && alpha > 0 {
+                        self.image = self.image?.withTintColor(color, renderingMode: .alwaysOriginal)
+                    }
+                }
             }
         }
 

@@ -12,6 +12,10 @@ export type NativeActionEvent = {
 	};
 };
 
+export type MenuThemeVariant = "light" | "dark" | "system";
+
+export type MenuUiKit = "auto" | "material3" | "appcompat";
+
 type MenuAttributes = {
 	/**
 	 * An attribute indicating the destructive style.
@@ -147,11 +151,15 @@ type MenuComponentPropsBase = {
 	shouldOpenOnLongPress?: boolean;
 	/**
 	 * Overrides theme variant of menu to light mode, dark mode or system theme
-	 * (Only support iOS for now)
-	 *
-	 * @platform iOS
+	 * @default system
 	 */
-	themeVariant?: string;
+	themeVariant?: MenuThemeVariant;
+	/**
+	 * Overrides UI kit of menu to auto, material3 or appcompat
+	 * @platform Android
+	 * @default auto
+	 */
+	uiKit?: MenuUiKit;
 	/**
 	 * Custom OpenSpace hitSlop prop. Works like touchable hitslop.
 	 * @platform iOS

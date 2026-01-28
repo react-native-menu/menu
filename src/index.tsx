@@ -8,6 +8,8 @@ import type {
 	ProcessedMenuAction,
 	NativeActionEvent,
 	MenuComponentRef,
+	MenuThemeVariant,
+	MenuUiKit,
 } from "./types";
 import { objectHash } from "./utils";
 
@@ -49,4 +51,6 @@ export type {
 	MenuComponentRef,
 	MenuAction,
 	NativeActionEvent,
+	MenuThemeVariant,
+	MenuUiKit,
 };

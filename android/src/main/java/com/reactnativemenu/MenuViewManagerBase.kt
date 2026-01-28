@@ -214,6 +214,16 @@ abstract class MenuViewManagerBase : ReactClippingViewManager<MenuView>() {
     view.setBackfaceVisibility(backfaceVisibility)
   }
 
+  @ReactProp(name = "themeVariant")
+  fun setThemeVariant(view: MenuView, themeVariant: String?) {
+    view.setThemeVariant(themeVariant)
+  }
+
+  @ReactProp(name = "uiKit")
+  fun setUiKit(view: MenuView, uiKit: String?) {
+    view.setUiKit(uiKit)
+  }
+
   override fun setOpacity(@NonNull view: MenuView, opacity: Float) {
     view.setOpacityIfPossible(opacity)
   }

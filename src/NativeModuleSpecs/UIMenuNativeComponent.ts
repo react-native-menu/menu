@@ -52,6 +52,7 @@ export interface NativeProps extends ViewProps {
 	actionsHash: string; // just a workaround to make sure we don't have to manually compare MenuActions manually in C++ (since it's a struct and that's a pain)
 	title?: string;
 	themeVariant?: string;
+	uiKit?: string;
 	shouldOpenOnLongPress?: boolean;
 	hitSlop: {
 		top: Int32;

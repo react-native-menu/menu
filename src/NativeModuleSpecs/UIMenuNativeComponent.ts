@@ -15,8 +15,6 @@ import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNati
   types here, to avoid issues while `pod install` takes place.
 */
 
-type PreferredElementSize = 'small' | 'medium' | 'large';
-
 type SubAction = {
 	id?: string;
 	title: string;
@@ -41,7 +39,7 @@ type MenuAction = {
 	image?: string;
 	imageColor?: Int32;
 	displayInline?: boolean;
-	preferredElementSize?: WithDefault<PreferredElementSize, 'large'>;
+	preferredElementSize?: WithDefault<string, 'large'>;
 	attributes?: {
 		destructive?: boolean;
 		disabled?: boolean;

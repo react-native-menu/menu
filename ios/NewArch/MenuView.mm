@@ -134,7 +134,7 @@ using namespace facebook::react;
             @"image": [NSString stringWithUTF8String:action.image.c_str()],
             @"imageColor": @(action.imageColor),
             @"displayInline": @(action.displayInline),
-            @"preferredElementSize": @(action.preferredElementSize),
+            @"preferredElementSize": [NSString stringWithUTF8String:action.preferredElementSize.c_str()],
             @"attributes": @{
                 @"destructive": @(action.attributes.destructive),
                 @"disabled": @(action.attributes.disabled),

@@ -23,7 +23,7 @@ function processAction(action: MenuAction): ProcessedMenuAction {
 const defaultHitslop = { top: 0, left: 0, bottom: 0, right: 0 };
 
 const MenuView = forwardRef<MenuComponentRef, MenuComponentProps>(
-	({ actions, preferredElementSize = "large", hitSlop = defaultHitslop, ...props }, ref) => {
+	({ actions, hitSlop = defaultHitslop, ...props }, ref) => {
 		const processedActions = actions.map<ProcessedMenuAction>((action) =>
 			processAction(action),
 		);
@@ -37,7 +37,6 @@ const MenuView = forwardRef<MenuComponentRef, MenuComponentProps>(
 				hitSlop={hitSlop}
 				actions={processedActions}
 				actionsHash={hash}
-				preferredElementSize={preferredElementSize}
 				ref={ref}
 			/>
 		);

@@ -1,9 +1,11 @@
 import type {
 	DirectEventHandler,
 	Int32,
+	WithDefault
 } from "react-native/Libraries/Types/CodegenTypes";
 import type { HostComponent, ViewProps } from "react-native";
 import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNativeComponent";
+
 /*
   Caution, those below are not just typescript types.
   Codegen is using them to create the corresponding C++ data types.
@@ -39,7 +41,7 @@ type MenuAction = {
 	image?: string;
 	imageColor?: Int32;
 	displayInline?: boolean;
-	preferredElementSize?: PreferredElementSize;
+	preferredElementSize?: WithDefault<PreferredElementSize, 'large'>;
 	attributes?: {
 		destructive?: boolean;
 		disabled?: boolean;

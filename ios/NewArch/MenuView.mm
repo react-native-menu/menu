@@ -105,34 +105,39 @@ using namespace facebook::react;
         NSMutableArray<NSDictionary *> *subactionsArray = [NSMutableArray arrayWithCapacity:actions.size()];
         if (action.subactions.size() > 0) {
             for (const MenuViewActionsSubactionsStruct &subaction : action.subactions) {
-                NSDictionary *subactionDict = @{
+                NSMutableDictionary *subactionDict = [@{
                     @"id": [NSString stringWithUTF8String:subaction.id.c_str()],
                     @"title": [NSString stringWithUTF8String:subaction.title.c_str()],
-                    @"titleColor": @(subaction.titleColor),
                     @"subtitle": [NSString stringWithUTF8String:subaction.subtitle.c_str()],
                     @"state": [NSString stringWithUTF8String:subaction.state.c_str()],
                     @"image": [NSString stringWithUTF8String:subaction.image.c_str()],
-                    @"imageColor": @(subaction.imageColor),
                     @"displayInline": @(subaction.displayInline),
                     @"attributes": @{
                         @"destructive": @(subaction.attributes.destructive),
                         @"disabled": @(subaction.attributes.disabled),
                         @"hidden": @(subaction.attributes.hidden),
                     },
-                };
+                } mutableCopy];
+
+                if (subaction.titleColor != 0) {
+                    subactionDict[@"titleColor"] = @(subaction.titleColor);
+                }
+
+                if (subaction.imageColor != 0) {
+                    subactionDict[@"imageColor"] = @(subaction.imageColor);
+                }
+
                 [subactionsArray addObject:subactionDict];
             }
         }
 
         // then convert the full actions object
-        NSDictionary *actionDict = @{
+        NSMutableDictionary *actionDict = [@{
             @"id": [NSString stringWithUTF8String:action.id.c_str()],
             @"title": [NSString stringWithUTF8String:action.title.c_str()],
-            @"titleColor": @(action.titleColor),
             @"subtitle": [NSString stringWithUTF8String:action.subtitle.c_str()],
             @"state": [NSString stringWithUTF8String:action.state.c_str()],
             @"image": [NSString stringWithUTF8String:action.image.c_str()],
-            @"imageColor": @(action.imageColor),
             @"displayInline": @(action.displayInline),
             @"attributes": @{
                 @"destructive": @(action.attributes.destructive),
@@ -140,7 +145,15 @@ using namespace facebook::react;
                 @"hidden": @(action.attributes.hidden),
             },
             @"subactions": subactionsArray,
-        };
+        } mutableCopy];
+
+        if (action.titleColor != 0) {
+            actionDict[@"titleColor"] = @(action.titleColor);
+        }
+
+        if (action.imageColor != 0) {
+            actionDict[@"imageColor"] = @(action.imageColor);
+        }
 
         [actionsArray addObject:actionDict];
     }

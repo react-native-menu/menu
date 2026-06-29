@@ -15,6 +15,9 @@ buildscript {
 }
 
 def isNewArchitectureEnabled() {
+  if (getReactNativeMinorVersion() >= 82) {
+    return true
+  }
   return rootProject.hasProperty("newArchEnabled") && rootProject.getProperty("newArchEnabled") == "true"
 }
 

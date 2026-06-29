@@ -25,8 +25,7 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
   private var mGestureDetector: GestureDetector
   private var mHitSlopRect: Rect? = null
     set(value) {
-      super.hitSlopRect = value
-      mHitSlopRect = value
+      field = value
       updateTouchDelegate()
     }
 

@@ -3666,6 +3666,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@isaacs/cliui@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@isaacs/cliui@npm:9.0.0"
+  checksum: 10c0/971063b7296419f85053dacd0a0285dcadaa3dfc139228b23e016c1a9848121ad4aa5e7fcca7522062014e1eb6239a7424188b9f2cba893a79c90aae5710319c
+  languageName: node
+  linkType: hard
+
 "@isaacs/ttlcache@npm:^1.4.1":
   version: 1.4.1
   resolution: "@isaacs/ttlcache@npm:1.4.1"
@@ -4059,6 +4066,13 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 10c0/4b30ec8cd56c5fd9a661f088230af01e0c1a3888d11ffb6b47639700f71225be21d1f7e168048d6d4f9449207b978a235c07c8f15c07705685d16dc06280e9d9
+  languageName: node
+  linkType: hard
+
+"@nodable/entities@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@nodable/entities@npm:2.2.0"
+  checksum: 10c0/a5ace5b2f747ae5b851f68a1731526c3e10feacde80469415d15a0df0e960251b515e3cd4ea080a3534e0610ac74b0d3252f607ef2f536bcc97e22d324231578
   languageName: node
   linkType: hard
 
@@ -4643,7 +4657,7 @@ __metadata:
     react: "npm:19.1.0"
     react-native: "npm:^0.81.1"
     react-native-builder-bob: "npm:^0.43.0"
-    react-native-test-app: "npm:^4.4.9"
+    react-native-test-app: "npm:^5.4.1"
     release-it: "npm:^18.1.1"
     typescript: "npm:5.9.3"
   peerDependencies:
@@ -5175,12 +5189,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rnx-kit/react-native-host@npm:^0.5.11":
-  version: 0.5.12
-  resolution: "@rnx-kit/react-native-host@npm:0.5.12"
+"@rnx-kit/react-native-host@npm:^0.5.19":
+  version: 0.5.19
+  resolution: "@rnx-kit/react-native-host@npm:0.5.19"
   peerDependencies:
     react-native: ">=0.66"
-  checksum: 10c0/b5db1a682472f159f95f5c1100e956ce647ddbb515894e1f503d851893d5a7872a324a41032801b945a3c521f6abb4dda086d1cf808bb14402eab79666d14e77
+  checksum: 10c0/6dbf12788c7ebff0813288343dcaa4b7c18b4a2fa048a6bdcb65019c92234beabbe8b9a52701dc7cd6845f9c621e93969fe58db3409093c7443053aa8646cc21
   languageName: node
   linkType: hard
 
@@ -5654,6 +5668,13 @@ __metadata:
     normalize-path: "npm:^3.0.0"
     picomatch: "npm:^2.0.4"
   checksum: 10c0/57b06ae984bc32a0d22592c87384cd88fe4511b1dd7581497831c56d41939c8a001b28e7b853e1450f2bf61992dfcaa8ae2d0d161a0a90c4fb631ef07098fbac
+  languageName: node
+  linkType: hard
+
+"anynum@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "anynum@npm:1.0.1"
+  checksum: 10c0/cfda92c9215722fc4b15faa33d0eb3d5dfd28fba6cb67c1f50d214feaa7ba6497814a3e110777853585de6d91c8c962a1ae425b637d3598d9f9d8f6f6802e5bb
   languageName: node
   linkType: hard
 
@@ -6520,7 +6541,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cliui@npm:^8.0.0, cliui@npm:^8.0.1":
+"cliui@npm:^8.0.1":
   version: 8.0.1
   resolution: "cliui@npm:8.0.1"
   dependencies:
@@ -7609,7 +7630,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.0.0, fast-xml-parser@npm:^4.0.12, fast-xml-parser@npm:^4.2.4":
+"fast-xml-builder@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "fast-xml-builder@npm:1.2.0"
+  dependencies:
+    path-expression-matcher: "npm:^1.5.0"
+    xml-naming: "npm:^0.1.0"
+  checksum: 10c0/84bb105cd04e91d6dcb746c4dbaeb12903b510e7ab9a06ffde55b5a582e005559a87d84467f18a655c6c4baf098f696fd74cee3cbe1aea9d01385907768ba32d
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^4.0.12, fast-xml-parser@npm:^4.2.4":
   version: 4.3.6
   resolution: "fast-xml-parser@npm:4.3.6"
   dependencies:
@@ -7628,6 +7659,22 @@ __metadata:
   bin:
     fxparser: src/cli/cli.js
   checksum: 10c0/bf9ccadacfadc95f6e3f0e7882a380a7f219cf0a6f96575149f02cb62bf44c3b7f0daee75b8ff3847bcfd7fbcb201e402c71045936c265cf6d94b141ec4e9327
+  languageName: node
+  linkType: hard
+
+"fast-xml-parser@npm:^5.8.0":
+  version: 5.9.3
+  resolution: "fast-xml-parser@npm:5.9.3"
+  dependencies:
+    "@nodable/entities": "npm:^2.2.0"
+    fast-xml-builder: "npm:^1.2.0"
+    is-unsafe: "npm:^1.0.1"
+    path-expression-matcher: "npm:^1.5.0"
+    strnum: "npm:^2.4.1"
+    xml-naming: "npm:^0.1.0"
+  bin:
+    fxparser: src/cli/cli.js
+  checksum: 10c0/0f4f4b98aec027334be1d4462c6e09649bda8dd8bd1c75f6e985f4000ce4a40ea4540745fa7ac081cd65bf462b0c22fce87da9abc5ede51c9727398c91cacd5f
   languageName: node
   linkType: hard
 
@@ -8736,6 +8783,13 @@ __metadata:
   version: 2.0.0
   resolution: "is-unicode-supported@npm:2.0.0"
   checksum: 10c0/3013dfb8265fe9f9a0d1e9433fc4e766595631a8d85d60876c457b4bedc066768dab1477c553d02e2f626d88a4e019162706e04263c94d74994ef636a33b5f94
+  languageName: node
+  linkType: hard
+
+"is-unsafe@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "is-unsafe@npm:1.0.1"
+  checksum: 10c0/93c6d4784dee35f32357718bad5b39f9ec6cd051e2103885a803e673a9b408f46bd87c4776eed4f9742f9f35b0d83e6411549c6afcd01884ded1aa8fbbc651b9
   languageName: node
   linkType: hard
 
@@ -11331,6 +11385,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-expression-matcher@npm:^1.5.0":
+  version: 1.6.1
+  resolution: "path-expression-matcher@npm:1.6.1"
+  checksum: 10c0/6d3bee01db16d8d3ad799aa6179785357a1277e227a44a4bff3ed5c7fcfb37325db596492c06356d8c82c097381c868ebc61b2e46a9363b35a1e007b7b902ee8
+  languageName: node
+  linkType: hard
+
 "path-is-absolute@npm:^1.0.0":
   version: 1.0.1
   resolution: "path-is-absolute@npm:1.0.1"
@@ -11746,25 +11807,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-test-app@npm:^4.4.9":
-  version: 4.4.9
-  resolution: "react-native-test-app@npm:4.4.9"
+"react-native-test-app@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "react-native-test-app@npm:5.4.1"
   dependencies:
-    "@rnx-kit/react-native-host": "npm:^0.5.11"
+    "@isaacs/cliui": "npm:^9.0.0"
+    "@rnx-kit/react-native-host": "npm:^0.5.19"
     "@rnx-kit/tools-react-native": "npm:^2.1.0"
     ajv: "npm:^8.0.0"
-    cliui: "npm:^8.0.0"
-    fast-xml-parser: "npm:^4.0.0"
+    fast-xml-builder: "npm:^1.2.0"
+    fast-xml-parser: "npm:^5.8.0"
     prompts: "npm:^2.4.0"
-    semver: "npm:^7.3.5"
-    uuid: "npm:^11.0.0"
+    semver: "npm:^7.5.2"
   peerDependencies:
-    "@callstack/react-native-visionos": 0.73 - 0.78
+    "@callstack/react-native-visionos": 0.76 - 0.79
     "@expo/config-plugins": ">=5.0"
-    react: 18.1 - 19.1
-    react-native: 0.70 - 0.81 || >=0.82.0-0 <0.82.0
-    react-native-macos: ^0.0.0-0 || 0.71 - 0.79
-    react-native-windows: ^0.0.0-0 || 0.70 - 0.79
+    react: 18.2 - 19.2
+    react-native: 0.76 - 0.86 || >=0.86.0-0 <0.87.0
+    react-native-macos: ^0.0.0-0 || 0.76 - 0.81
+    react-native-windows: ^0.0.0-0 || 0.76 - 0.83
   peerDependenciesMeta:
     "@callstack/react-native-visionos":
       optional: true
@@ -11779,7 +11840,7 @@ __metadata:
     init: scripts/init.mjs
     init-test-app: scripts/init.mjs
     install-windows-test-app: windows/app.mjs
-  checksum: 10c0/b67033963763a8f125ca691a28ad8bf9e71379407eb16511aa0ae3f5755785aa633bc624b45d4ea522bd2acbfdde40a7861d11e7be41e0a71b7fa397cb245a43
+  checksum: 10c0/a27a8650f399bf975b868cce9fa333e260447ed6053aba25aed3fff6848da94ba25103a9fbb68ef789efe3b87c26a4984769ef6ccb4cd7c4b32ab172cf4700a3
   languageName: node
   linkType: hard
 
@@ -13018,6 +13079,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strnum@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "strnum@npm:2.4.1"
+  dependencies:
+    anynum: "npm:^1.0.1"
+  checksum: 10c0/0d6a42bf8a1ad74b0a6c048ecf3bea50757383bcf304877ebe6e62acca5574bc088ce71bfb4de4b89b2ab44c618834c76be5894da04b67c673ff6677788b2638
+  languageName: node
+  linkType: hard
+
 "stubborn-fs@npm:^1.2.5":
   version: 1.2.5
   resolution: "stubborn-fs@npm:1.2.5"
@@ -13494,15 +13564,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.0.0":
-  version: 11.1.0
-  resolution: "uuid@npm:11.1.0"
-  bin:
-    uuid: dist/esm/bin/uuid
-  checksum: 10c0/34aa51b9874ae398c2b799c88a127701408cd581ee89ec3baa53509dd8728cbb25826f2a038f9465f8b7be446f0fbf11558862965b18d21c993684297628d4d3
-  languageName: node
-  linkType: hard
-
 "v8-to-istanbul@npm:^9.0.1":
   version: 9.2.0
   resolution: "v8-to-istanbul@npm:9.2.0"
@@ -13790,6 +13851,13 @@ __metadata:
   version: 5.1.0
   resolution: "xdg-basedir@npm:5.1.0"
   checksum: 10c0/c88efabc71ffd996ba9ad8923a8cc1c7c020a03e2c59f0ffa72e06be9e724ad2a0fccef488757bc6ed3d8849d753dd25082d1035d95cb179e79eae4d034d0b80
+  languageName: node
+  linkType: hard
+
+"xml-naming@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "xml-naming@npm:0.1.0"
+  checksum: 10c0/8c7614865361bcb7e53e3e091dac21c567e2b92d447919b2f072775aa9dcfc94a5255bd52fbaa0fd53c93513e53a23a6a835218ad2af512451dbc678392f85fe
   languageName: node
   linkType: hard
 

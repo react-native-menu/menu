@@ -50,7 +50,7 @@
     "@callstack/react-native-visionos": "^0.79.6",
     "@react-native-community/cli": "^20.0.2",
     "@react-native/babel-preset": "^0.81.1",
-    "@react-native/metro-config": "0.81.1",
+    "@react-native/metro-config": "0.86.0",
     "@release-it/conventional-changelog": "^11.0.1",
     "@rnx-kit/metro-config": "^2.1.1",
     "@types/jest": "^29.1.2",

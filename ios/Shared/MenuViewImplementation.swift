@@ -59,16 +59,26 @@ public class MenuViewImplementation: UIButton {
         self.setup()
     }
    
+    // Presentation is tracked from the two delegate methods the class already
+    // overrode. Overriding willDisplayMenuFor as well (even for bookkeeping)
+    // shadows UIButton's own implementation and degrades the button-anchored
+    // presentation into generic context-menu chrome — an empty header row with
+    // a dismiss chevron appears above the actions.
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        // Flush updates deferred by the presented-guard before the action
+        // provider snapshots self.menu (covers a stuck flag from an
+        // interaction that never ended cleanly).
+        if pendingMenu != nil {
+            pendingMenu = nil
+            isMenuPresented = false
+            self.setup()
+        }
+        isMenuPresented = true
         sendMenuOpen()
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
             guard let self = self else { return nil }
             return self.menu
         }
-    }
-
-    public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willDisplayMenuFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
-        isMenuPresented = true
     }
     
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {

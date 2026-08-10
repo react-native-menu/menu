@@ -126,8 +126,35 @@ public class MenuViewImplementation: UIButton {
 
         var visited: Set<ObjectIdentifier> = []
         for interaction in candidates where visited.insert(ObjectIdentifier(interaction)).inserted {
-            interaction.updateVisibleMenu { _ in menu }
+            // The block receives whichever menu level is currently on screen —
+            // the navigated submenu when the user picked inside one, not the
+            // root. Swap in the matching node from the rebuilt tree (stable
+            // identifiers from the JS action ids) so that level updates in
+            // place; returning an unrelated menu instead makes UIKit render it
+            // as navigation into a foreign menu, with a stale or blank
+            // expanded-submenu header row above the actions. The root carries
+            // an auto-generated identifier that never matches, so it falls
+            // through to a children-only replacement.
+            interaction.updateVisibleMenu { [weak self] visibleMenu in
+                guard let self = self else { return visibleMenu }
+                if let replacement = self.menuMatching(visibleMenu.identifier, in: menu) {
+                    return replacement
+                }
+                return visibleMenu.replacingChildren(menu.children)
+            }
         }
+    }
+
+    private func menuMatching(_ identifier: UIMenu.Identifier, in menu: UIMenu) -> UIMenu? {
+        if menu.identifier == identifier {
+            return menu
+        }
+        for element in menu.children {
+            if let submenu = element as? UIMenu, let match = menuMatching(identifier, in: submenu) {
+                return match
+            }
+        }
+        return nil
     }
 
     public override func reactSetFrame(_ frame: CGRect) {

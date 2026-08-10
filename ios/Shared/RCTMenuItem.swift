@@ -103,10 +103,15 @@ class RCTMenuAction {
                 subMenuActions.append(subaction.createUIMenuElement(handler))
             }
             var menu: UIMenu;
+            let menuIdentifier = identifier.map { UIMenu.Identifier(rawValue: $0.rawValue) }
             if self.displayInline {
-                menu = UIMenu(title: title, image: image, options: .displayInline, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, identifier: menuIdentifier, options: .displayInline, children: subMenuActions)
             } else {
-                menu = UIMenu(title: title, image: image, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, identifier: menuIdentifier, children: subMenuActions)
+            }
+
+            if #available(iOS 15.0, *) {
+                menu.subtitle = subtitle
             }
 
             if #available(iOS 16.0, *) {

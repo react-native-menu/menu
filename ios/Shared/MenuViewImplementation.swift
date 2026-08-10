@@ -66,10 +66,22 @@ public class MenuViewImplementation: UIButton {
             return self.menu
         }
     }
+
+    public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willDisplayMenuFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
+        isMenuPresented = true
+    }
     
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
         sendMenuClose()
+        isMenuPresented = false
+        if pendingMenu != nil {
+            pendingMenu = nil
+            self.setup()
+        }
     }
+
+    private var isMenuPresented = false
+    private var pendingMenu: UIMenu?
 
     func setup () {
         let menu = UIMenu(title: _title,
@@ -86,8 +98,26 @@ public class MenuViewImplementation: UIButton {
             }
         }
 
+        if isMenuPresented {
+            pendingMenu = menu
+            self.refreshPresentedMenu(menu)
+            return
+        }
+
         self.menu = menu
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
+    }
+
+    private func refreshPresentedMenu(_ menu: UIMenu) {
+        var candidates = self.interactions.compactMap { $0 as? UIContextMenuInteraction }
+        if let interaction = self.contextMenuInteraction {
+            candidates.append(interaction)
+        }
+
+        var visited: Set<ObjectIdentifier> = []
+        for interaction in candidates where visited.insert(ObjectIdentifier(interaction)).inserted {
+            interaction.updateVisibleMenu { _ in menu }
+        }
     }
 
     public override func reactSetFrame(_ frame: CGRect) {

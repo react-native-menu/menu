@@ -105,6 +105,27 @@ using namespace facebook::react;
         NSMutableArray<NSDictionary *> *subactionsArray = [NSMutableArray arrayWithCapacity:actions.size()];
         if (action.subactions.size() > 0) {
             for (const MenuViewActionsSubactionsStruct &subaction : action.subactions) {
+                NSMutableArray<NSDictionary *> *subSubactionsArray =
+                    [NSMutableArray arrayWithCapacity:subaction.subactions.size()];
+                for (const MenuViewActionsSubactionsSubactionsStruct &subSubaction : subaction.subactions) {
+                    NSDictionary *subSubactionDict = @{
+                        @"id": [NSString stringWithUTF8String:subSubaction.id.c_str()],
+                        @"title": [NSString stringWithUTF8String:subSubaction.title.c_str()],
+                        @"titleColor": @(subSubaction.titleColor),
+                        @"subtitle": [NSString stringWithUTF8String:subSubaction.subtitle.c_str()],
+                        @"state": [NSString stringWithUTF8String:subSubaction.state.c_str()],
+                        @"image": [NSString stringWithUTF8String:subSubaction.image.c_str()],
+                        @"imageColor": @(subSubaction.imageColor),
+                        @"displayInline": @(subSubaction.displayInline),
+                        @"attributes": @{
+                            @"destructive": @(subSubaction.attributes.destructive),
+                            @"disabled": @(subSubaction.attributes.disabled),
+                            @"hidden": @(subSubaction.attributes.hidden),
+                            @"keepsMenuPresented": @(subSubaction.attributes.keepsMenuPresented),
+                        },
+                    };
+                    [subSubactionsArray addObject:subSubactionDict];
+                }
                 NSDictionary *subactionDict = @{
                     @"id": [NSString stringWithUTF8String:subaction.id.c_str()],
                     @"title": [NSString stringWithUTF8String:subaction.title.c_str()],
@@ -118,7 +139,9 @@ using namespace facebook::react;
                         @"destructive": @(subaction.attributes.destructive),
                         @"disabled": @(subaction.attributes.disabled),
                         @"hidden": @(subaction.attributes.hidden),
+                        @"keepsMenuPresented": @(subaction.attributes.keepsMenuPresented),
                     },
+                    @"subactions": subSubactionsArray,
                 };
                 [subactionsArray addObject:subactionDict];
             }
@@ -138,6 +161,7 @@ using namespace facebook::react;
                 @"destructive": @(action.attributes.destructive),
                 @"disabled": @(action.attributes.disabled),
                 @"hidden": @(action.attributes.hidden),
+                @"keepsMenuPresented": @(action.attributes.keepsMenuPresented),
             },
             @"subactions": subactionsArray,
         };

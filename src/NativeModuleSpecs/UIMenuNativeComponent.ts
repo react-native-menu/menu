@@ -13,6 +13,22 @@ import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNati
   types here, to avoid issues while `pod install` takes place.
 */
 
+type SubSubAction = {
+	id?: string;
+	title: string;
+	titleColor?: Int32;
+	subtitle?: string;
+	state?: string;
+	image?: string;
+	imageColor?: Int32;
+	displayInline?: boolean;
+	attributes?: {
+		destructive?: boolean;
+		disabled?: boolean;
+		hidden?: boolean;
+		keepsMenuPresented?: boolean;
+	};
+};
 type SubAction = {
 	id?: string;
 	title: string;
@@ -26,7 +42,9 @@ type SubAction = {
 		destructive?: boolean;
 		disabled?: boolean;
 		hidden?: boolean;
+		keepsMenuPresented?: boolean;
 	};
+	subactions?: Array<SubSubAction>;
 };
 type MenuAction = {
 	id?: string;
@@ -41,6 +59,7 @@ type MenuAction = {
 		destructive?: boolean;
 		disabled?: boolean;
 		hidden?: boolean;
+		keepsMenuPresented?: boolean;
 	};
 	subactions?: Array<SubAction>;
 };

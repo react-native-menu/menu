@@ -103,9 +103,13 @@ class RCTMenuAction {
                 subMenuActions.append(subaction.createUIMenuElement(handler))
             }
             var menu: UIMenu;
+            // Stable identifiers let updateVisibleMenu match submenu nodes in
+            // place, so a refresh while the menu is presented keeps the user's
+            // current submenu level instead of popping back to the root.
+            // Inline sections don't navigate, so they stay stock.
             let menuIdentifier = identifier.map { UIMenu.Identifier(rawValue: $0.rawValue) }
             if self.displayInline {
-                menu = UIMenu(title: title, image: image, identifier: menuIdentifier, options: .displayInline, children: subMenuActions)
+                menu = UIMenu(title: title, image: image, options: .displayInline, children: subMenuActions)
             } else {
                 menu = UIMenu(title: title, image: image, identifier: menuIdentifier, children: subMenuActions)
             }

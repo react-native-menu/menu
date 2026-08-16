@@ -32,7 +32,14 @@ class RCTMenuAction {
             if self.image === nil {
                 self.image = UIImage(named: image as String)
             }
-            if let imageColor = details["imageColor"] {
+            // Under React Native's New Architecture, the codegen-generated
+            // MenuViewActionsSubactionsStruct declares `int imageColor{0}` as
+            // the default, so the bridge always forwards a value even when JS
+            // didn't pass one. Without this guard the unwrap below would
+            // succeed with `imageColor == 0`, and `RCTConvert.uiColor(0)`
+            // returns a fully transparent UIColor — every SF Symbol passed
+            // via `image` would render invisible. Closes #1198, refs #1034 #1002.
+            if let imageColor = details["imageColor"], (imageColor as? Int) != 0 {
                 self.image = self.image?.withTintColor(RCTConvert.uiColor(imageColor), renderingMode: .alwaysOriginal)
             }
         }

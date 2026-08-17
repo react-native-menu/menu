@@ -89,6 +89,10 @@ public class ActionSheetView: UIView {
 
     @objc func handleTap(_ sender:UITapGestureRecognizer) {
         if shouldOpenOnLongPress {
+            // Tap acts as a press when the sheet opens on long press.
+            if sender.state == .ended {
+                self.sendButtonAction("rnmenu:onPress")
+            }
             return
         }
         if sender.state == .ended {

@@ -41,6 +41,14 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
       override fun onSingleTapUp(e: MotionEvent): Boolean {
         if (!mIsOnLongPress) {
           prepareMenu()
+        } else {
+          // In long-press mode a normal tap acts as a press, emitted through
+          // onPressAction with a sentinel id.
+          val dispatcher = UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
+          val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
+          dispatcher?.dispatchEvent(
+            MenuOnPressActionEvent(surfaceId, id, "rnmenu:onPress", id)
+          )
         }
         return true
       }

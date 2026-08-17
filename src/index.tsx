@@ -22,8 +22,14 @@ function processAction(action: MenuAction): ProcessedMenuAction {
 
 const defaultHitslop = { top: 0, left: 0, bottom: 0, right: 0 };
 
+// Sentinel action id the native side emits through onPressAction on a plain
+// tap of the anchor (only when shouldOpenOnLongPress is set). The JS layer
+// translates it into the public `onPress` callback so an anchor can be both
+// tapped and long-pressed.
+const ON_PRESS_EVENT = "rnmenu:onPress";
+
 const MenuView = forwardRef<MenuComponentRef, MenuComponentProps>(
-	({ actions, hitSlop = defaultHitslop, ...props }, ref) => {
+	({ actions, hitSlop = defaultHitslop, onPress, onPressAction, ...props }, ref) => {
 		const processedActions = actions.map<ProcessedMenuAction>((action) =>
 			processAction(action),
 		);
@@ -37,6 +43,13 @@ const MenuView = forwardRef<MenuComponentRef, MenuComponentProps>(
 				hitSlop={hitSlop}
 				actions={processedActions}
 				actionsHash={hash}
+				onPressAction={(event) => {
+					if (event.nativeEvent.event === ON_PRESS_EVENT) {
+						onPress?.();
+						return;
+					}
+					onPressAction?.(event);
+				}}
 				ref={ref}
 			/>
 		);

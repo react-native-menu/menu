@@ -59,7 +59,21 @@ public class MenuViewImplementation: UIButton {
         self.setup()
     }
    
+    // Presentation is tracked from the two delegate methods the class already
+    // overrode. Overriding willDisplayMenuFor as well (even for bookkeeping)
+    // shadows UIButton's own implementation and degrades the button-anchored
+    // presentation into generic context-menu chrome — an empty header row with
+    // a dismiss chevron appears above the actions.
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        // Flush updates deferred by the presented-guard before the action
+        // provider snapshots self.menu (covers a stuck flag from an
+        // interaction that never ended cleanly).
+        if pendingMenu != nil {
+            pendingMenu = nil
+            isMenuPresented = false
+            self.setup()
+        }
+        isMenuPresented = true
         sendMenuOpen()
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
             guard let self = self else { return nil }
@@ -69,7 +83,15 @@ public class MenuViewImplementation: UIButton {
     
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {
         sendMenuClose()
+        isMenuPresented = false
+        if pendingMenu != nil {
+            pendingMenu = nil
+            self.setup()
+        }
     }
+
+    private var isMenuPresented = false
+    private var pendingMenu: UIMenu?
 
     func setup () {
         let menu = UIMenu(title: _title,
@@ -86,8 +108,53 @@ public class MenuViewImplementation: UIButton {
             }
         }
 
+        if isMenuPresented {
+            pendingMenu = menu
+            self.refreshPresentedMenu(menu)
+            return
+        }
+
         self.menu = menu
         self.showsMenuAsPrimaryAction = !shouldOpenOnLongPress
+    }
+
+    private func refreshPresentedMenu(_ menu: UIMenu) {
+        var candidates = self.interactions.compactMap { $0 as? UIContextMenuInteraction }
+        if let interaction = self.contextMenuInteraction {
+            candidates.append(interaction)
+        }
+
+        var visited: Set<ObjectIdentifier> = []
+        for interaction in candidates where visited.insert(ObjectIdentifier(interaction)).inserted {
+            // The block receives whichever menu level is currently on screen —
+            // the navigated submenu when the user picked inside one, not the
+            // root. Swap in the matching node from the rebuilt tree (stable
+            // identifiers from the JS action ids) so that level updates in
+            // place; returning an unrelated menu instead makes UIKit render it
+            // as navigation into a foreign menu, with a stale or blank
+            // expanded-submenu header row above the actions. The root carries
+            // an auto-generated identifier that never matches, so it falls
+            // through to a children-only replacement.
+            interaction.updateVisibleMenu { [weak self] visibleMenu in
+                guard let self = self else { return visibleMenu }
+                if let replacement = self.menuMatching(visibleMenu.identifier, in: menu) {
+                    return replacement
+                }
+                return visibleMenu.replacingChildren(menu.children)
+            }
+        }
+    }
+
+    private func menuMatching(_ identifier: UIMenu.Identifier, in menu: UIMenu) -> UIMenu? {
+        if menu.identifier == identifier {
+            return menu
+        }
+        for element in menu.children {
+            if let submenu = element as? UIMenu, let match = menuMatching(identifier, in: submenu) {
+                return match
+            }
+        }
+        return nil
     }
 
     public override func reactSetFrame(_ frame: CGRect) {

@@ -1,6 +1,6 @@
 #import <React/RCTViewManager.h>
 #import <React/RCTUIManager.h>
-#import "RCTBridge.h"
+#import <React/RCTBridge.h>
 
 #ifdef RCT_NEW_ARCH_ENABLED
 // NEW ARCH

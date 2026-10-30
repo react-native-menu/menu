@@ -27,7 +27,9 @@ class RCTMenuAction {
             self.identifier = UIAction.Identifier(rawValue: identifier as String);
         }
 
-        if let image = details["image"] as? NSString {
+        // The new architecture sends an unset image as an empty string, and
+        // UIImage(named: "") logs "Invalid asset name supplied" each time the menu is built.
+        if let image = details["image"] as? NSString, image.length > 0 {
             self.image = UIImage(systemName: image as String);
             if self.image === nil {
                 self.image = UIImage(named: image as String)

@@ -28,7 +28,9 @@ class RCTAlertAction {
             self.title = "";
         }
                 
-        if let image = details["image"] as? NSString {
+        // The new architecture sends an unset image as an empty string, and
+        // UIImage(named: "") logs "Invalid asset name supplied" each time the menu is built.
+        if let image = details["image"] as? NSString, image.length > 0 {
             if #available(iOS 13.0, *) {
                 self.image = UIImage(systemName: image as String)
                 if let imageColor = details["imageColor"] {

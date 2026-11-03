@@ -39,7 +39,7 @@ let package = Package(
                 "ios/RCTMenu.xcodeproj", "ios/Menu-Bridging-Header.h",
                 "ios/MenuViewManager.mm", "ios/NewArch/MenuView.h", "ios/NewArch/MenuView.mm",
             ],
-            sources: ["ios/Shared", "ios/OldArch", "ios/NewArch", "spm-support/Imports.swift"]
+            sources: ["ios/Shared", "ios/OldArch", "ios/NewArch", "spm-support"]
         ),
         .target(
             name: "ReactNativeMenuObjC",

@@ -64,7 +64,7 @@ let package = Package(
             path: ".",
             exclude: unusedRootEntries + ["spm-support"] + unusedObjCIosEntries,
             sources: ["ios"],
-            // Required: SwiftPM defaults to a missing include directory (f4-no-public-build.log).
+            // Required: without it SwiftPM looks for a default include/ folder, which this target does not have.
             publicHeadersPath: "spm-headers/public",
             cSettings: [
                 .define("RCT_NEW_ARCH_ENABLED", to: "1"),

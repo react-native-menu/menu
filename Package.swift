@@ -13,10 +13,29 @@ let reactHeaders: [Target.Dependency] = [
 
 // The Swift import shim lives outside ios/. Keep unrelated repository and npm
 // package contents out of SwiftPM's resource discovery.
-let usedRootEntries: Set<String> = ["ios", "spm-support", "Package.swift"]
+let usedRootEntries: Set<String> = ["ios", "spm-support", "spm-headers", "Package.swift"]
 let unusedRootEntries = try! FileManager.default.contentsOfDirectory(atPath: Context.packageDirectory)
     .filter { !usedRootEntries.contains($0) }
     .sorted()
+
+// Discover sources as folders, splitting the podspec's native and Swift files.
+// Exclude projects and non-source files from both targets.
+let iosDirectory = URL(fileURLWithPath: Context.packageDirectory).appendingPathComponent("ios")
+let iosEntries = try! FileManager.default.subpathsOfDirectory(atPath: iosDirectory.path)
+    .filter { !$0.contains(".xcodeproj/") }
+func unusedIosEntries(sourceExtensions: Set<String>) -> [String] {
+    iosEntries.filter { entry in
+        let url = iosDirectory.appendingPathComponent(entry)
+        if url.pathExtension == "xcodeproj" { return true }
+        let isFile = try! url.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile == true
+        return isFile && (!sourceExtensions.contains(url.pathExtension)
+            || entry == "Menu-Bridging-Header.h")
+    }
+    .map { "ios/" + $0 }
+    .sorted()
+}
+let unusedSwiftIosEntries = unusedIosEntries(sourceExtensions: ["swift"])
+let unusedObjCIosEntries = unusedIosEntries(sourceExtensions: ["h", "m", "mm"])
 
 let package = Package(
     name: "react_native_menu",
@@ -35,32 +54,28 @@ let package = Package(
             name: "react_native_menu",
             dependencies: reactHeaders,
             path: ".",
-            exclude: unusedRootEntries + [
-                "ios/RCTMenu.xcodeproj", "ios/Menu-Bridging-Header.h",
-                "ios/MenuViewManager.mm", "ios/NewArch/MenuView.h", "ios/NewArch/MenuView.mm",
-            ],
+            exclude: unusedRootEntries + ["spm-headers"] + unusedSwiftIosEntries,
             sources: ["ios/Shared", "ios/OldArch", "ios/NewArch", "spm-support"]
         ),
         .target(
             name: "ReactNativeMenuObjC",
             dependencies: [.target(name: "react_native_menu")] + reactHeaders,
-            path: "ios",
-            exclude: [
-                "RCTMenu.xcodeproj", "Menu-Bridging-Header.h", "Shared", "OldArch",
-                "NewArch/FabricActionSheetView.swift", "NewArch/FabricMenuViewImplementation.swift",
-                "NewArch/FabricViewImplementationProtocol.swift",
-            ],
-            sources: ["MenuViewManager.mm", "NewArch/MenuView.mm"],
-            publicHeadersPath: "NewArch",
+            // Root the target here so its empty public module stays outside ios/.
+            path: ".",
+            exclude: unusedRootEntries + ["spm-support"] + unusedObjCIosEntries,
+            sources: ["ios"],
+            publicHeadersPath: "spm-headers/public",
             cSettings: [
                 .define("RCT_NEW_ARCH_ENABLED", to: "1"),
-                .headerSearchPath("../spm-headers"),
+                .headerSearchPath("ios/NewArch"),
+                .headerSearchPath("spm-headers"),
             ],
             cxxSettings: [
                 .define("RCT_NEW_ARCH_ENABLED", to: "1"),
                 .define("DEBUG", .when(configuration: .debug)),
                 .define("NDEBUG", .when(configuration: .release)),
-                .headerSearchPath("../spm-headers"),
+                .headerSearchPath("ios/NewArch"),
+                .headerSearchPath("spm-headers"),
             ]
         ),
     ],

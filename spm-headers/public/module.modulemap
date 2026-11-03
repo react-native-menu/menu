@@ -1,0 +1,4 @@
+// The Fabric adapter has no public headers; MenuView.h stays private.
+module ReactNativeMenuObjC {
+    export *
+}

@@ -13,6 +13,9 @@
     "android",
     "ios",
     "cpp",
+    "Package.swift",
+    "spm-support",
+    "spm-headers",
     "react-native-menu.podspec",
     "!lib/typescript/example",
     "!**/__tests__",
@@ -107,6 +110,9 @@
   },
   "volta": {
     "node": "22.11.0"
+  },
+  "swiftpmConfig": {
+    "name": "react_native_menu"
   },
   "codegenConfig": {
     "name": "RNMenuViewSpec",

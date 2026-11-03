@@ -2,8 +2,19 @@
 // If this file fails to compile, update both files together.
 import UIKit
 
-// Swift cannot compile-time check explicit @objc class-name strings or the
-// protocol's module-qualified mangled runtime name. No runtime checks belong here.
+// Swift cannot check explicit @objc class/member names (#selector follows the
+// current name) or the protocol's mangled runtime name at compile time.
+
+private let _menuBase: (UIButton & FabricViewImplementationProtocol).Type = FabricMenuViewImplementation.self
+private let _sheetBase: (UIView & FabricViewImplementationProtocol).Type = FabricActionSheetView.self
+
+private let _protocol_actions: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, [NSDictionary]?> = \.actions
+private let _protocol_title: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, NSString?> = \.title
+private let _protocol_themeVariant: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, NSString?> = \.themeVariant
+private let _protocol_shouldOpenOnLongPress: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, Bool> = \.shouldOpenOnLongPress
+private let _protocol_onPressAction: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, ((String) -> Void)?> = \.onPressAction
+private let _protocol_onCloseMenu: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, (() -> Void)?> = \.onCloseMenu
+private let _protocol_onOpenMenu: ReferenceWritableKeyPath<any FabricViewImplementationProtocol, (() -> Void)?> = \.onOpenMenu
 
 private let _menu_actions: ReferenceWritableKeyPath<FabricMenuViewImplementation, [NSDictionary]?> = \.actions
 private let _menu_title: ReferenceWritableKeyPath<FabricMenuViewImplementation, NSString?> = \.title

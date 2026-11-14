@@ -1,14 +1,56 @@
 import * as React from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
+import {
+	Button,
+	Platform,
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+} from "react-native";
 import { MenuView, type MenuComponentRef } from "@react-native-menu/menu";
 import { useRef } from "react";
 
 export const App = () => {
 	const [themeVariant] = React.useState<string | undefined>("light");
 	const menuRef = useRef<MenuComponentRef>(null);
+	const [taps, setTaps] = React.useState(0);
+	const [linkTaps, setLinkTaps] = React.useState(0);
 
 	return (
 		<View style={styles.container}>
+			<MenuView
+				title="Long press menu"
+				shouldOpenOnLongPress
+				onPressAction={({ nativeEvent }) => {
+					console.warn(JSON.stringify(nativeEvent));
+				}}
+				actions={[
+					{ id: "copy", title: "Copy" },
+					{ id: "share", title: "Share" },
+				]}
+				testID="longPressMenuView"
+			>
+				<View style={styles.card}>
+					<Text>
+						Long press opens the menu. A tap reaches the children:{" "}
+						<Text
+							style={styles.link}
+							onPress={() => setLinkTaps((n) => n + 1)}
+							accessibilityRole="link"
+						>
+							link ({linkTaps})
+						</Text>
+					</Text>
+					<Pressable
+						style={styles.counter}
+						onPress={() => setTaps((n) => n + 1)}
+						accessibilityRole="button"
+						testID="longPressMenuCounter"
+					>
+						<Text>Tapped {taps} times</Text>
+					</Pressable>
+				</View>
+			</MenuView>
 			<Button
 				title="Show Menu with ref (Android only)"
 				onPress={() => menuRef.current?.show()}
@@ -195,4 +237,19 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	buttonText: { color: "white" },
+	card: {
+		width: 280,
+		padding: 16,
+		gap: 12,
+		borderRadius: 16,
+		backgroundColor: "#EEF1F5",
+	},
+	link: { color: "#2367A2", fontWeight: "600" },
+	counter: {
+		alignSelf: "flex-start",
+		paddingHorizontal: 12,
+		paddingVertical: 8,
+		borderRadius: 8,
+		backgroundColor: "#D6DEE8",
+	},
 });

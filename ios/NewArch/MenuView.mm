@@ -14,12 +14,16 @@
 
 using namespace facebook::react;
 
-@interface MenuView () <RCTMenuViewViewProtocol>
+@interface MenuView () <RCTMenuViewViewProtocol, UIContextMenuInteractionDelegate>
 
 @end
 
 @implementation MenuView {
     UIView <FabricViewImplementationProtocol> * _view;
+    // Set while the menu opens on a long press: the context menu interaction lives on this view
+    // instead of the button, see setOpensOnLongPress:
+    id<UIInteraction> _longPressInteraction;
+    NSString *_themeVariant;
 }
 
 + (ComponentDescriptorProvider)componentDescriptorProvider
@@ -163,11 +167,14 @@ using namespace facebook::react;
     }
 
     if (oldViewProps.themeVariant != newViewProps.themeVariant) {
-        _view.themeVariant = [NSString stringWithUTF8String:newViewProps.themeVariant.c_str()];
+        _themeVariant = [NSString stringWithUTF8String:newViewProps.themeVariant.c_str()];
+        _view.themeVariant = _themeVariant;
+        [self applyLongPressThemeVariant];
     }
-    
+
     if (oldViewProps.shouldOpenOnLongPress != newViewProps.shouldOpenOnLongPress) {
         _view.shouldOpenOnLongPress = newViewProps.shouldOpenOnLongPress;
+        [self setOpensOnLongPress:newViewProps.shouldOpenOnLongPress];
     }
 
     if (oldViewProps.hitSlop.top != newViewProps.hitSlop.top ||
@@ -183,6 +190,104 @@ using namespace facebook::react;
     }
 
     [super updateProps:props oldProps:oldProps];
+}
+
+#pragma mark - Opening on a long press
+
+// The button is this view's contentView, which React Native keeps above the children, so it takes
+// every touch: with the menu opening on a long press, a child never received a tap, and VoiceOver
+// read the whole view as one element (the view takes isAccessibilityElement from its contentView).
+// In that mode the context menu interaction lives on this view instead and the button steps out of
+// touches and accessibility: a tap reaches the child under the finger, a long press opens the
+// button's menu, and VoiceOver reaches each child. A menu that opens on a tap is unchanged.
+//
+// This runs only when shouldOpenOnLongPress changes, so it relies on prepareForRecycle keeping
+// _props, as the button's own showsMenuAsPrimaryAction already does: if a recycled view were reset
+// to default props while still in this mode, a reused tap-to-open menu would stop opening.
+- (void)setOpensOnLongPress:(BOOL)longPress
+{
+    if (longPress == (_longPressInteraction != nil) || ![_view isKindOfClass:[UIControl class]]) {
+        return;
+    }
+    if (@available(iOS 14.0, *)) {
+        if (longPress) {
+            _longPressInteraction = [[UIContextMenuInteraction alloc] initWithDelegate:self];
+            [self addInteraction:_longPressInteraction];
+        } else {
+            [self removeInteraction:_longPressInteraction];
+            _longPressInteraction = nil;
+        }
+        _view.userInteractionEnabled = !longPress;
+        _view.isAccessibilityElement = !longPress;
+        _view.accessibilityElementsHidden = longPress;
+        [self applyLongPressThemeVariant];
+    }
+}
+
+// The button applies themeVariant to its own menu. In long press mode the menu is presented from
+// this view, so the variant goes here, as it does on the old architecture, where the button is the
+// view that holds the children.
+- (void)applyLongPressThemeVariant
+{
+    if (@available(iOS 13.0, *)) {
+        UIUserInterfaceStyle style = UIUserInterfaceStyleUnspecified;
+        if (_longPressInteraction != nil && [_themeVariant isEqualToString:@"dark"]) {
+            style = UIUserInterfaceStyleDark;
+        } else if (_longPressInteraction != nil && [_themeVariant isEqualToString:@"light"]) {
+            style = UIUserInterfaceStyleLight;
+        }
+        self.overrideUserInterfaceStyle = style;
+    }
+}
+
+// The menu, its title and the open and close events stay the button's own
+- (UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction
+                        configurationForMenuAtLocation:(CGPoint)location API_AVAILABLE(ios(14.0))
+{
+    return [(id<UIContextMenuInteractionDelegate>)_view contextMenuInteraction:interaction
+                                                configurationForMenuAtLocation:location];
+}
+
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction
+       willEndForConfiguration:(UIContextMenuConfiguration *)configuration
+                      animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(14.0))
+{
+    [(id<UIContextMenuInteractionDelegate>)_view contextMenuInteraction:interaction
+                                                willEndForConfiguration:configuration
+                                                               animator:animator];
+}
+
+// The preview is this view as it is drawn. One taken off screen while its menu is up just fades.
+- (UITargetedPreview *)longPressPreview API_AVAILABLE(ios(14.0))
+{
+    return self.window != nil ? [[UITargetedPreview alloc] initWithView:self] : nil;
+}
+
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction
+                                configuration:(UIContextMenuConfiguration *)configuration
+        highlightPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0))
+{
+    return [self longPressPreview];
+}
+
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction
+                                configuration:(UIContextMenuConfiguration *)configuration
+        dismissalPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0))
+{
+    return [self longPressPreview];
+}
+
+// The same preview before iOS 16, which asks these instead
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction
+    previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0))
+{
+    return [self longPressPreview];
+}
+
+- (UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction
+    previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0))
+{
+    return [self longPressPreview];
 }
 
 Class<RCTComponentViewProtocol> MenuViewCls(void)

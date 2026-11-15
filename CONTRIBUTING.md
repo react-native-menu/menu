@@ -121,9 +121,13 @@ Releases are automated. Merging to `master` is all that is needed — no one run
 
 - `fix:` or `perf:` → patch
 - `feat:` → minor
-- `!` after the type, or a `BREAKING CHANGE:` footer → major
+- `!` after the type (`feat!:`, `refactor!:`, …), or a `BREAKING CHANGE:` / `BREAKING-CHANGE:` footer → major
+
+This relies on the `conventionalcommits` preset configured under `release-it` in `package.json`. **Do not switch that preset to `angular` without re-reading this list** — the angular preset's header pattern does not accept `!` at all, so under it `feat!: drop iOS 13 support` parses with no type and ships as a *patch*, quietly breaking semver for every consumer.
 
 A push containing only `chore:`, `docs:`, `test:`, or `refactor:` commits releases nothing, and the workflow stops before touching npm. Note that nothing currently enforces the commit format, so a `feat` mislabelled as `chore` silently ships nothing — squash-merge titles matter here.
+
+There is no separate lever for "release a major because we decided to". The commit messages are the only input, so an intentional breaking release needs either a `!` on the type or a `BREAKING CHANGE:` footer on one of the commits in the range. (`v2.0.0` predates this automation and was tagged by hand.)
 
 The workflow publishes to npm, pushes the `chore: release <version>` commit and the `v<version>` tag, and creates the GitHub release. It authenticates with an `NPM_TOKEN` repository secret; if publishing starts failing with an auth error, that token has most likely expired.
 

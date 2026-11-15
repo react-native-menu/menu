@@ -29,15 +29,19 @@ jobs:
     runs-on: ubuntu-latest
     # Never react to the `chore: release` commit release-it pushes itself,
     # and never publish off a red Build.
+    # `branches: master` filters the *triggering* run's head branch, and Build also
+    # runs on pull_request -- so a fork PR from a branch named "master" would match.
+    # Requiring event == 'push' keeps this to real pushes to our own master.
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' &&
+      (github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.conclusion == 'success' &&
        !startsWith(github.event.workflow_run.head_commit.message, 'chore: release'))
     permissions:
       # release-it pushes the release commit and tag, and creates the GitHub release.
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: master
           # Full history and tags, so conventional-changelog can see the commits
@@ -69,10 +73,32 @@ jobs:
             range="HEAD"
           fi
 
-          # Only feat/fix/perf and breaking changes produce a version bump under the
-          # angular preset. Without one, release-it has nothing to do.
-          releasable="$(git log "$range" --format='%s%n%b' \
-            | grep -cE '^(feat|fix|perf)(\([^)]*\))?!?: |^BREAKING[ -]CHANGE:' || true)"
+          # What the `conventionalcommits` preset will actually bump on:
+          #   - `!` after any type                 -> major
+          #   - a BREAKING CHANGE: / BREAKING-CHANGE: footer -> major
+          #   - feat:                              -> minor
+          #   - fix: / perf:                       -> patch
+          # Anything else (chore/docs/test/refactor) bumps nothing, so release-it
+          # has no work to do. Keep these in step with the preset.
+          subject_re='^[a-zA-Z]+(\([^)]*\))?!: |^(feat|fix|perf)(\([^)]*\))?: '
+          footer_re='^BREAKING[ -]CHANGE:'
+
+          # Walk commits one at a time, checking the subject and the body against
+          # their own patterns. Matching both at once against the whole message
+          # would let a body line that merely starts with "fix: " count as a fix.
+          # Via a file rather than a pipe, so a failing `git log` fails the step
+          # instead of silently counting zero.
+          shas="$(mktemp)"
+          git rev-list "$range" > "$shas"
+
+          releasable=0
+          while IFS= read -r sha; do
+            [ -n "$sha" ] || continue
+            if git log -1 --format='%s' "$sha" | grep -qE "$subject_re" \
+              || git log -1 --format='%b' "$sha" | grep -qE "$footer_re"; then
+              releasable=$((releasable + 1))
+            fi
+          done < "$shas"
 
           echo "Releasable commits since ${last_tag:-the start of history}: $releasable"
           if [ "$releasable" -eq 0 ]; then
@@ -81,7 +107,7 @@ jobs:
             echo "release=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         if: steps.guard.outputs.release == 'true'
         with:
           node-version: 22

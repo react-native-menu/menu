@@ -5,3 +5,31 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 10
+  # The React Native family is version-locked: `@react-native/*` and
+  # `@react-native-community/cli` track the react-native minor line, and
+  # `@types/react` tracks `react`. Bumping any of them on its own produces a
+  # combination nobody ships, so dependabot proposes them as one PR that moves
+  # them together. Anything not matched here still gets its own PR.
+  #
+  # `exclude-patterns` is not redundant. GitHub's reference documents `*` as the
+  # wildcard but does not say how a pattern *without* one is matched -- exact
+  # name or substring. If it is a substring match, bare `react` would also
+  # capture react-native-builder-bob, react-native-test-app and the rest below,
+  # grouping packages that genuinely do move independently. Excludes take
+  # precedence over patterns, so naming them keeps this config correct under
+  # either reading. @rnx-kit/metro-config in particular was bumped on its own
+  # in #1242 with CI clean, so it is not part of this family.
+  groups:
+    react-native:
+      patterns:
+      - react
+      - react-native
+      - "@react-native/*"
+      - "@react-native-community/cli"
+      - "@types/react"
+      exclude-patterns:
+      - react-native-builder-bob
+      - react-native-test-app
+      - "@rnx-kit/*"
+      - "@types/react-native"
+      - "@callstack/react-native-visionos"

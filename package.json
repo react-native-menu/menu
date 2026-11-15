@@ -38,7 +38,10 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/react-native-menu/menu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-native-menu/menu.git"
+  },
   "author": "Jesse Katsumata <jesse.katsumata@gmail.com> (https://github.com/Naturalclar)",
   "license": "MIT",
   "bugs": {
@@ -82,7 +85,8 @@
       "tagName": "v${version}"
     },
     "npm": {
-      "publish": true
+      "publish": true,
+      "skipChecks": true
     },
     "github": {
       "release": true

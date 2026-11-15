@@ -1,0 +1,132 @@
+name: Release
+
+# Publishes to npm automatically once `Build` has passed on master.
+#
+# The version and changelog come from release-it + @release-it/conventional-changelog
+# (see the "release-it" block in package.json), so they are derived from the
+# conventional commit messages since the previous tag.
+#
+# Requires an `NPM_TOKEN` repository secret holding an npm access token with
+# publish rights on @react-native-menu/menu.
+on:
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
+    branches:
+      - master
+  # Manual escape hatch, e.g. to retry a release that failed partway through.
+  # Note this path does not check Build, so only run it on a commit you know is green.
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    # Never react to the `chore: release` commit release-it pushes itself,
+    # and never publish off a red Build.
+    # `branches: master` filters the *triggering* run's head branch, and Build also
+    # runs on pull_request -- so a fork PR from a branch named "master" would match.
+    # Requiring event == 'push' keeps this to real pushes to our own master.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.event == 'push' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       !startsWith(github.event.workflow_run.head_commit.message, 'chore: release'))
+    permissions:
+      # release-it pushes the release commit and tag, and creates the GitHub release.
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: master
+          # Full history and tags, so conventional-changelog can see the commits
+          # since the previous release.
+          fetch-depth: 0
+
+      - name: Decide whether to release
+        id: guard
+        run: |
+          set -euo pipefail
+
+          # `Build` validated a specific commit. If master has moved on since then,
+          # publishing now would ship code CI never checked.
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            expected='${{ github.event.workflow_run.head_sha }}'
+            actual="$(git rev-parse HEAD)"
+            if [ "$expected" != "$actual" ]; then
+              echo "master moved past the commit Build validated ($expected -> $actual)."
+              echo "Skipping; the next green Build will pick this up."
+              echo "release=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          last_tag="$(git describe --tags --abbrev=0 2>/dev/null || true)"
+          if [ -n "$last_tag" ]; then
+            range="$last_tag..HEAD"
+          else
+            range="HEAD"
+          fi
+
+          # What the `conventionalcommits` preset will actually bump on:
+          #   - `!` after any type                 -> major
+          #   - a BREAKING CHANGE: / BREAKING-CHANGE: footer -> major
+          #   - feat:                              -> minor
+          #   - fix: / perf:                       -> patch
+          # Anything else (chore/docs/test/refactor) bumps nothing, so release-it
+          # has no work to do. Keep these in step with the preset.
+          subject_re='^[a-zA-Z]+(\([^)]*\))?!: |^(feat|fix|perf)(\([^)]*\))?: '
+          footer_re='^BREAKING[ -]CHANGE:'
+
+          # Walk commits one at a time, checking the subject and the body against
+          # their own patterns. Matching both at once against the whole message
+          # would let a body line that merely starts with "fix: " count as a fix.
+          # Via a file rather than a pipe, so a failing `git log` fails the step
+          # instead of silently counting zero.
+          shas="$(mktemp)"
+          git rev-list "$range" > "$shas"
+
+          releasable=0
+          while IFS= read -r sha; do
+            [ -n "$sha" ] || continue
+            if git log -1 --format='%s' "$sha" | grep -qE "$subject_re" \
+              || git log -1 --format='%b' "$sha" | grep -qE "$footer_re"; then
+              releasable=$((releasable + 1))
+            fi
+          done < "$shas"
+
+          echo "Releasable commits since ${last_tag:-the start of history}: $releasable"
+          if [ "$releasable" -eq 0 ]; then
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v5
+        if: steps.guard.outputs.release == 'true'
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        if: steps.guard.outputs.release == 'true'
+        run: yarn install --immutable
+
+      - name: Configure git identity
+        if: steps.guard.outputs.release == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Release
+        if: steps.guard.outputs.release == 'true'
+        run: yarn release --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # setup-node writes an .npmrc that reads NODE_AUTH_TOKEN.
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

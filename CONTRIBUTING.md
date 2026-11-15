@@ -113,6 +113,31 @@ When you're sending a pull request:
 - For pull requests that change the API or implementation, discuss with maintainers first by opening an issue.
 - For version-dependent changes, follow the versioning structure for `MenuViewManager` outlined in the **Versioning in `MenuViewManager`** section. Ensure all version-specific files are included in `reactNativeVersionPatch` and referenced in `build.gradle`.
 
+### Releasing
+
+Releases are automated. Merging to `master` is all that is needed — no one runs `yarn release` locally.
+
+`.github/workflows/release.yml` waits for the `Build` workflow to finish on `master` and then, if it passed, runs `release-it` in CI. `@release-it/conventional-changelog` derives the new version and the release notes from the commit messages since the previous tag, so **the version bump is decided entirely by your commit message**:
+
+- `fix:` or `perf:` → patch
+- `feat:` → minor
+- `!` after the type (`feat!:`, `refactor!:`, …), or a `BREAKING CHANGE:` / `BREAKING-CHANGE:` footer → major
+
+This relies on the `conventionalcommits` preset configured under `release-it` in `package.json`. **Do not switch that preset to `angular` without re-reading this list** — the angular preset's header pattern does not accept `!` at all, so under it `feat!: drop iOS 13 support` parses with no type and ships as a *patch*, quietly breaking semver for every consumer.
+
+A push containing only `chore:`, `docs:`, `test:`, or `refactor:` commits releases nothing, and the workflow stops before touching npm. Note that nothing currently enforces the commit format, so a `feat` mislabelled as `chore` silently ships nothing — squash-merge titles matter here.
+
+There is no separate lever for "release a major because we decided to". The commit messages are the only input, so an intentional breaking release needs either a `!` on the type or a `BREAKING CHANGE:` footer on one of the commits in the range. (`v2.0.0` predates this automation and was tagged by hand.)
+
+The workflow publishes to npm, pushes the `chore: release <version>` commit and the `v<version>` tag, and creates the GitHub release. It authenticates with an `NPM_TOKEN` repository secret; if publishing starts failing with an auth error, that token has most likely expired.
+
+Two things the workflow deliberately refuses to do:
+
+- It skips if `master` has moved past the commit `Build` validated, rather than publishing code CI never checked. The next green `Build` picks it up.
+- It ignores its own `chore: release` commit, so a release cannot trigger another release.
+
+`Release` can also be started manually from the Actions tab, which is useful when a release fails partway through. That path skips the `Build` gate, so only use it on a commit you know is green.
+
 ## Code of Conduct
 
 ### Our Pledge

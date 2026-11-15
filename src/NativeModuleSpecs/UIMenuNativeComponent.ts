@@ -1,8 +1,9 @@
-// biome-ignore-all lint/suspicious/noReactNativeDeepImports: this is a codegen spec file.
+// biome-ignore-start lint/suspicious/noReactNativeDeepImports: this is a codegen spec file.
 // React Native's codegen parses these imports directly and expects CodegenTypes and
-// codegenNativeComponent on these exact paths. The top-level entry point does re-export
-// codegenNativeComponent, but rewriting the import risks breaking native codegen for no
-// benefit -- see the note on this file in CLAUDE.md.
+// codegenNativeComponent on these exact paths. react-native/index.js does re-export
+// codegenNativeComponent, but rewriting an import that codegen parses risks breaking native
+// builds for no benefit -- see the note on this file in CLAUDE.md. Scoped to this import
+// block rather than the whole file, so accidental deep imports below are still caught.
 import type {
 	DirectEventHandler,
 	Int32,
@@ -10,6 +11,7 @@ import type {
 } from "react-native/Libraries/Types/CodegenTypes";
 import type { HostComponent, ViewProps } from "react-native";
 import codegenNativeComponent from "react-native/Libraries/Utilities/codegenNativeComponent";
+// biome-ignore-end lint/suspicious/noReactNativeDeepImports: end of the codegen import block.
 
 /*
   Caution, those below are not just typescript types.

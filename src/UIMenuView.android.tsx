@@ -1,4 +1,5 @@
 import {
+	codegenNativeCommands,
 	findNodeHandle,
 	type HostComponent,
 	requireNativeComponent,
@@ -6,7 +7,6 @@ import {
 } from "react-native";
 import type { MenuComponentRef, NativeMenuComponentProps } from "./types";
 import { forwardRef, useImperativeHandle, useRef } from "react";
-import codegenNativeCommands from "react-native/Libraries/Utilities/codegenNativeCommands";
 
 const NativeMenuComponent = requireNativeComponent(
 	"MenuView",

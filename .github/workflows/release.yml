@@ -6,8 +6,20 @@ name: Release
 # (see the "release-it" block in package.json), so they are derived from the
 # conventional commit messages since the previous tag.
 #
-# Requires an `NPM_TOKEN` repository secret holding an npm access token with
-# publish rights on @react-native-menu/menu.
+# Authentication is npm Trusted Publishing (OIDC): npm mints a short-lived
+# credential from this workflow's GitHub identity, so there is no NPM_TOKEN secret
+# to rotate and the published tarball carries a provenance attestation.
+#
+# That binding is configured npm-side, on the package's Settings -> Trusted
+# publisher: organization/repository `react-native-menu/menu`, workflow
+# `release.yml`. Renaming this file or moving the publish to another workflow
+# breaks publishing until that entry is updated to match.
+#
+# `npm.skipChecks` in the package.json release-it config belongs to the same
+# switch: release-it otherwise gates publishing on `npm whoami` and
+# `npm access list collaborators`, which need a long-lived token. Under OIDC
+# there is none -- `npm publish` mints the credential itself -- so those checks
+# fail with ENEEDAUTH and abort the release before it starts.
 on:
   workflow_run:
     workflows: ["Build"]
@@ -40,6 +52,8 @@ jobs:
     permissions:
       # release-it pushes the release commit and tag, and creates the GitHub release.
       contents: write
+      # Lets npm exchange this run's OIDC token for publish rights (Trusted Publishing).
+      id-token: write
     steps:
       - uses: actions/checkout@v5
         with:
@@ -113,6 +127,14 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
 
+      # Node 22 ships npm 10, which has no OIDC support and would fall back to
+      # looking for a token. Trusted Publishing needs npm >= 11.5.1.
+      - name: Upgrade npm for Trusted Publishing
+        if: steps.guard.outputs.release == 'true'
+        run: |
+          npm install -g npm@^11.5.1
+          npm --version
+
       - name: Install dependencies
         if: steps.guard.outputs.release == 'true'
         run: yarn install --immutable
@@ -128,5 +150,6 @@ jobs:
         run: yarn release --ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # setup-node writes an .npmrc that reads NODE_AUTH_TOKEN.
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # No npm credential here on purpose: `npm publish` picks up the OIDC
+          # token from the id-token permission above. Setting NODE_AUTH_TOKEN
+          # would take precedence and put us back on a 2FA-gated token.

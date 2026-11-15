@@ -1,3 +1,8 @@
+// biome-ignore-all lint/suspicious/noReactNativeDeepImports: this is a codegen spec file.
+// React Native's codegen parses these imports directly and expects CodegenTypes and
+// codegenNativeComponent on these exact paths. The top-level entry point does re-export
+// codegenNativeComponent, but rewriting the import risks breaking native codegen for no
+// benefit -- see the note on this file in CLAUDE.md.
 import type {
 	DirectEventHandler,
 	Int32,

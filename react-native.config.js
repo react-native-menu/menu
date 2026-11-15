@@ -12,7 +12,7 @@ const project = (() => {
 				sourceDir: path.join("example", "ios"),
 			},
 		});
-	} catch (e) {
+	} catch {
 		return undefined;
 	}
 })();

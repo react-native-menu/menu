@@ -6,6 +6,7 @@ import {
 } from "react-native";
 import type { MenuComponentRef, NativeMenuComponentProps } from "./types";
 import { forwardRef, useImperativeHandle, useRef } from "react";
+// biome-ignore lint/suspicious/noReactNativeDeepImports: paired with the codegen spec's own deep import. Kept on this path so the Fabric command dispatch matches what codegen generates.
 import codegenNativeCommands from "react-native/Libraries/Utilities/codegenNativeCommands";
 
 const NativeMenuComponent = requireNativeComponent(

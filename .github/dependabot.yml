@@ -33,3 +33,17 @@ updates:
       - "@rnx-kit/*"
       - "@types/react-native"
       - "@callstack/react-native-visionos"
+    # release-it and its changelog plugin are coupled through a peer range: the
+    # plugin declares `release-it: ^18 || ^19 || ^20`, so a release-it 21 bump
+    # on its own leaves a combination the plugin refuses. That is not
+    # hypothetical -- it is why #1245 could not be merged. yarn treats the peer
+    # mismatch as a warning and CI never runs the release path, so nothing
+    # catches it until a publish actually fails.
+    #
+    # No exclude-patterns here: `release-it` and `@release-it/conventional-changelog`
+    # are the only matching dependencies, so the group is the same under either
+    # reading of non-wildcard pattern matching.
+    release-it:
+      patterns:
+      - release-it
+      - "@release-it/*"

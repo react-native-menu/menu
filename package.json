@@ -54,7 +54,7 @@
     "@react-native-community/cli": "^20.0.2",
     "@react-native/babel-preset": "^0.81.1",
     "@react-native/metro-config": "0.81.1",
-    "@release-it/conventional-changelog": "^11.0.1",
+    "@release-it/conventional-changelog": "^12.0.2",
     "@rnx-kit/metro-config": "^2.1.1",
     "@types/jest": "^29.1.2",
     "@types/react": "^19.1.12",
@@ -65,7 +65,7 @@
     "react-native": "^0.81.1",
     "react-native-builder-bob": "^0.44.1",
     "react-native-test-app": "^4.4.9",
-    "release-it": "^18.1.1",
+    "release-it": "^21.1.2",
     "typescript": "5.9.3"
   },
   "peerDependencies": {

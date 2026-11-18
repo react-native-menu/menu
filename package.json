@@ -31,6 +31,7 @@
     "pods": "cd example && pod-install --quiet",
     "prepare": "bob build",
     "release": "release-it",
+    "spm:check": "node scripts/check-spm.mjs",
     "start": "react-native start",
     "test": "jest",
     "typescript": "tsc --noEmit",

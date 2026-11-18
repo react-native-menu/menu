@@ -21,6 +21,14 @@ __attribute__((objc_runtime_name("_TtP17react_native_menu32FabricViewImplementat
 @property (nonatomic) UIEdgeInsets hitSlop;
 @end
 
+// The superclasses are flattened on purpose: MenuView.mm only ever reaches
+// protocol members and UIKit ones, so mirroring MenuViewImplementation and
+// ActionSheetView here would double the surface that can drift. If MenuView.mm
+// ever needs a member declared on one of those bases, mirror the base class
+// rather than widening the protocol. Availability has to match the Swift
+// declarations, though -- calling an iOS 14 only class outside an availability
+// check does not compile. scripts/check-spm.mjs enforces both halves.
+API_AVAILABLE(ios(14.0))
 @interface FabricMenuViewImplementation : UIButton <FabricViewImplementationProtocol>
 @end
 @interface FabricActionSheetView : UIView <FabricViewImplementationProtocol>

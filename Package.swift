@@ -14,21 +14,26 @@ let reactHeaders: [Target.Dependency] = [
 // The Swift import shim lives outside ios/. Keep unrelated repository and npm
 // package contents out of SwiftPM's resource discovery.
 let usedRootEntries: Set<String> = ["ios", "spm-support", "spm-headers", "Package.swift"]
-let unusedRootEntries = try! FileManager.default.contentsOfDirectory(atPath: Context.packageDirectory)
+// `try?` rather than `try!`: a manifest that traps reports a Swift fatal error
+// instead of a SwiftPM diagnostic, which is a miserable thing to debug.
+let unusedRootEntries = ((try? FileManager.default.contentsOfDirectory(atPath: Context.packageDirectory)) ?? [])
     .filter { !usedRootEntries.contains($0) }
     .sorted()
 
 // Discover sources as folders, splitting the podspec's native and Swift files.
 // Exclude projects and non-source files from both targets.
 let iosDirectory = URL(fileURLWithPath: Context.packageDirectory).appendingPathComponent("ios")
-let iosEntries = try! FileManager.default.subpathsOfDirectory(atPath: iosDirectory.path)
+let iosEntries = ((try? FileManager.default.subpathsOfDirectory(atPath: iosDirectory.path)) ?? [])
     .filter { !$0.contains(".xcodeproj/") }
 func unusedIosEntries(sourceExtensions: Set<String>) -> [String] {
     iosEntries.filter { entry in
         let url = iosDirectory.appendingPathComponent(entry)
         if url.pathExtension == "xcodeproj" { return true }
-        let isFile = try! url.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile == true
-        return isFile && (!sourceExtensions.contains(url.pathExtension)
+        // An entry that cannot be stat'd -- a dangling symlink, say -- counts as
+        // a file so it stays excludable. Excluding a directory would drop
+        // everything inside it.
+        let isDirectory = (try? url.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory ?? false
+        return !isDirectory && (!sourceExtensions.contains(url.pathExtension)
             || entry == "Menu-Bridging-Header.h")
     }
     .map { "ios/" + $0 }
@@ -63,7 +68,11 @@ let package = Package(
             // Root the target here so its empty public module stays outside ios/.
             path: ".",
             exclude: unusedRootEntries + ["spm-support"] + unusedObjCIosEntries,
-            sources: ["ios"],
+            // Name the source directories rather than all of ios/: a stray .h,
+            // .m or .mm anywhere under ios/ (stale codegen output under
+            // ios/build/, say, in a consumer using this as a path dependency)
+            // would otherwise be compiled into this target.
+            sources: ["ios/MenuViewManager.mm", "ios/Shared", "ios/OldArch", "ios/NewArch"],
             // Required: without it SwiftPM looks for a default include/ folder, which this target does not have.
             publicHeadersPath: "spm-headers/public",
             cSettings: [

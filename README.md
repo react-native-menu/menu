@@ -179,6 +179,14 @@ String to override theme of the menu. If you want to control theme universally a
 |-----------------------|----------|
 | enum('light', 'dark') | No       |
 
+### `preferredMenuElementOrder` (iOS 16+ only)
+
+The order of the menu's actions when it opens. With the default `automatic`, iOS may reorder them, so a menu that opens upward (from a button near the bottom of the screen) lists its actions in reverse. Use `fixed` to keep the order of `actions` wherever the menu opens, or `priority` to keep the first action closest to the button. Ignored before iOS 16.
+
+| Type                                   | Required | Default       |
+|----------------------------------------|----------|---------------|
+| enum('automatic', 'priority', 'fixed') | No       | `'automatic'` |
+
 #### `MenuAction`
 
 Object representing Menu Action.

@@ -172,6 +172,11 @@ using namespace facebook::react;
         [self applyLongPressThemeVariant];
     }
 
+    if (oldViewProps.preferredMenuElementOrder != newViewProps.preferredMenuElementOrder &&
+        [_view respondsToSelector:@selector(setMenuElementOrder:)]) {
+        _view.menuElementOrder = [NSString stringWithUTF8String:newViewProps.preferredMenuElementOrder.c_str()];
+    }
+
     if (oldViewProps.shouldOpenOnLongPress != newViewProps.shouldOpenOnLongPress) {
         _view.shouldOpenOnLongPress = newViewProps.shouldOpenOnLongPress;
         [self setOpensOnLongPress:newViewProps.shouldOpenOnLongPress];

@@ -56,7 +56,20 @@ public class MenuViewImplementation: UIButton {
         super.init(frame: frame)
         let interaction = UIContextMenuInteraction(delegate: self)
         self.addInteraction(interaction)
+        // In long-press mode the menu opens via the context-menu interaction,
+        // leaving a normal tap free. The UIButton fires touchUpInside on tap;
+        // forward it through the action callback with a sentinel id.
+        self.addTarget(self, action: #selector(handlePress), for: .touchUpInside)
         self.setup()
+    }
+
+    // Emit a press only when the menu opens on long press (primary action
+    // disabled); in primary-action mode the tap already opens the menu.
+    @objc func handlePress() {
+        if !self.showsMenuAsPrimaryAction {
+            let action = UIAction(title: "", identifier: UIAction.Identifier("rnmenu:onPress")) { _ in }
+            self.sendButtonAction(action)
+        }
     }
    
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {

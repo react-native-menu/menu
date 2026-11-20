@@ -163,6 +163,14 @@ Boolean determining if menu should open after long press or on normal press
 |---------|----------|
 | boolean | No       |
 
+### `onPress`
+
+Callback fired when the anchor is tapped (a normal press, not a long press). Only meaningful together with [`shouldOpenOnLongPress`](#shouldopenonlongpress): the menu opens on long press while a normal tap invokes this — letting the anchor be both tappable and long-pressable (e.g. tap a row to open it, long-press for a context menu).
+
+| Type       | Required |
+|------------|----------|
+| () => void | No       |
+
 ### `actions`
 
 Actions to be displayed in the menu.

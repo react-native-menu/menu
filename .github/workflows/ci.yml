@@ -74,6 +74,20 @@ jobs:
         run: yarn && yarn bootstrap
       - name: Build Android Example App and Library
         run: cd example/android && ./gradlew clean assembleDebug
+  spm:
+    name: SwiftPM package
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      # No `yarn install`: the script uses node builtins, `git` and the Swift
+      # toolchain the runner already ships. It does not build the package --
+      # see the comment at the top of the script for why that is not possible
+      # until React Native's SwiftPM autolinking lands here.
+      - name: Check SwiftPM package
+        run: node scripts/check-spm.mjs
   ios:
     runs-on: macos-latest
     strategy:

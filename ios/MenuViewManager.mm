@@ -73,6 +73,11 @@ RCT_EXPORT_VIEW_PROPERTY(shouldOpenOnLongPress, BOOL)
  * themeVariant: determines whether menu should use dark theme, light theme or system theme
  */
 RCT_EXPORT_VIEW_PROPERTY(themeVariant, NSString)
+/**
+ * preferredMenuElementOrder: 'automatic', 'priority' or 'fixed' (iOS 16+). Remapped because UIButton
+ * already has a preferredMenuElementOrder property of its own type.
+ */
+RCT_REMAP_VIEW_PROPERTY(preferredMenuElementOrder, menuElementOrder, NSString)
 
 /**
  * hitSlop: The same as hitSlop in React Native

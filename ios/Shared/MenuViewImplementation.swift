@@ -52,6 +52,12 @@ public class MenuViewImplementation: UIButton {
 
     @objc public var hitSlop: UIEdgeInsets = .zero
 
+    // The `preferredMenuElementOrder` prop. Named apart from UIButton's own
+    // `preferredMenuElementOrder`, which UIKit only applies to a configuration
+    // it builds itself; this class builds its own in
+    // configurationForMenuAtLocation, so it applies the order there.
+    @objc public var menuElementOrder: NSString?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         let interaction = UIContextMenuInteraction(delegate: self)
@@ -61,10 +67,21 @@ public class MenuViewImplementation: UIButton {
    
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         sendMenuOpen()
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
+        let configuration = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { [weak self] _ in
             guard let self = self else { return nil }
             return self.menu
         }
+        if #available(iOS 16.0, *) {
+            switch menuElementOrder {
+            case "fixed":
+                configuration.preferredMenuElementOrder = .fixed
+            case "priority":
+                configuration.preferredMenuElementOrder = .priority
+            default:
+                configuration.preferredMenuElementOrder = .automatic
+            }
+        }
+        return configuration
     }
     
     public override func contextMenuInteraction(_ interaction: UIContextMenuInteraction, willEndFor configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionAnimating?) {

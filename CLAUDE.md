@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Yarn 4 (Berry, `nodeLinker: node-modules`), Node 22.11.0 (see `.tool-versions`).
+Yarn 4 (Berry, `nodeLinker: node-modules`), Node 22.23.5 (see `.tool-versions`).
 
 ```sh
 yarn bootstrap     # install deps + generate the react-native-test-app Android manifest (required before Android builds)

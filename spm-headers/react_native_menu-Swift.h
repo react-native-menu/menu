@@ -19,6 +19,7 @@ __attribute__((objc_runtime_name("_TtP17react_native_menu32FabricViewImplementat
 @property (nonatomic, copy, nullable) void (^onOpenMenu)(void);
 @optional
 @property (nonatomic) UIEdgeInsets hitSlop;
+@property (nonatomic, strong, nullable) NSString *menuElementOrder;
 @end
 
 // The superclasses are flattened on purpose: MenuView.mm only ever reaches

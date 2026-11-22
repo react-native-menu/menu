@@ -153,6 +153,17 @@ type MenuComponentPropsBase = {
 	 */
 	themeVariant?: string;
 	/**
+	 * (iOS 16+) The order of the menu's elements. With `automatic`, the system
+	 * may reorder them, so a menu that opens upward from a button near the
+	 * bottom of the screen lists its actions in reverse. `fixed` keeps the
+	 * order of `actions` in every position; `priority` keeps the first action
+	 * closest to where the menu opens.
+	 *
+	 * @default 'automatic'
+	 * @platform iOS
+	 */
+	preferredMenuElementOrder?: "automatic" | "priority" | "fixed";
+	/**
 	 * Custom OpenSpace hitSlop prop. Works like touchable hitslop.
 	 * @platform iOS
 	 */

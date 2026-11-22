@@ -82,6 +82,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+          # setup-node@v5 caches the package manager named in package.json's
+          # `packageManager` on its own. This job never installs, so the cache
+          # folder never exists, and on a cache miss (any PR that changes
+          # yarn.lock) the post-step save fails the job.
+          package-manager-cache: false
       # No `yarn install`: the script uses node builtins, `git` and the Swift
       # toolchain the runner already ships. It does not build the package --
       # see the comment at the top of the script for why that is not possible

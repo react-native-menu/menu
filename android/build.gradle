@@ -128,22 +128,31 @@ android {
 
   sourceSets {
     main {
+      def extraSrcDirs = []
       if (isNewArchitectureEnabled()) {
-        java.srcDirs += [
+        extraSrcDirs += [
           "src/newarch",
           // This is needed to build Kotlin project with NewArch enabled
           "${project.buildDir}/generated/source/codegen/java"
         ]
       } else {
-        java.srcDirs += ["src/oldarch"]
+        extraSrcDirs += ["src/oldarch"]
       }
 
       // MenuViewManager
       if (getReactNativeMinorVersion() <= 75) {
-        java.srcDirs += "src/reactNativeVersionPatch/MenuViewManager/75"
+        extraSrcDirs += ["src/reactNativeVersionPatch/MenuViewManager/75"]
       } else {
-        java.srcDirs += "src/reactNativeVersionPatch/MenuViewManager/latest"
+        extraSrcDirs += ["src/reactNativeVersionPatch/MenuViewManager/latest"]
       }
+
+      java.srcDirs += extraSrcDirs
+      // AGP 9's built-in Kotlin compiles .kt files only from the `kotlin` source
+      // directories. Directories added to `java.srcDirs` alone are skipped, and the
+      // build fails with "Unresolved reference 'MenuViewManager'". The Kotlin Gradle
+      // plugin (used when built-in Kotlin is off) already reads both, so listing the
+      // directories in each is safe on every setup.
+      kotlin.srcDirs += extraSrcDirs
     }
   }
 }

@@ -68,7 +68,7 @@
     "react": "19.1.0",
     "react-native": "^0.81.1",
     "react-native-builder-bob": "^0.44.1",
-    "react-native-test-app": "^4.4.9",
+    "react-native-test-app": "^5.4.17",
     "release-it": "^21.1.2",
     "typescript": "7.0.2"
   },

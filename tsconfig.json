@@ -1,6 +1,5 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"paths": {
 			"@react-native-menu/menu": ["./src/index"]
 		},
@@ -11,16 +10,15 @@
 		"jsx": "react-jsx",
 		"lib": ["esnext"],
 		"module": "esnext",
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
-		"noImplicitUseStrict": false,
-		"noStrictGenericChecks": false,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"strict": true,
-		"target": "esnext"
+		"target": "esnext",
+		"types": ["jest", "node"]
 	}
 }

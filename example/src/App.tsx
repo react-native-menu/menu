@@ -112,6 +112,22 @@ export const App = () => {
 						state: "on",
 					},
 					{
+						title: "Inline Actions",
+						displayInline: true,
+						subactions: [
+							{
+								id: "inline1",
+								title: "Inline action",
+								state: "on",
+							},
+							{
+								id: "inline2",
+								title: "Another inline action",
+								state: "off",
+							},
+						],
+					},
+					{
 						id: "mixed",
 						title: "Mixed State",
 						titleColor: "rgba(100,200,250,0.3)",

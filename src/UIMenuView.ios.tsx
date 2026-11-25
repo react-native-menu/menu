@@ -8,12 +8,6 @@ type NativeProps = Omit<
 	"ref"
 >;
 
-/**
- * `show()` opens the menu from code on Android. iOS has no public API to
- * present a UIMenu from code, so here it does nothing. It is still defined, so
- * shared code that calls `ref.current?.show()` doesn't throw
- * `show is not a function` on iOS.
- */
 const MenuComponent = forwardRef<MenuComponentRef, NativeProps>(
 	(props, ref) => {
 		useImperativeHandle(

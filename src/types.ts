@@ -116,6 +116,13 @@ type MenuComponentPropsBase = {
 	 */
 	onPressAction?: ({ nativeEvent }: NativeActionEvent) => void;
 	/**
+	 * Callback fired when the anchor is tapped (a normal press, not a long
+	 * press). Only meaningful together with `shouldOpenOnLongPress`: the menu
+	 * opens on long press while a normal tap invokes this — letting the anchor
+	 * be both tappable and long-pressable.
+	 */
+	onPress?: () => void;
+	/**
 	 * Callback function that will be called when the menu closes.
 	 */
 	onCloseMenu?: () => void;

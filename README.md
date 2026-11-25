@@ -131,9 +131,11 @@ It's also possible to obtain the `action` is a more React-ish, declarative fashi
 
 ### Props
 
-#### `ref` (Android only)
+#### `ref`
 
-Ref to the menu component.
+Ref to the menu component. Call `ref.current?.show()` to open the menu from code.
+
+`show()` works on Android only. On iOS it does nothing (a warning is logged in development), because iOS has no public API to present a menu from code.
 
 | Type | Required |
 |------|----------|

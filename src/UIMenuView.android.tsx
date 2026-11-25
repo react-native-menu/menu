@@ -39,7 +39,10 @@ const MenuComponent = forwardRef<MenuComponentRef, NativeMenuComponentProps>(
 							const command =
 								UIManager.getViewManagerConfig("MenuView").Commands.show;
 
-							UIManager.dispatchViewManagerCommand(node, command, undefined);
+							// The command arguments must be an array, even an empty one:
+							// `undefined` reaches native code as null, and the New
+							// Architecture rejects it with "expected Array, got a null".
+							UIManager.dispatchViewManagerCommand(node, command, []);
 						}
 					}
 				},

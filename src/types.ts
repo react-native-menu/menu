@@ -183,6 +183,13 @@ export type MenuComponentProps =
 	React.PropsWithChildren<MenuComponentPropsBase>;
 
 export type MenuComponentRef = {
+	/**
+	 * Opens the menu from code.
+	 *
+	 * Does nothing on iOS, which has no public API to present a menu from code
+	 * (a warning is logged in development).
+	 * @platform Android
+	 */
 	show: () => void;
 };
 

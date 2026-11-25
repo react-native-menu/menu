@@ -39,7 +39,7 @@ const MenuComponent = forwardRef<MenuComponentRef, NativeMenuComponentProps>(
 							const command =
 								UIManager.getViewManagerConfig("MenuView").Commands.show;
 
-							UIManager.dispatchViewManagerCommand(node, command, undefined);
+							UIManager.dispatchViewManagerCommand(node, command, []);
 						}
 					}
 				},

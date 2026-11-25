@@ -51,10 +51,12 @@ export const App = () => {
 					</Pressable>
 				</View>
 			</MenuView>
-			<Button
-				title="Show Menu with ref (Android only)"
-				onPress={() => menuRef.current?.show()}
-			/>
+			{Platform.OS === "android" && (
+				<Button
+					title="Show Menu with ref (Android only)"
+					onPress={() => menuRef.current?.show()}
+				/>
+			)}
 			<MenuView
 				ref={menuRef}
 				title="Menu Title"

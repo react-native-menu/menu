@@ -8,6 +8,8 @@ import android.os.Build
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import android.text.style.TextAppearanceSpan
+import android.util.TypedValue
 import android.view.*
 import android.widget.PopupMenu
 import com.facebook.react.bridge.*
@@ -159,15 +161,8 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
         true -> attributes.getBoolean("disabled")
         else -> false
       }
-      menuItem.isEnabled = !disabled
-      if (!menuItem.isEnabled) {
-        val disabledColor = 0x77888888
-        menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), disabledColor)
-        if (imageName != null) {
-          val icon = menuItem.icon
-          icon?.setTintList(ColorStateList.valueOf(disabledColor))
-          menuItem.icon = icon
-        }
+      if (disabled) {
+        disableMenuItem(menuItem)
       }
 
       // actions.attributes.hidden
@@ -212,28 +207,86 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
           val subMenuItem = menuItem.subMenu?.add(Menu.NONE, Menu.NONE, i, subMenuConfig?.getString("title"))
           if (subMenuItem != null) {
             prepareMenuItem(subMenuItem, subMenuConfig)
-            subMenuItem.setOnMenuItemClickListener {
-              if (!it.hasSubMenu()) {
-                mIsMenuDisplayed = false
-                if (!subactions.isNull(it.order)) {
-                  val selectedItem = subactions.getMap(it.order)
-                  val dispatcher =
-                    UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
-                  val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
-                  dispatcher?.dispatchEvent(
-                    MenuOnPressActionEvent(surfaceId, id, selectedItem?.getString("id"), id)
-                  )
-                }
-                true
-              } else {
-                false
-              }
-            }
+            setOnPressAction(subMenuItem, subMenuConfig)
           }
         }
         i++
       }
     }
+  }
+
+  private fun disableMenuItem(menuItem: MenuItem) {
+    val disabledColor = 0x77888888
+    menuItem.isEnabled = false
+    menuItem.title = getMenuItemTextWithColor(menuItem.title.toString(), disabledColor)
+    // Drawables from the same resource share state, without mutate() the tint leaks to other items
+    val icon = menuItem.icon?.mutate()
+    if (icon != null) {
+      icon.setTintList(ColorStateList.valueOf(disabledColor))
+      menuItem.icon = icon
+    }
+  }
+
+  private fun setOnPressAction(menuItem: MenuItem, config: ReadableMap?) {
+    menuItem.setOnMenuItemClickListener {
+      if (!it.hasSubMenu()) {
+        mIsMenuDisplayed = false
+        val dispatcher = UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
+        val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
+        dispatcher?.dispatchEvent(
+          MenuOnPressActionEvent(surfaceId, id, config?.getString("id"), id)
+        )
+        true
+      } else {
+        false
+      }
+    }
+  }
+
+  private fun setInlineTitleStyle(menuItem: MenuItem) {
+    val headerStyle = TypedValue()
+    context.theme.resolveAttribute(android.R.attr.textAppearancePopupMenuHeader, headerStyle, true)
+    val text = SpannableStringBuilder(menuItem.title)
+    text.setSpan(
+      TextAppearanceSpan(context, headerStyle.resourceId),
+      0, text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE or (1 shl Spannable.SPAN_PRIORITY_SHIFT)
+    )
+    menuItem.title = text
+    menuItem.isEnabled = false
+  }
+
+  private fun addInlineSubactions(
+    groupId: Int,
+    order: Int,
+    config: ReadableMap,
+    subactions: ReadableArray
+  ): Boolean {
+    val title = config.getString("title").orEmpty()
+    val titleItem = mPopupMenu.menu.add(groupId, Menu.NONE, order, title)
+    prepareMenuItem(titleItem, config)
+    if (!titleItem.isVisible) {
+      return false
+    }
+
+    val disabled = !titleItem.isEnabled
+    if (title.isNotEmpty()) {
+      setInlineTitleStyle(titleItem)
+    }
+    var hasVisibleItems = false
+    for (i in 0 until subactions.size()) {
+      if (!subactions.isNull(i)) {
+        val subaction = subactions.getMap(i)
+        val menuItem = mPopupMenu.menu.add(groupId, Menu.NONE, order, subaction?.getString("title"))
+        prepareMenuItem(menuItem, subaction)
+        if (disabled) {
+          disableMenuItem(menuItem)
+        }
+        setOnPressAction(menuItem, subaction)
+        hasVisibleItems = hasVisibleItems || menuItem.isVisible
+      }
+    }
+    titleItem.isVisible = hasVisibleItems && title.isNotEmpty()
+    return hasVisibleItems
   }
 
   private fun prepareMenu() {
@@ -248,31 +301,34 @@ class MenuView(private val mContext: ReactContext) : ReactViewGroup(mContext) {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         mPopupMenu.setForceShowIcon(true)
       }
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        mPopupMenu.menu.setGroupDividerEnabled(true)
+      }
+      var groupId = Menu.NONE
       var i = 0
       while (i < getActionsCount) {
         if (!mActions.isNull(i)) {
           val item = mActions.getMap(i)
-          val menuItem = when (item != null && item.hasKey("subactions") && !item.isNull("subactions")) {
-            true -> mPopupMenu.menu.addSubMenu(Menu.NONE, Menu.NONE, i, item.getString("title")).item
-            else -> mPopupMenu.menu.add(Menu.NONE, Menu.NONE, i, item?.getString("title"))
+          val subactions = when (item != null && item.hasKey("subactions") && !item.isNull("subactions")) {
+            true -> item.getArray("subactions")
+            else -> null
           }
-          prepareMenuItem(menuItem, item)
-          menuItem.setOnMenuItemClickListener {
-            if (!it.hasSubMenu()) {
-              mIsMenuDisplayed = false
-              if (!mActions.isNull(it.order)) {
-                val selectedItem = mActions.getMap(it.order)
-                val dispatcher =
-                  UIManagerHelper.getEventDispatcherForReactTag(mContext, id)
-                val surfaceId: Int = UIManagerHelper.getSurfaceId(this)
-                dispatcher?.dispatchEvent(
-                  MenuOnPressActionEvent(surfaceId, id, selectedItem?.getString("id"), id)
-                )
-              }
-              true
-            } else {
-              false
+          val displayInline = when (item != null && item.hasKey("displayInline") && !item.isNull("displayInline")) {
+            true -> item.getBoolean("displayInline")
+            else -> false
+          }
+          if (item != null && subactions != null && subactions.size() > 0 && displayInline) {
+            // Dividers are drawn between groups, so the actions after the inline ones need a new group too
+            if (addInlineSubactions(groupId + 1, i, item, subactions)) {
+              groupId += 2
             }
+          } else {
+            val menuItem = when (subactions != null) {
+              true -> mPopupMenu.menu.addSubMenu(groupId, Menu.NONE, i, item?.getString("title")).item
+              else -> mPopupMenu.menu.add(groupId, Menu.NONE, i, item?.getString("title"))
+            }
+            prepareMenuItem(menuItem, item)
+            setOnPressAction(menuItem, item)
           }
         }
         i++

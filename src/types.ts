@@ -98,6 +98,8 @@ export type MenuAction = {
 	subactions?: MenuAction[];
 	/**
 	 * Whether subactions should be inline (separated by divider) or nested (sub menu)
+	 * - On Android dividers need API 28+
+	 * - Nesting sub menus in inline subactions does not work on Android, or on iOS with the new architecture
 	 */
 	displayInline?: boolean;
 	/**
